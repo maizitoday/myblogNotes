@@ -1,0 +1,310 @@
+---
+title:       "nginx系列一基础认识"
+subtitle:    ""
+description: ""
+date:        2019-03-04
+author:      "麦子"
+image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
+tags:        ["nginx","负载均衡","应用服务器"]
+categories:  ["Tech" ]
+---
+
+#### **tomcat** 与 **nginx**，**apache**的区别是什么？
+
+虽然Tomcat也可以认为是HTTP服务器，但通常它仍然会和Nginx配合在一起使用：
+
+- 动静态资源分离——运用Nginx的反向代理功能分发请求：所有动态资源的请求交给Tomcat，而静态资源的请求（例如图片、视频、CSS、JavaScript文件等）则直接由Nginx返回到浏览器，这样能大大减轻Tomcat的压力。
+- 负载均衡，当业务压力增大时，可能一个Tomcat的实例不足以处理，那么这时可以启动多个Tomcat实例进行水平扩展，而Nginx的负载均衡功能可以把请求通过算法分发到各个不同的实例进行处理
+
+apache用的越来越少了，大体上和nginx功能重合的更多。
+
+ 严格的来说，**Apache/Nginx** 应该叫做「**HTTP Server**」；而 **Tomcat** 则是一个「**Application Server**」，或者更准确的来说，是一个「**Servlet/JSP**」应用的容器（**Ruby/Python** 等其他语言开发的应用也无法直接运行在 **Tomcat** 上）。
+
+一个 HTTP Server 关心的是 HTTP 协议层面的传输和访问控制，所以在 Apache/Nginx 上你可以看到代理、负载均衡等功能。客户端通过 HTTP Server 访问服务器上存储的资源（HTML 文件、图片文件等等）。通过 CGI 技术，也可以将处理过的内容通过 HTTP Server 分发，但是一个 HTTP Server 始终只是把服务器上的文件如实的通过 HTTP 协议传输给客户端。
+
+而应用服务器，则是一个应用执行的容器。它首先需要支持开发语言的 Runtime（对于 Tomcat 来说，就是 Java），保证应用能够在应用服务器上正常运行。其次，需要支持应用相关的规范，例如类库、安全方面的特性。对于 Tomcat 来说，就是需要提供 JSP/Sevlet 运行需要的标准类库、Interface 等。为了方便，应用服务器往往也会集成 HTTP Server 的功能，但是不如专业的 HTTP Server 那么强大，所以应用服务器往往是运行在 HTTP Server 的背后，执行应用，将动态的内容转化为静态的内容之后，通过 HTTP Server 分发到客户端。
+
+
+
+#### 什么是HOST文件
+
+Hosts是一个没有扩展名的系统文件，其基本作用就是将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，系统会立即打开对应网页，如果没有找到，
+则系统再会将网址提交DNS
+域名解析服务器进行IP地址的解析，如果发现是被屏蔽的IP或域名，就会禁止打开此网页！
+在我们开发中，我们可以设置一个好记住的名字， 有力于开发。 
+
+#### nginx多进程工作模式￼
+
+master主进程控制多个work进程。work进程处理业务逻辑。 
+
+Nginx的高效得益于它的事件驱动机制，当完成后就告诉socker，这个时候socker就进行处理。 其中在等待的时候， sokcer可以接收其他的请求。 
+
+#### Nginx配置文件分析   nginx.conf
+
+------
+
+```nginx
+user  nginx;    # 当前用户  
+
+worker_processes  1;   #  CPU数，或者是2倍CPU数量
+
+error_log  /var/log/nginx/error.log warn;   #错误日志 
+
+pid        /var/run/nginx.pid;  # 当前nginx的进程id 
+
+events {
+    worker_connections  1024;  # 每一台进程数就是  work_processes*work_connections 
+}
+
+http {
+    include       /etc/nginx/mime.types;  # 互联网媒体类型的标准
+    default_type  application/octet-stream; # 默认的接受数据类型任意的二进制数据格式 
+    log_format  main   '$remote_addr - $remote_user [$time_local] "$request" '  #日志格式类型 
+                       '$status $body_bytes_sent "$http_referer" '
+                       '"$http_user_agent" "$http_x_forwarded_for"';
+    access_log  /var/log/nginx/access.log  main;  #访问日志 
+    sendfile    on;  # 指定是否调用sendfile来输出文件，对于普通应用，必须设为on，如果用来进行下载等应用磁盘IO负载应用，可设置为off，以平衡磁盘与网络IO处理速度，降低系统uptime
+                       
+   #tcp_nopush  on;  # 在nginx中，tcp_nopush配置与tcp_nodelay“互斥”。它可以配置一次发送数据包的大小。也就是说，数据包累积到一定大小后就发送。在nginx中tcp_nopush必须和sendfile配合使用
+    
+   keepalive_timeout  65;  # 连接超时时间为75s 
+   #gzip  on;   #经过gzip压缩后页面大小可以变为原来的30%甚至更小，这样，用户浏览页面的时候速度会块得多。
+   include /etc/nginx/conf.d/*.conf; #这个地方用来写入虚拟主机文件，对应的某一个域名访问的日志都在这个里面的。
+```
+
+
+
+#### 什么是虚拟主机
+
+虚拟主机，就是把一台物理服务器划分为多个“虚拟”服务器， 每一个虚拟主机都可以有独立的域名和独立的目录。
+阿里云就是做的虚拟主机。 nginx中一个server就是一个虚拟主机。 
+
+#### default.conf   具体虚拟主机配置
+
+```nginx
+server {
+    listen       80;  #监听端口 
+    server_name  localhost;  #服务地址 
+    #charset koi8-r;
+    access_log  /var/log/nginx/host.access.log  main;  #这个虚拟主机的访问日志 
+```
+
+```nginx
+#-------location-------------#
+
+  语法规则： location[=|~|~*|^~]/uri/{...}
+
+ = 开头表示精确匹配 
+
+ ^~ 开头表示uri以某个常规字符串开头，理解为匹配url路径即可。
+
+ ~ 开头表示区分大小写的正则匹配 
+
+ ~* 开头表示不区分大小写的正则匹配
+
+ / 通用匹配，任何请求都会匹配到。
+
+#-------location-------------#
+location / {
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+}
+
+#http://localhost:9090/index.html，表示, 到/usr/share/nginx/html 这个下面去找
+
+error_page   500 502 503 504  /50x.html;
+
+location = /50x.html {
+    root   /usr/share/nginx/html;
+}
+```
+
+#### location 中root地址分析， 如下： 
+
+```nginx
+   location ^~  /images/  {
+           root   /tmp/;
+      }
+```
+
+http://localhost:9090/images/3.jpg  这个会到这里， 然后在去找 /tmp/ 然后是这个下面的images目录下面的3.jpg这个文件。 
+
+#### nginx命令参数 
+
+```nginx
+# nginx -t 测试配置是否正确 
+
+# nginx -s reload 作用加载最新配置 
+
+# nginx -s stop 立刻停止
+
+# nginx -s quit 优雅停止 
+
+# nginx -s reopen 重新打开日志
+
+# nginx -c xxx.conf  指定配置文件打开
+```
+
+#### 反向代理和正向代理
+
+正向代理简单地打个租房的比方**:**
+
+A**(客户端)想租**C**(服务端)的房子,但是**A**(客户端)并不认识**C**(服务端)租不到。
+
+**B**(代理)认识**C**(服务端)能租这个房子所以你找了**B**(代理)帮忙租到了这个房子。
+
+这个过程中**C**(服务端)不认识**A**(客户端)只认识**B**(代理)
+
+**C**(服务端)并不知道**A**(客户端)租了房子，只知道房子租给了**B**(代理)。
+
+ 作用： 
+
+1. 访问原来无法访问的资源，翻墙。
+2. 可以做缓存，加速资源的访问。
+3. 对客户端上网进行认证授权。
+4. 上网行为管理，记录用户访问记录。
+
+
+
+反向代理**:**客户端 一**>**代理 **<**一**>** 服务端
+
+反向代理也用一个租房的例子**:**
+
+A**(客户端)想租一个房子,**B**(代理)就把这个房子租给了他。
+
+这时候实际上**C**(服务端)才是房东。
+
+**B**(代理)是中介把这个房子租给了**A**(客户端)。
+
+这个过程中**A**(客户端)并不知道这个房子到底谁才是房东
+
+他都有可能认为这个房子就是**B**(代理)的
+
+作用： 
+
+1. 负载均衡，提高处理和响应速度。
+2. 保证内网安全，隐藏服务器信息，防止web攻击。
+
+#### 负载均衡
+
+```nginx
+nginx.conf  在这个地方设置
+
+upstream tomcat { #集群名称 
+        server 127.0.0.1:9092 weight=5;  // weight 这个是权重，谁大几率就访问大一些
+        server 127.0.0.1:9093 weight=5;
+     }
+
+同时在 具体的虚拟主机中设置如下
+
+server {
+      listen       80;
+      server_name  localhost; # 这边对外的访问都是 localhost:80
+      location / {
+          root   /usr/share/nginx/html;
+          index  index.html index.htm;
+          proxy_pass http://tomcat; #直接转发到这个集群里面去了，这里对应了2个服务器
+          proxy_redirect default;
+     }
+
+这样就实现了一个简单的负载均衡了。
+```
+
+负载均衡几种策略方式
+
+1. weight                     权重方式 
+2. ip_hash                   依据ip分配方式
+3. least_conn               最少连接方式
+4. fair（第三方）           响应时间方式
+5. url_hash（第三方）  依据URL分配方式    
+
+#### 动静分离
+
+```nginx
+location ~* \.(gif|jpg|jpeg|png|css|js|ico)$ { //包含这些后缀，请求被转发到静态池，否则转发到动态池
+        root /tmp/images/;
+   }
+
+或者
+
+upstream static_pools {
+    server 192.168.1.106:8080;
+}
+
+location ~ .*.(gif|jpg|jpeg|png|bmp|swf|css|js)$ { 
+            proxy_pass http://static_pools;
+        }
+
+
+```
+
+#### 高并发策略
+
+1. 负载均衡： 集群
+2. 动静分离：使用Nginx，CDN（用第三方的一些js，不放到自己的服务器上）
+3. 缓存：以空间换时间，提高系统效率
+4. 限流：流量控制
+5. 降级：服务降载，就是把不是核心的业务关掉。 比如不需要的日志业务给关掉。
+
+#### 安装ftp
+
+yum  install  vsftpd
+
+配置文件：/etc/vsftpd.conf
+
+service  vsftpd restart   (注意他的端口也还是SSH的默认端口)
+
+#### SSH服务安装
+
+yum install openssh-server 
+
+vi /etc/ssh/sshd_config  
+
+Port 22
+
+Protocol 2
+
+PermitRootLogin yes    最后一个重要！因为它是允许root用户直接使用sshd服务登录服务器的！  
+
+service sshd restart  
+
+#### 开机自启动sshd服务  
+
+```shell
+$ systemctl enable sshd.service     
+# 开机自启sshd$ systemctl disable sshd.service    
+# 开机关闭自启sshd$ systemctl start sshd.service     
+# 启动sshd$ systemctl restart sshd.service    
+# 重启$ systemctl stop sshd.service       
+# 停止$ systemctl reload sshd.service    
+# 重新加载$ systemctl status sshd.service    
+# 查看启动状态`
+```
+
+#### 集群中的session
+
+1. Session 保持
+
+​      对于Nginx可以选用Session保持的方法实行负载均衡，nginx的upstream目前支持5种方式的分配方式，其中有两种比    较通用的Session解决方法，ip_hash和url_hash。注意：后者不是官方模块，需要额外安装。
+
+​       ip_hash
+
+​      每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，达到了Session保持的方法。
+
+2. Session 复制
+
+​      既然，我们的目标是所有服务器上都要保持用户的Session，那么将每个应用服务器中的Session信息复制到其它服务 器节点上是不是就可以呢？这就是Session的第二中处理办法：会话复制。
+
+2. Session 共享
+
+   既然会话保持和会话复制都不完美，那么我们为什么不把Session放在一个统一的地方呢，这样集群中的所有节点都  在一个地方进行Session的存取就可以解决问题。对于Session来说，肯定是频繁使用的，虽然你可以把它存放在数据库中，但是真正生产环境中我更推荐存放在性能更快的分布式KV数据中，例如：Memcached和Redis。
+
+
+
+#### springboot运行后，查看解压后的文件（负载均衡中，我这边直接使用springboot服务）
+
+```java
+jar uvf test.jar com\lovedata\bigdata\jar\NeedReplace.class
+```
+
+通过上面的命令，直接替换class文件。 如果是持续集成的话，就不要管了， 同时还可以在IDEA已经通过SSH替换了class后，我们在写一个shell命令， 进行再次打包。 
