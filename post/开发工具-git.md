@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-04-28
 author:      "麦子"
-image:       ""
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
 tags:        ["开发工具", "git"]
 categories:  ["Tech" ]
 ---
@@ -715,10 +715,12 @@ nothing to commit, working tree clean
 
 把现在已经生成的文件，上传到github，进行同步， 我这里直接把博客的文章上传到github中。 
 
-```
+```properties
 ➜  content git init
 ➜ content git:(master) ✗ git remote add origin https://github.com/maizitoday/myblogNotes.git
-
+➜  content git:(master) ✗ git add .
+➜  content git:(master) ✗ git commit -am '博客文章'
+➜  content git:(master) git push -u origin master
 ```
 
 

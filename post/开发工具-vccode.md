@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-04-27
 author:      ""
-image:       ""
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
 tags:        ["开发工具", "vccode"]
 categories:  ["Tech" ]
 ---
