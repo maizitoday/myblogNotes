@@ -718,6 +718,7 @@ nothing to commit, working tree clean
 ```properties
 ➜  content git init
 ➜ content git:(master) ✗ git remote add origin https://github.com/maizitoday/myblogNotes.git
+➜  gitdemo git:(master) git pull origin master
 ➜  content git:(master) ✗ git add .
 ➜  content git:(master) ✗ git commit -am '博客文章'
 ➜  content git:(master) git push -u origin master
