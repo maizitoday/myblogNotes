@@ -5,7 +5,7 @@ description: ""
 date:        2019-04-26
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
-tags:        ["zookeeper", "nosql", "节点详细说明"]
+tags:        ["nosql", "节点详细说明"]
 categories:  ["Tech" ]
 ---
 

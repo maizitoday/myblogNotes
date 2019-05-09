@@ -5,7 +5,7 @@ description: ""
 date:        2019-04-26
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
-tags:        ["docker", "容器编排", "docker-compose.yml"]
+tags:        ["docker", "docker-compose.yml"]
 categories:  ["Tech" ]
 ---
 

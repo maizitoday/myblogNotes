@@ -2,7 +2,7 @@
 title:       "springCloud系列-config"
 subtitle:    ""
 description: ""
-date:        2019-04-022
+date:        2019-04-22
 author:      "麦子"
 image:       "https://zhaohuabing.com/img/2018-12-27-the-obstacles-to-put-istio-into-production/background.jpg"
 tags:        ["springCloud", "配置文件"]
