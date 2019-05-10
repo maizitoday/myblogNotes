@@ -2,9 +2,9 @@
 title:       "Zookeeper-监听服务动态上下线"
 subtitle:    ""
 description: ""
-date:        2019-05-10
+date:        2019-05-09
 author:      ""
-image:       ""
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
 tags:        ["Zookeeper", "服务监听", "zk-java-api用法"]
 categories:  ["Tech" ]
 ---

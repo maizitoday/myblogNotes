@@ -2,13 +2,14 @@
 title:       "Zookeeper-分布式锁"
 subtitle:    ""
 description: ""
-date:        2019-05-10
+date:        2019-05-09
 author:      "麦子"
-image:       ""
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
 tags:        ["Zookeeper", "分布式锁"]
 categories:  ["Tech" ]
 ---
 
 [TOC]
 
-开始学习分布式锁
+分布式锁分布式锁分布式锁分布式锁分布式锁分布式锁分布式锁分布式锁分布式锁分布式锁分布式锁分布式锁分布式锁
+
