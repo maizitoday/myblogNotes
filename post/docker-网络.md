@@ -25,7 +25,7 @@ bridge模式是docker的默认网络模式，不写--net参数，就是bridge模
 
 bridge模式如下图所示：
 
-![5-20](/Users/maizi/Desktop/5-20.jpeg)
+![5-20](/img/5-20.jpeg)
 
 
 
@@ -35,7 +35,7 @@ bridge模式如下图所示：
 
 Node模式示意图:
 
-![5-21](/Users/maizi/Desktop/5-21.jpeg)
+![5-21](/img/5-21.jpeg)
 
 ## host模式
 
@@ -43,7 +43,7 @@ Node模式示意图:
 
 Host模式如下图所示：
 
-![5-22](/Users/maizi/Desktop/5-22.jpeg)
+![5-22](/img/5-22.jpeg)
 
 ## container模式，
 
@@ -51,6 +51,6 @@ Host模式如下图所示：
 
 Container模式示意图：
 
-![5-23](/Users/maizi/Desktop/5-23.jpeg)
+![5-23](/img/5-23.jpeg)
 
  
