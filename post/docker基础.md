@@ -101,6 +101,15 @@ docker cp  30026605dcfe:/home/cloudera/RS-MapReduce /tmp/
 
 
 
+## inspect
+
+```dockerfile
+docker inspect 容器id：#查看到容器的相关信息，这里可以看到这个容器所有信息，网络，数据卷，端口等
+
+docker volume ls
+docker inspect mysshvolume:  #查看数据卷的相关信息
+```
+
 
 
 #   删除镜像 
@@ -160,6 +169,10 @@ docker cp  30026605dcfe:/home/cloudera/RS-MapReduce /tmp/
  docker run -itd -p 10001:22 -v /docker_data:/opt/webdata  --privileged=true base_centos:latest /usr/sbin/init 
 
  其中 /docker_data 表示宿主的目录，  /opt/webdata表示容器里面的目录。  这两个目录是一种数据共享目录。
+
+ docker run -itd -p 10001:22 -v /docker_data:/opt/webdata**:ro**  --privileged=true base_centos:latest /usr/sbin/init 
+
+加入ro就表示这个数据卷只读的。
 
 # 数据卷容器
 
