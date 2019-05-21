@@ -86,6 +86,15 @@ docker cp  30026605dcfe:/home/cloudera/RS-MapReduce /tmp/
 - **--name="nginx-lb":** 为容器指定一个名称；
 - **-h "mars":** 指定容器的hostname；Linux中直接 hostname 查看主机名称
 
+```dockerfile
+--restart具体参数值详细信息：
+no -  容器退出时，不重启容器；
+on-failure - 只有在非0状态退出时才从新启动容器；
+always - 无论退出状态是如何，都重启容器；
+如果创建时未指定 --restart=always ,可通过update 命令设置
+docker update --restart=always xxx     
+```
+
 ### --rm
 
 在Docker容器退出时，默认容器内部的文件系统仍然被保留，以方便调试并保留用户数据。但是，对于foreground容器，由于其只是在开发调试过程中短期运行，其用户数据并无保留的必要，因而可以在容器启动时设置--rm选项，这样在容器退出时就能够自动清理容器内部的文件系统。显然，--rm选项不能与-d同时使用，即只能自动清理foreground容器，不能自动清理detached容器。

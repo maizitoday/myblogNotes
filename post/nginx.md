@@ -191,6 +191,7 @@ A**(客户端)想租一个房子,**B**(代理)就把这个房子租给了他。
 nginx.conf  在这个地方设置
 
 upstream tomcat { #集群名称 
+        #ip_hash;
         server 127.0.0.1:9092 weight=5;  // weight 这个是权重，谁大几率就访问大一些
         server 127.0.0.1:9093 weight=5;
      }
