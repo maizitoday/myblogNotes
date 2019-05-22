@@ -5,7 +5,7 @@ description: ""
 date:        2019-05-19
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
-tags:        ["数据库", "mysql", "性能优化"]
+tags:        ["数据库", "性能优化"]
 categories:  ["Tech" ]
 ---
 

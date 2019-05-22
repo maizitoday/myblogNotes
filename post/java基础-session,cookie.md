@@ -5,7 +5,7 @@ description: ""
 date:        2019-05-20
 author:      "麦子"
 image:       "https://c.pxhere.com/photos/e7/82/road_forest_season_autumn_fall_landscape_nature_forest_landscape-839463.jpg!d"
-tags:        ["java基础", "web基础", "session", "cookie", "分布式", "分布式session"]
+tags:        ["java基础", "web基础", "session", "cookie", "分布式系列", "分布式session"]
 categories:  ["Tech" ]
 ---
 
