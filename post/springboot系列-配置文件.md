@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-05-24
 author:      "麦子"
-image:       ""
+image:       "https://c.pxhere.com/images/51/0a/8a6110798028de393339f17f9c51-1433591.jpg!d"
 tags:        ["springboot系列", "yaml", "配置文件优先级", "配置文件激活方式", "修改默认配置路径"]
 categories:  ["Tech" ]
 ---

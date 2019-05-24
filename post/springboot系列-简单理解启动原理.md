@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-05-24
 author:      "麦子"
-image:       ""
+image:       "https://c.pxhere.com/images/98/20/4e64c736bb23441baf5bcde4cf87-1432045.jpg!d"
 tags:        ["springboot系列", "简单理解启动原理", "0配置启动原理"]
 categories:  ["Tech" ]
 ---
