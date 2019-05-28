@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-05-24
 author:      "麦子"
-image:       "https://c.pxhere.com/images/7b/bb/5dcfbafe5a03098a31972b948a1f-1440099.jpg!d"
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
 tags:        ["springboot系列", "常用注解理解"]
 categories:  ["Tech" ]
 ---
@@ -16,5 +16,13 @@ categories:  ["Tech" ]
   @bean  注解  
 
   @*Component*
+
+@bean 
+
+  @*Autowired*
+
+@*ControllerAdvice*
+
+
 
  
