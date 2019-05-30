@@ -15,6 +15,8 @@ categories:  ["Tech" ]
 
 **视频地址： https://www.bilibili.com/video/av38657363/?p=9**
 
+**spingboot版本<version>2.1.5.RELEASE</version>**
+
 # YAML语法
 
 
