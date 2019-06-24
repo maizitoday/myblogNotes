@@ -2,10 +2,10 @@
 title:       "web安全-CSRF"
 subtitle:    ""
 description: ""
-date:        2019-06-01
+date:        2019-05-30
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["web安全", "CSRF"]
+tags:        ["web安全", "CSRF", "java基础"]
 categories:  ["Tech" ]
 ---
 

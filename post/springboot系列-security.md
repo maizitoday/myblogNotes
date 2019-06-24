@@ -5,7 +5,7 @@ description: ""
 date:        2019-05-30
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["springboot系列", "security", "jwt"]
+tags:        ["springboot系列", "security"]
 categories:  ["Tech" ]
 ---
 
