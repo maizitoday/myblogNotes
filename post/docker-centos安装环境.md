@@ -1,13 +1,4 @@
----
-title:       "docker-centos安装环境"
-subtitle:    ""
-description: ""
-date:        2019-06-14
-author:      "麦子"
-image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["docker", "centos7安装环境"]
-categories:  ["Tech" ]
----
+
 
 [TOC]
 

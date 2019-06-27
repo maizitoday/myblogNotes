@@ -5,7 +5,7 @@ description: ""
 date:        2019-05-30
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["web安全", "CSRF", "java基础"]
+tags:        ["web安全", "CSRF", "java基础", "web相关概念"]
 categories:  ["Tech" ]
 ---
 

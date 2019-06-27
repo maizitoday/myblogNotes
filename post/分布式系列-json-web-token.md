@@ -5,7 +5,7 @@ description: ""
 date:        2019-05-30
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["分布式系列", "权限安全", "前后端分离", "单点登录", "jwt"]
+tags:        ["分布式系列", "权限安全", "前后端分离", "单点登录", "jwt", "数字签名"]
 categories:  ["Tech" ]
 ---
 
