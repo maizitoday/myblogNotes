@@ -5,7 +5,7 @@ description: ""
 date:        2019-09-27
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["web相关概念", "SSO", "单点登录"]
+tags:        ["java相关概念", "SSO", "单点登录"]
 categories:  ["Tech" ]
 ---
 

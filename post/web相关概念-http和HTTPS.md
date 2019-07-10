@@ -5,7 +5,7 @@ description: ""
 date:        2019-06-27
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["web相关概念", "http和HTTPS", "tcp"]
+tags:        ["java相关概念", "http和HTTPS", "tcp"]
 categories:  ["Tech" ]
 ---
 
