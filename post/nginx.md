@@ -309,3 +309,31 @@ jar uvf test.jar com\lovedata\bigdata\jar\NeedReplace.class
 ```
 
 通过上面的命令，直接替换class文件。 如果是持续集成的话，就不要管了， 同时还可以在IDEA已经通过SSH替换了class后，我们在写一个shell命令， 进行再次打包。 
+
+
+
+#### nginx缓存的开启和禁用
+
+原文：**https://blog.csdn.net/weixin_36185028/article/details/80740142**
+
+在网站程序调试的时候，经常会遇到浏览器的缓存问题导致修改过的前端代码无效果。每次通过Ctrl+F5强制刷新后才能清掉缓存。这时如果禁用掉nginx缓存，可以减少一些小麻烦，让浏览器每次到服务器去请求文件，而不是在浏览器中读取缓存文件。
+
+当程序调试好上线后，可以开启nginx缓存，**节省服务器的带宽流量，减少一些请求，降低服务器的压力。**
+
+##### 1.启用缓存
+
+```ruby
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ {
+  #设置缓存上面定义的后缀文件缓存到浏览器的生存时间
+  expires   3d;
+}
+```
+
+##### 2.禁用缓存
+
+```ruby
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ {
+ #禁止缓存，每次都从服务器请求
+  add_header Cache-Control no-store;
+}
+```
