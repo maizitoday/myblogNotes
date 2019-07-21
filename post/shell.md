@@ -319,3 +319,144 @@ echo "脚本运行的当前进程ID号"
 
 
 ![屏幕快照 2019-04-09 下午9.42.24](/img/4-9-5.png)
+
+
+
+### Linux nohup、&、 2>&1是什么
+
+**原文地址**：**https://blog.csdn.net/lovewebeye/article/details/82934049**
+
+基本含义
+
+- /dev/null 表示空设备文件
+- 0 表示stdin标准输入
+- 1 表示stdout标准输出
+- 2 表示stderr标准错误
+
+
+
+>file 表示将标准输出输出到file中，也就相当于 1>file
+
+2> error 表示将错误输出到error文件中
+
+2>&1 也就表示将错误重定向到标准输出上
+
+2>&1 >file ：错误输出到终端，标准输出重定向到文件file，**等于 > file 2>&1(标准输出重定向到文件，错误重定向到标准输出)。**
+
+& 放在命令到结尾，表示后台运行，防止终端一直被某个进程占用，这样终端可以执行别到任务，配合 >file 2>&1可以将log保存到某个文件中，但如果终端关闭，则进程也停止运行。如 command > file.log 2>&1 & 。
+
+**nohup放在命令的开头，表示不挂起（no hang up），也即，关闭终端或者退出某个账号，进程也继续保持运行状态，一般配合&符号一起使用。如nohup command &。**
+
+### &` 号
+
+所以，可以在命令的末尾加上一个 `&` 号，将这个任务放到后台去执行：
+
+### 常用脚本列子
+
+```shell
+#!/bin/sh
+
+## java 此处是指定jdk启动
+export JAVA_HOME=/opt/java/jdk1.8.0_201
+export JRE_HOME=$JAVA_HOME/jre
+
+##此处是打包的jar包名称，不带.jar后缀
+API_NAME=springbootdemoweb-0.0.1-SNAPSHOT
+JAR_NAME=$API_NAME\.jar
+
+#PID  代表是PID文件
+PID=$API_NAME\.pid
+
+
+#使用说明，用来提示输入参数
+usage() {
+    echo "Usage: sh 执行脚本.sh [start|stop|restart|status]"
+    exit 1
+}
+
+
+#检查程序是否在运行
+is_exist(){
+  pid=`ps -ef|grep $JAR_NAME|grep -v grep|awk '{print $2}' `
+  #如果不存在返回1，存在返回0
+  if [ -z "${pid}" ]; then
+   return 1
+  else
+    return 0
+  fi
+}
+
+
+#启动方法
+start(){
+  is_exist
+  if [ $? -eq "0" ]; then
+    echo ">>> ${JAR_NAME} is already running PID=${pid} <<<"
+  else
+    nohup $JRE_HOME/bin/java -Xms256m -Xmx512m -jar $JAR_NAME >springboot.log 2>&1 &
+    echo $! > $PID
+    echo ">>> start $JAR_NAME successed PID=$! <<<"
+   fi
+  }
+
+
+#停止方法
+stop(){
+  #is_exist
+  pidf=$(cat $PID)
+  #echo "$pidf"
+  echo ">>> api PID = $pidf begin kill $pidf <<<"
+  kill $pidf
+  rm -rf $PID
+  sleep 2
+  is_exist
+  if [ $? -eq "0" ]; then
+    echo ">>> api 2 PID = $pid begin kill -9 $pid  <<<"
+    kill -9  $pid
+    sleep 2
+    echo ">>> $JAR_NAME process stopped <<<"
+  else
+    echo ">>> ${JAR_NAME} is not running <<<"
+  fi
+}
+
+#输出运行状态
+status(){
+  is_exist
+  if [ $? -eq "0" ]; then
+    echo ">>> ${JAR_NAME} is running PID is ${pid} <<<"
+  else
+    echo ">>> ${JAR_NAME} is not running <<<"
+  fi
+}
+
+#重启
+restart(){
+  stop
+  start
+}
+
+#根据输入参数，选择执行对应方法，不输入则执行使用说明
+case "$1" in
+  "start")
+    start
+    ;;
+  "stop")
+    stop
+    ;;
+  "status")
+    status
+    ;;
+  "restart")
+    restart
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+#rm -rf $JAR_NAME
+
+exit 0
+```
+
