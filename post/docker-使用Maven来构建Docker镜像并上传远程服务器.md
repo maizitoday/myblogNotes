@@ -4,8 +4,8 @@ subtitle:    ""
 description: ""
 date:        2019-07-21
 author:      "麦子"
-image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["docker", "开发工具", "maven", "Maven来构建Docker镜像", "docker开启远程服务", "vscode远程连接docker"]
+image:       "https://c.pxhere.com/images/aa/a6/2c425d9c6f81e52b34d87e5c3989-1424141.jpg!d"
+tags:        ["docker", "maven", "Maven来构建Docker镜像", "docker开启远程服务", "vscode远程连接docker"]
 categories:  ["Tech" ]
 ---
 

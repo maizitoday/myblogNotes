@@ -83,6 +83,26 @@ git config --global user.name jianan
 
 
 
+### 查看项目配置
+
+```
+ git config --local --list
+```
+
+### 修改当前项目配置
+
+```
+cd  /Users/maizi/Desktop/demo/.git/config  #进入到当前项目目录的.git文件夹下面，修改config文件
+```
+
+
+
+
+
+
+
+
+
 ## init
 
 初始化一个项目，如果不需要这个项目了，就把这个.git删除掉。 这个我们一般不需要改动。
