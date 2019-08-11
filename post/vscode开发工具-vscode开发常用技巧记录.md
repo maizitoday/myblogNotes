@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-07-25
 author:      "麦子"
-image:       "https://c.pxhere.com/images/09/aa/f7a1eee82aebe4c7e28fa80e247a-1435531.jpg!d"
+image:       "https://get.pxhere.com/photo/photography-sea-fog-horizon-water-calm-shore-black-and-white-morning-sky-pier-mist-ocean-haze-fixed-link-1445001.jpg"
 tags:        ["开发工具", "vscode开发常用技巧记录", "vscode开发快捷键"]
 categories:  ["Tech" ]
 ---
@@ -204,7 +204,7 @@ categories:  ["Tech" ]
 
 ### 设置Checkstyle配置文件   
 
-![Xnip2019-07-27_18-23-56](/Users/maizi/Desktop/Xnip2019-07-27_18-23-56.png) 
+![Xnip2019-07-27_18-23-56](/img/Xnip2019-07-27_18-23-56.png) 
 
 
 
@@ -248,7 +248,7 @@ categories:  ["Tech" ]
 
 显示效果如下：
 
-![Xnip2019-07-27_21-32-10](/Users/maizi/Desktop/Xnip2019-07-27_21-32-10.png)
+![Xnip2019-07-27_21-32-10](/img/Xnip2019-07-27_21-32-10.png)
 
 
 

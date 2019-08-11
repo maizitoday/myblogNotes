@@ -4,7 +4,7 @@ title:       "vccode-java环境和git操作"
 subtitle:    ""
 description: ""
 date:        2019-07-24
-author:      ""
+author:      "麦子"
 image:       "https://c.pxhere.com/images/aa/a6/2c425d9c6f81e52b34d87e5c3989-1424141.jpg!d"
 tags:        ["开发工具", "vccode"]
 categories:  ["Tech" ]
