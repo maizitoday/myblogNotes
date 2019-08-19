@@ -28,6 +28,27 @@ netstat -anpt | grep 22
 
 ```
 
+还可以直接直接下面的查看是否对外有22端口。
+
+```
+nmap 127.0.0.1
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2019-08-19 21:08 CST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000020s latency).
+Not shown: 995 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+25/tcp   open  smtp
+111/tcp  open  rpcbind
+631/tcp  open  ipp
+8080/tcp open  http-proxy
+
+
+```
+
+
+
 # 制作公钥和私钥
 
 ```shell

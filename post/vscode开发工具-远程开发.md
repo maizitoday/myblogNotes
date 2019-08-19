@@ -65,3 +65,48 @@ sftp.jso 格式如下：更多配置看官网地址：<https://marketplace.visua
 
 # 远程调试代码
 
+## launch配置
+
+```json
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Attach)",
+            "request": "attach",
+            "hostName": "10.211.55.10",
+            "port": 5006
+        }
+    ]
+}
+```
+
+## springboot启动
+
+```shell
+
+java  -Xnoagent -Djava.compiler=NONE -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=10.211.55.10:5006 -jar remotedemo-0.0.1-SNAPSHOT.jar 
+```
+
+注意：这里的address一定需要是ip+端口形式启动，否则无法开启远程调试。
+
+## 命令分析
+
+**转载地址：<https://blog.51cto.com/a4boy/1889940>**
+
+### transport
+
+这里通常使用套接字传输。但是在 Windows 平台上也可以使用共享内存传输。
+
+### server
+
+如果值为 y，目标应用程序监听将要连接的调试器应用程序。否则，它将连接到特定地址上的调试器应用程序。
+
+### address
+
+这是连接的传输地址。如果服务器为 n，将尝试连接到该地址上的调试器应用程序。否则，将在这个端口监听连接。
+
+### suspend
+
+ 如果值为 y，目标 VM 将暂停，直到调试器应用程序进行连接。
+
