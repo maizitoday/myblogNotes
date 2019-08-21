@@ -228,6 +228,9 @@ CMD /usr/local/mycat/bin/mycat console
 #编译
 docker build -t mycat .
 
+#build --tag, -t:** 镜像的名字及标签，
+#通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签
+
 #运行
 docker run -P     #-p 大写， 会默认有一个为容器的对应端口出来
 

@@ -121,6 +121,19 @@ docker inspect mysshvolume:  #查看数据卷的相关信息
 
 
 
+## build 命令
+
+**--tag, -t:**   镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。
+**-f :**   指定要使用的Dockerfile路径；
+
+```dockerfile
+docker build -t mysql-master .
+
+docker build -f /path/to/a/Dockerfile .
+```
+
+
+
 #   删除镜像 
 
 
