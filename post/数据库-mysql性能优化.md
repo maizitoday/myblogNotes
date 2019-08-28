@@ -5,7 +5,7 @@ description: ""
 date:        2019-05-19
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
-tags:        ["数据库", "性能优化"]
+tags:        ["mysql系列", "mysql基本了解", "表空间", "三种虚拟表"]
 categories:  ["Tech" ]
 ---
 
@@ -28,38 +28,6 @@ categories:  ["Tech" ]
 # 数据库事物
 
 **转载地址： https://www.cnblogs.com/huanongying/p/7021555.html**
-
-## 事务的基本要素（ACID）
-
-### 原子性（Atomicity）
-
-事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。事务执行过程中出错，会回滚到事务开始前的状态，所有的操作就像没有发生一样。也就是说事务是一个不可分割的整体，就像化学中学过的原子，是物质构成的基本单位。
-
-### 一致性（Consistency）
-
-事务开始前和结束后，数据库的完整性约束没有被破坏 。比如A向B转账，不可能A扣了钱，B却没收到。
-
-### 隔离性（Isolation）
-
-同一时间，只允许一个事务请求同一数据，不同的事务之间彼此没有任何干扰。比如A正在从一张银行卡中取钱，在A取钱的过程结束前，B不能向这张卡转账。
-
-### 持久性（Durability）
-
-事务完成后，事务对数据库的所有更新将被保存到数据库，不能回滚。
-
-## 事务的并发问题
-
-### 脏读
-
-事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据。
-
-### 不可重复读
-
-事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。
-
-### 幻读
-
-系统管理员A将数据库中所有学生的成绩从具体分数改为ABCDE等级，但是系统管理员B就在这个时候插入了一条具体分数的记录，当系统管理员A改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读。
 
 
 
@@ -94,59 +62,7 @@ categories:  ["Tech" ]
 
 
 
-### 隔离级别的理解
 
-#### 读未提交（read-uncommitted）
-
-可以看到未提交的数据（脏读），举个例子：别人说的话你都相信了，但是可能他只是说说，并不实际做。
-
-#### 不可重复读（read-committed）
-
-读取提交的数据。但是，可能多次读取的数据结果不一致（不可重复读，幻读）。用读写的观点就是：读取的行数据，可以写。
-
-#### repeatable read(MySQL默认隔离级别)
-
-可以重复读取，但有幻读。读写观点：读取的数据行不可写，但是可以往表中新增数据。在MySQL中，其他事务新增的数据，看不到，不会产生幻读。采用多版本并发控制（MVCC）机制解决幻读问题。
-
-#### serializable
-
-可读，不可写。像java中的锁，写数据必须等待另一个事务结束。
-
-
-
-# 数据库锁
-
-**转载地址：https://www.jianshu.com/p/2633fc36b57a**
-
-## 乐观锁
-
-乐观锁（Optimistic Lock），顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在提交更新的时候会判断一下在此期间别人有没有去更新这个数据。乐观锁适用于读多写少的应用场景，这样可以提高吞吐量。
-
-乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。
-
-乐观锁一般来说有以下2种方式：
-
-- 使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。
-- 使用时间戳（timestamp）。乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。
-   Java JUC中的atomic包就是乐观锁的一种实现，AtomicInteger 通过CAS（Compare And Set）操作实现线程安全的自增。
-
-### 优点与不足
-
-乐观并发控制相信事务之间的数据竞争(data race)的概率是比较小的，因此尽可能直接做下去，直到提交的时候才去锁定，所以**不会产生任何锁和死锁**。但如果直接简单这么做，还是有可能会遇到不可预期的结果，例如两个事务都读取了数据库的某一行，经过修改以后写回数据库，这时就遇到了问题。
-
- 
-
-## 悲观锁
-
-悲观锁（Pessimistic Lock），顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。
-
-悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。
-
-Java synchronized 就属于悲观锁的一种实现，每次线程要修改数据时都先获得锁，保证同一时刻只有一个线程能操作数据，其他线程则会被block。
-
-### 优点与不足
-
- 悲观并发控制实际上是“先取锁再访问”的保守策略，**为数据处理的安全提供了保证**。但是在效率方面，处理加锁的机制**会让数据库产生额外的开销，还有增加产生死锁的机会**；另外，在只读型事务处理中由于不会产生冲突，也没必要使用锁，这样做只能增加系统负载；还有会**降低了并行性**，一个事务如果锁定了某行数据，其他事务就必须等待该事务处理完才可以处理那行数。
 
 # 表空间
 
@@ -394,55 +310,7 @@ create view other as select a.name, a.age from user as a;
 
 让数据更加清晰。想要什么样的数据，就创建什么样的视图。经过以上三条作用的解析，这条作用应该很容易理解了吧
 
-# 开启慢查询日志
-
-可以记录超时的所有的SQL语句
-
-```sql
-#开启终端，连接客户端
-mysql -u root -p
-
-# 查看慢查日志是否开启
-SHOW VARIABLES  LIKE 'slow_query_log';
-SET GLOBAL slow_query_log=on;
-
-# 查看是否没有使用索引的查询记录
-SHOW VARIABLES LIKE 'log%';
-# 开启所有查询都记录下来
-SET GLOBAL log_queries_not_using_indexes=on;
-
-#查看执行多长时间的语句记录下来。
-SHOW VARIABLES LIKE 'long_query_time';
-#这个地方设置后，需要重新开启一个终端才可以看到效果
-set global long_query_time=0;
-
-#查看慢日志的具体文件
-SHOW  VARIABLES LIKE 'slow%'
-```
-
-## 查询日志格式
-
-```sql
-#查看慢日志的具体文件
-SHOW  VARIABLES LIKE 'slow%'
-
-SET timestamp=1558163795;
-/* ApplicationName=DataGrip 2017.2.2 */ SET SQL_SELECT_LIMIT=12;
-# User@Host: root[root] @  [172.17.0.1]  Id:    78
-# Query_time: 0.000247  Lock_time: 0.000102 Rows_sent: 1  Rows_examined: 2
-SET timestamp=1558163795;
-/* ApplicationName=DataGrip 2017.2.2 */ SELECT * FROM work.PDMAN_DB_VERSION WHERE DB_VERSION = 'v1.0.4';
-```
-
-# EXPLAIN分析
-
-![5-19-3](/img/5-19-3.png)
-
-![5-19-4](/img/5-19-4.png)
-
-![5-19-5](/img/5-19-5.png)
-
- 
+## 
 
 # 分库分表
 
@@ -470,65 +338,17 @@ SET timestamp=1558163795;
 
 
 
-# sql left right inner 使用
-
-**原文：https://blog.csdn.net/weixin_41926488/article/details/80327541**
 
 
 
-## 左链接 left join on
-
-left join,在两张表进行连接查询时，会返回左表所有的行，即使在右表中没有匹配的记录。
-
-```sql
-SELECT Persons.LastName, Persons.FirstName, Orders.OrderNo
-FROM Persons
-LEFT JOIN Orders
-ON Persons.Id_P=Orders.Id_P
-ORDER BY Persons.LastName
-```
 
 
 
-## 右链接 right join on
-
-right join,在两张表进行连接查询时，会返回右表所有的行，即使在左表中没有匹配的记录。
-
-```sql
-SELECT Persons.LastName, Persons.FirstName, Orders.OrderNo
-FROM Persons
-RIGHT JOIN Orders
-ON Persons.Id_P=Orders.Id_P
-ORDER BY Persons.LastName
-```
 
 
 
-## 内链接  inner join
-
-inner join，在两张表进行连接查询时，只保留两张表中完全匹配的结果集。
-
-```sql
-SELECT Persons.LastName, Persons.FirstName, Orders.OrderNo
-FROM Persons
-INNER JOIN Orders
-ON Persons.Id_P=Orders.Id_P
-ORDER BY Persons.LastName
-```
 
 
-
-## 全链接 full join
-
-full join,在两张表进行连接查询时，返回左表和右表中所有没有匹配的行。
-
-```sql
-SELECT Persons.LastName, Persons.FirstName, Orders.OrderNo
-FROM Persons
-FULL JOIN Orders
-ON Persons.Id_P=Orders.Id_P
-ORDER BY Persons.LastName
-```
 
  
 

@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-08-21
 author:      "麦子"
-image:       "https://c.pxhere.com/photos/1e/b3/workers_construction_site_hardhats_silhouettes_building_tools_job-749554.jpg!d"
+image:       "https://c.pxhere.com/photos/50/b0/tree_road_archway_symmetry_and_black_white-99031.jpg!d"
 tags:        ["开发工具", "Dockerfile安装常用环境"]
 categories:  ["Tech" ]
 ---

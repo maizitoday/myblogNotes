@@ -279,7 +279,7 @@ spring:
 
 ![屏幕快照 2019-05-15 下午9.37.53](/img/5-16-4.png)
 
-可以看到我们已经把两个provide服务和gateway服务，注册到了eureka中，这个时候，cloud-gateway-eureka会代理服务中心的所有服务。
+可以看到我们已经把两个provide服务和gateway服务，注册到了eureka中，这个时候，**cloud-gateway-eureka会代理服务中心的所有服务。**
 
 ## 代理服务运行结果
 

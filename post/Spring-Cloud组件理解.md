@@ -5,7 +5,7 @@ description: ""
 date:        2019-04-09
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/istio-install_and_example/post-bg.jpg"
-tags:        ["springboot", "srpingCloud"]
+tags:        ["springboot", "springCloud"]
 categories:  ["Tech" ]
 ---
 

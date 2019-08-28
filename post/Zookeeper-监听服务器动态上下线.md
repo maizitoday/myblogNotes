@@ -5,7 +5,7 @@ description: ""
 date:        2019-05-09
 author:      ""
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["Zookeeper", "服务监听", "zk-java-api用法"]
+tags:        ["nosql", "服务监听", "zk-java-api用法"]
 categories:  ["Tech" ]
 ---
 
