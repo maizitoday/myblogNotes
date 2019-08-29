@@ -1,4 +1,4 @@
-title:       "库与表基本操作以及数据增删改"
+title:       "mysql系列-库与表基本操作以及数据增删改"
 subtitle:    ""
 description: ""
 date:        2019-08-26

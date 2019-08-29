@@ -1,5 +1,5 @@
 ---
-title:       "索引的使用、原理和设计优化"
+title:       "mysql系列-索引的使用、原理和设计优化"
 subtitle:    ""
 description: ""
 date:        2019-08-28

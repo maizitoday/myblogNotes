@@ -1,5 +1,5 @@
 ---
-title:       "表的设计与优化（单表、多表）"
+title:       "mysql系列-表的设计与优化（单表、多表）"
 subtitle:    ""
 description: ""
 date:        2019-08-28

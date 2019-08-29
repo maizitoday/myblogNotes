@@ -1,5 +1,5 @@
 ---
-title:       "查找优化-外连接、多表联合查询以及查询注意点"
+title:       "mysql系列-查找优化-外连接、多表联合查询以及查询注意点"
 subtitle:    ""
 description: ""
 date:        2019-08-26

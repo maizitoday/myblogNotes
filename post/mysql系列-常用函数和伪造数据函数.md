@@ -1,5 +1,5 @@
 ---
-title:       "常用方法和伪造数据函数"
+title:       "mysql系列-常用方法和伪造数据函数"
 subtitle:    ""
 description: ""
 date:        2019-08-29
