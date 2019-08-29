@@ -5,7 +5,7 @@ description: ""
 date:        2019-04-23
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-4-25-istio-auto-injection-with-webhook/lion.jpg"
-tags:        ["分布式系列", "服务注册", "nosql"]
+tags:        ["服务注册", "nosql"]
 categories:  ["Tech" ]
 ---
 
