@@ -393,3 +393,9 @@ CREATE TABLE 表名 [AS] SELECT * FROM 要复制的表名
 
 
 
+## 添加自增长
+
+```sql
+alter table tablename modify id int(11)  auto_increment;
+```
+

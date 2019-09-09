@@ -1,5 +1,5 @@
 ---
-title:       "查找优化-非索引设计与单表查询优化"
+title:       "mysql系列-非索引设计与单表查询优化"
 subtitle:    ""
 description: ""
 date:        2019-08-26

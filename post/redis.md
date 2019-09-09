@@ -1,11 +1,11 @@
 ---
-title:       "redis"
+title:       "redis系列-入门"
 subtitle:    ""
 description: ""
 date:        2019-04-06
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
-tags:        ["nosql", "主从复制", "集群", "分布式锁", "分布式系列"]
+tags:        ["redis", "主从复制", "集群", "分布式锁"]
 categories:  ["Tech" ]
 ---
 
