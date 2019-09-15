@@ -11,6 +11,19 @@ categories:  ["Tech" ]
 
 [TOC]
 
+
+
+# 修改容器，镜像名称
+
+```yaml
+# 修改容器名称
+docker rename 0cf82999886a redis-5.0.5 
+
+# 修改镜像名称
+docker tag  XX镜像id   XX新的名字
+
+```
+
 # mysql
 
 ```dockerfile
@@ -103,5 +116,23 @@ root@369a39fe77bf:/usr/local/bin# redis-cli -h 127.0.0.1 -p 6379 shutdown
 #启动
 cd  /usr/local/bin 
 root@369a39fe77bf:/usr/local/bin# redis-server /etc/redis/redis.conf
+```
+
+# mongodb
+
+```yml
+FROM mongo
+EXPOSE 27017
+ 
+#docker hub -- https://hub.docker.com/_/mongo 
+
+#编译 
+docker build -f /vscode/docker-software-dockerfile/mongodb/Dockerfile .
+
+#启动
+docker run -p 27017:27017 -v $PWD/db:/data/db -v $PWD/configdb:/data/configdb -d mongo
+
+#用自己的配置文件进行启动
+#docker run --name some-mongo -v /my/custom:/etc/mongo -d mongo --config /etc/mongo/mongod.conf
 ```
 
