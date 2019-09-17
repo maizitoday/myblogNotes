@@ -1,11 +1,11 @@
 ---
-title:       "mongodb系列-标准sql和mongodb对比"
+title:       "mongodb-标准sql和mongodb对比"
 subtitle:    ""
 description: ""
 date:        2019-09-15
 author:      "麦子"
 image:       "https://c.pxhere.com/images/a1/23/147c2090573fcd3fbc38e7b7b5a7-1593571.jpg!d"
-tags:        ["mongodb系列", "SQL术语VSMongoDB术语", "创建和修改表", "CRUD"]
+tags:        ["mongodb", "SQL术语VSMongoDB术语"]
 categories:  ["Tech" ]
 ---
 
@@ -14,10 +14,6 @@ categories:  ["Tech" ]
 **说明：本文来自于<https://www.bilibili.com/video/av36394924/?p=2>视频讲解**
 
 **官方文档：<https://docs.mongodb.com/>  4.2版本**
-
-
-
-
 
 # SQL术语VSMongoDB术语
 

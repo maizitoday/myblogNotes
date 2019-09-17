@@ -1,11 +1,11 @@
 ---
-title:       "mongodb系列-运算符"
+title:       "mongodb-运算符"
 subtitle:    ""
 description: ""
 date:        2019-09-15
 author:      "麦子"
 image:       "https://c.pxhere.com/images/a1/23/147c2090573fcd3fbc38e7b7b5a7-1593571.jpg!d"
-tags:        ["mongodb系列", "比较运算符", "逻辑运算符", "评估查询运算符", "数组查询运算符", "字段更新运算符", "数组更新运算符"]
+tags:        ["mongodb", "比较运算符", "逻辑运算符", "评估查询运算符", "数组查询运算符", "字段更新运算符", "数组更新运算符"]
 categories:  ["Tech" ]
 ---
 

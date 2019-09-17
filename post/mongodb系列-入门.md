@@ -1,11 +1,11 @@
 ---
-title:       "mongodb系列-入门"
+title:       "mongodb-入门"
 subtitle:    ""
 description: ""
 date:        2019-09-15
 author:      "麦子"
 image:       "https://c.pxhere.com/images/a1/23/147c2090573fcd3fbc38e7b7b5a7-1593571.jpg!d"
-tags:        ["mongodb系列", "$type运用", "capped collection", "objectid分析"]
+tags:        ["mongodb", "$type运用", "capped collection", "objectid分析"]
 categories:  ["Tech" ]
 ---
 

@@ -132,7 +132,21 @@ docker build -f /vscode/docker-software-dockerfile/mongodb/Dockerfile .
 #启动
 docker run -p 27017:27017 -v $PWD/db:/data/db -v $PWD/configdb:/data/configdb -d mongo
 
-#用自己的配置文件进行启动
-#docker run --name some-mongo -v /my/custom:/etc/mongo -d mongo --config /etc/mongo/mongod.conf
+#命令地址
+#/usr/bin/mongo  #手动启动客户端地址
+
+ 
+#/usr/bin/  ./mongofiles -d records put /macfile/110.pdf  #GridFS操作
+
+
+#安装自己配置文件启动
+docker run -p 27000:27000 \
+              -v $PWD/27000/db:/data/db \
+              -v $PWD/27000/configdb:/data/configdb \
+              -itd mongo4.2.0 \
+              --config /data/configdb/27000_mongod.conf
+
 ```
+
+## 
 

@@ -1,11 +1,11 @@
 ---
-title:       "mongodb系列-crud操作"
+title:       "mongodb-crud操作"
 subtitle:    ""
 description: ""
 date:        2019-09-15
 author:      "麦子"
 image:       "https://c.pxhere.com/images/a1/23/147c2090573fcd3fbc38e7b7b5a7-1593571.jpg!d"
-tags:        ["mongodb系列","数组更新运算符"]
+tags:        ["mongodb","常用crud操作"]
 categories:  ["Tech" ]
 ---
 
