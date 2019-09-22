@@ -60,7 +60,15 @@ services:
     command: mongod --dbpath /data/db --replSet mongoreplset
 ```
 
-通过执行 docker-compose up -d 启动，
+**容器处理**
+
+```shell
+docker-compose up -d   启动，
+docker-compose ps      查看
+docker-compose stop    停止
+```
+
+
 
 ## 查看容器IP
 
