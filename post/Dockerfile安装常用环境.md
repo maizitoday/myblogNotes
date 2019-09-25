@@ -24,6 +24,33 @@ docker tag  XX镜像id   XX新的名字
 
 ```
 
+# nginx
+
+```dockerfile
+FROM nginx
+EXPOSE  8081
+
+# 编译 
+# docker build -f /vscode/docker-software-dockerfile/nginx/Dockerfile .
+
+
+#拷贝容器内 Nginx 默认配置文件到本地当前目录下的 conf 目录
+#docker run -itd -p 8081:80 -d nginx
+#docker cp fd2fb5879cd5:/etc/nginx/nginx.conf /vscode/docker-software-dockerfile/nginx/conf
+#docker cp fd2fb5879cd5:/etc/nginx/conf.d/default.conf /vscode/docker-software-#dockerfile/nginx/conf.d
+
+
+# 启动
+#docker run -itd  --name nginx  -p 8081:80  -v /vscode/docker-software-dockerfile/nginx/conf/nginx.conf:/etc/nginx/nginx.conf  -v /vscode/docker-software-dockerfile/nginx/defaultconf/default.conf:/etc/nginx/conf.d/default.conf  -v /vscode/docker-software-dockerfile/nginx/logs:/var/log/nginx    nginx
+
+# 注意  
+# 发现里面的/usr/share/nginx/html/index.html 无法替换。 $PWD如果不行就用绝对路径 -v 
+
+
+```
+
+
+
 # mysql
 
 ```dockerfile
@@ -204,7 +231,81 @@ docker build -f /vscode/docker-software-dockerfile/kibana/Dockerfile .
 docker run -d --name kibana6 --net esk -p 5601:5601 kibana:6.8.3
 
 #配置文件地址
-/usr/share/kibana/config
+/usr/share/elasticsearch/config
+```
+
+
+
+## Logstash
+
+### dockerfile
+
+```dockerfile
+FROM logstash:6.8.3
+
+# 编译 
+# docker build -f /vscode/docker-software-dockerfile/Logstash/Dockerfile .
+
+# 启动   
+# docker run --name logstash -itd -p 6666:6666 -v  $PWD/config/logstash.yml:/usr/share/logstash/config/logstash.yml -v $PWD/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml -v $PWD/config/logstash-sample.conf:/usr/share/logstash/config/logstash-sample.conf logstash:6.8.3 
+
+```
+
+### logstash.yml
+
+这个我直接给屏蔽了
+
+```yml
+# http.host: "0.0.0.0"
+# xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+```
+
+### pipelines.yml
+
+```yml
+- pipeline.id: sample
+  path.config: "/usr/share/logstash/config/logstash-sample.conf"
+```
+
+### logstash-sample.conf
+
+模拟用tcp插件来获取数据到ES中。 
+
+```json
+# input{
+#     file{
+#         path => ["/rmc.log"]
+#         start_position => beginning
+#         sincedb_path => "/dev/null"
+#     }
+# }
+
+input{
+  tcp {
+        port => "6666"
+        mode => "server"
+    }
+}
+
+filter{
+
+
+}
+  
+output {
+  elasticsearch {
+    hosts => ["http://192.168.1.100:9200"]
+    id => "my_plugin_id"
+    index => "viewdata-%{+YYYY.MM.dd}"
+    #user => "elastic"
+    #password => "changeme"
+  }
+  stdout {
+        codec => rubydebug
+    }
+}
+##nc 192.168.1.100 6666 < /var/log/nginx/access.log
+用nc命令来模拟tcp数据
 ```
 
 
@@ -213,3 +314,10 @@ docker run -d --name kibana6 --net esk -p 5601:5601 kibana:6.8.3
 
 默认网络docker0：网络中所有主机间只能用IP相互访问。通过--link选项创建的容器可以对链接的容器名(container-name)作为hostname进行直接访问。
 自定义网络(bridge)：网络中所有主机除ip访问外，还可以直接用容器名(container-name)作为hostname相互访问。
+
+## 问题记录
+
+我的ES和logstash, 一个是Networks：esk  一个是Networks：bridge，但是依然可以OK， 不知道为什么。 我的电脑是mac系统。 后期在来解答。 
+
+
+

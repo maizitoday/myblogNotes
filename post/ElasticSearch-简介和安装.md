@@ -13,7 +13,7 @@ categories:  ["Tech" ]
 
 **说明：本文来自于https://www.bilibili.com/video/av64033816/?p=1>视频讲解**
 
-**官方文档：https://www.elastic.co/guide/en/elasticsearch/reference/6.0/getting-started.html**
+**官方文档：https://www.elastic.co/guide/en/elasticsearch/reference/6.0/getting-started.html 版本6.8.3**
 
 # 简介
 

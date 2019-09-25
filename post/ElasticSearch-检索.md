@@ -13,7 +13,7 @@ categories:  ["Tech" ]
 
 **说明：本文来自于https://www.bilibili.com/video/av64033816/?p=1>视频讲解**
 
-**官方文档：https://www.elastic.co/guide/en/elasticsearch/reference/6.0/getting-started.html**
+**官方文档：https://www.elastic.co/guide/en/elasticsearch/reference/6.0/getting-started.html 版本6.8.3**
 
 # 检索
 
@@ -350,6 +350,8 @@ https://github.com/medcl/elasticsearch-analysis-ik/releases/ 找到对应的版�
 docker cp 
 /elasticsearch-analysis-ik-6.8.3.zip c350e8e2732c:/usr/share/elasticsearch/plugins/ik
 ```
+
+然后重启ES和kibana容器就安装成功了。 
 
 ik 带有两个分词器
 **ik_max_word ：**会将文本做最细粒度的拆分；尽可能多的拆分出词语
