@@ -201,6 +201,8 @@ logstash 的 JVM 配置文件。
 
 # Filebeat
 
+他是安装在服务器上面的， 所以可以收集任何机子上的日志文件， mysql的，redis的等都可以。 比如收集查询慢的SQL语句等。 
+
 ```shell
 sudo yum install filebeat
 

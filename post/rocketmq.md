@@ -149,27 +149,6 @@ Topic是一个逻辑上的概念，实际上在每个broker上以queue的形式�
 
 #### 搭建单Master模式
 
-查看官网， 下载提供的zip包
-
-##### 启动name server
-
-```shell
- > nohup sh bin/mqnamesrv &
- > tail -f ~/logs/rocketmqlogs/namesrv.log
-   The Name Server boot success...
-```
-
-##### 启动broker（注意：发布部署时候需要指定配置文件发布）
-
-```shell
- > nohup sh bin/mqbroker -n 192.168.70.102:9876 &
- > tail -f ~/logs/rocketmqlogs/broker.log 
-   The broker[%s, 172.30.30.233:10911] boot success...
-   
-   注意：发布部署时候需要指定配置文件发布
-   nohup sh bin/mqbroker -c  conf/2m-noslave/broker-a.properties -n 192.168.70.102:9876 &
-```
-
 需要注意的是默认的name server 启动是内存4G， broker是默认8G，我们需要修改runserver.sh和runbroker.sh中的JAVA_OPT，修改小一点如：JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn128m"，然后就可以启动成功了， 不然启动后电脑太卡。 
 
 ##### 停止name server 和 broker
@@ -194,24 +173,6 @@ Send shutdown request to mqnamesrv(36664) OK
 nohup sh  bin/mqnamesrv  -c  conf/namesrv.properties > ~/logs/rocketmqlogs/namesrv.log 2>&1
 
 nohup sh  bin/mqnamesrv  -c  conf/namesrv.properties &
-```
-
-
-
-#### 记录本地docker启动
-
-```shell
-docker run --privileged -itd -p 8022:22 -p 9876:9876 -p 10911:10911 -p 10909:10909  rmq_master /usr/sbin/init  
-```
-
-
-
-#### docker搭建rocketmq-console
-
-```shell
-docker pull styletang/rocketmq-console-ng
-
-docker run -e "JAVA_OPTS=-Drocketmq.namesrv.addr=192.168.70.102:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" -p 8086:8080 -t styletang/rocketmq-console-ng
 ```
 
 
@@ -292,31 +253,76 @@ maxMessageSize=65536
 #sendMessageThreadPoolNums=128
 #拉消息线程池数量
 #pullMessageThreadPoolNums=128
-
-
- 
 ```
 
 
 
-#### 使用工具模拟通信
+### 生产者
 
-```shell
-#生产端
-export NAMESRV_ADDR=192.168.70.102:9876
-sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer
+```java
+public class SyncProducer {
 
-#消费端
-sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer
+    public static void main(String[] args) throws MQClientException, UnsupportedEncodingException, RemotingException,
+            MQBrokerException, InterruptedException {
+   
+        DefaultMQProducer producer = new DefaultMQProducer("maizi_007");
+        // Specify name server addresses.
+        producer.setNamesrvAddr("192.168.1.100:9876");
+        // Launch the instance.
+        producer.start();
+        for (int i = 0; i < 10; i++) {
+            // Create a message instance, specifying topic, tag and message body.
+            Message msg = new Message("yb-007" /* Topic */, "TagA" /* Tag */,
+                    ("maizi_today, Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
+            );
+            // Call send message to deliver message to one of brokers.
+            SendResult sendResult = producer.send(msg);
+            System.out.printf("%s%n", sendResult);
+        }
+        // Shut down once the producer instance is not longer in use.
+        // 把这个隐掉后，才控制台才可以看到你的生产组
+        // producer.shutdown();
+    }
+
+}
 ```
 
 
 
-#### docker hub地址
+### 消费者
 
-```shell
+```java
+public class Consumer {
 
+    public static void main(String[] args) throws MQClientException {
+         // Instantiate with specified consumer group name.
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("myconsumer");
+         
+        // Specify name server addresses.
+        consumer.setNamesrvAddr("192.168.1.100:9876");
+        
+        // Subscribe one more more topics to consume.
+        consumer.subscribe("yb-007", "*");
+        // Register callback to execute on arrival of messages fetched from brokers.
+        consumer.registerMessageListener(new MessageListenerConcurrently() {
+
+            @Override
+            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
+                ConsumeConcurrentlyContext context) {
+                msgs.forEach(item->System.out.println(new String(item.getBody())));
+
+                System.out.printf("--------------------------------");
+
+                // System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+            }
+        });
+
+        //Launch the consumer instance.
+        consumer.start();
+
+        System.out.printf("Consumer Started.%n");
+     }
+}
 ```
-
-
 
