@@ -11,6 +11,8 @@ categories:  ["Tech" ]
 
 [TOC]
 
+**视频资料：https://www.bilibili.com/video/av59635085?from=search&seid=15914016610413035041**
+
 ### 消息队列好处
 
 ##### 1. 解耦:   
@@ -326,3 +328,24 @@ public class Consumer {
 }
 ```
 
+
+
+### 事务消息
+
+![Xnip2019-09-30_00-42-26](/img/Xnip2019-09-30_00-42-26.png)
+
+**注意**：如果本地事务， 也就是我们的service层，执行时间过长，会执行会查本地事务状态，根据状态来对这个消息进行撤销或者继续进行让消费端进行可见。 
+
+大致可以理解， 如果你需要做有关事物的操作的时候， 先进行你的本地事务操作， 只有在本地事务操作成功的时候，你的这个消息才可以被其他的消费者接受到。 他只会保证生产者这边的事务是OK的， 同时也保证这个消息是一定会发给消费端的。 但是消费端那边的事务是否正确他不能保证，如果出错的话， 需要手工进行干预处理。 
+
+
+
+[http://silence.work/2018/08/22/RocketMQ-4-3%E4%BA%8B%E5%8A%A1%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%88%86%E6%9E%90/](http://silence.work/2018/08/22/RocketMQ-4-3事务使用与分析/)
+
+[http://silence.work/2019/05/04/RocketMQ%20Reliablity/](http://silence.work/2019/05/04/RocketMQ Reliablity/)
+
+https://www.infoq.cn/article/2018/08/rocketmq-4.3-release
+
+https://www.cnblogs.com/hzmark/p/rocket_txn.html
+
+https://www.cnblogs.com/hzmark/p/rocket_txn.html

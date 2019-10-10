@@ -9,5 +9,9 @@ tags:        ["elasticSearch","kibana"]
 categories:  ["Tech" ]
 ---
 
+[TOC]
+
+
+
 https://www.jianshu.com/p/f22d869c1fb4
 
