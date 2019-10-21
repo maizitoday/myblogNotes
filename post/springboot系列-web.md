@@ -659,3 +659,30 @@ jar包：执行SpringBoot主类的main方法，启动ioc容器，创建嵌入式
 
 war包：启动服务器，**服务器启动SpringBoot应用**【SpringBootServletInitializer】，启动ioc容器；
 
+
+
+# 自定义Spring Boot的父POM
+
+```xml
+	<parent>
+		<artifactId>mycloud</artifactId>
+		<groupId>maizi.cloud</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>consumer-9001</artifactId>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!-- Import dependency management from Spring Boot -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.1.4.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+```
+
