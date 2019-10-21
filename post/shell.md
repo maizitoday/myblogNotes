@@ -5,7 +5,7 @@ description: ""
 date:        2019-04-09
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/docker.jpg"
-tags:        ["shell语法", "服务脚本"]
+tags:        ["shell"]
 categories:  ["Tech" ]
 ---
 

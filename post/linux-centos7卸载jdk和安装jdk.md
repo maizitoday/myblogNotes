@@ -5,7 +5,7 @@ description: ""
 date:        2019-08-11
 author:      "麦子"
 image:       "https://get.pxhere.com/photo/sea-light-black-and-white-photography-underwater-reflection-darkness-black-monochrome-outer-space-reef-diver-scuba-screenshot-macro-photography-monochrome-photography-atmosphere-of-earth-computer-wallpaper-99827.jpg"
-tags:        ["开发工具","服务脚本","jdk安装和卸载"]
+tags:        ["开发工具","shell","jdk安装和卸载"]
 categories:  ["Tech" ]
 ---
 

@@ -5,7 +5,7 @@ description: ""
 date:        2019-08-19
 author:      "麦子"
 image:       "https://c.pxhere.com/images/bf/95/76b7d5d335a773e933f8085ced47-1419036.jpg!d"
-tags:        ["服务脚本", "防火墙相关知识"]
+tags:        ["shell", "防火墙相关知识"]
 categories:  ["Tech" ]
 ---
 

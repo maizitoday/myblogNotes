@@ -5,7 +5,7 @@ description: ""
 date:        2019-03-04
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/istio-install_and_example/post-bg.jpg"
-tags:        ["rocketmq","docker安装","消息队列","中间件"]
+tags:        ["rocketmq","docker安装","消息队列","rocketmq"]
 categories:  ["Tech" ]
 ---
 

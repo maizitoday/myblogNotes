@@ -5,7 +5,7 @@ description: ""
 date:        2019-03-27
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-05-23-external_system_auth/background.jpg"
-tags:        ["中间件","数据库","主从复制","读写分离"]
+tags:        ["mycat","mycat","数据库","主从复制-mycat","读写分离"]
 categories:  ["Tech" ]
 ---
 

@@ -11,6 +11,10 @@ categories:  ["Tech" ]
 
 [TOC]
 
+# 简述
+
+简单查看项目和项目依赖处理， 业务模块进行modules的分开。抽离公用模块代码。 
+
 # jsite-root
 
 ```xml

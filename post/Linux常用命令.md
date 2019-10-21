@@ -5,7 +5,7 @@ description: ""
 date:        2019-04-09
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-11-service-mesh-vs-api-gateway/background.jpg"
-tags:        ["服务脚本", "linux常用命令"]
+tags:        ["shell", "linux常用命令"]
 categories:  ["Tech" ]
 ---
 

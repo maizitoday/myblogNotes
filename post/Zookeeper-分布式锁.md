@@ -5,7 +5,7 @@ description: ""
 date:        2019-05-13
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["nosql", "分布式系列"]
+tags:        ["Zookeeper", "分布式系列"]
 categories:  ["Tech" ]
 ---
 

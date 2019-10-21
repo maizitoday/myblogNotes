@@ -5,7 +5,7 @@ description: ""
 date:        2019-04-06
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
-tags:        ["redis", "主从复制", "集群", "分布式锁"]
+tags:        ["redis", "主从复制-redis", "集群-redis", "分布式锁"]
 categories:  ["Tech" ]
 ---
 

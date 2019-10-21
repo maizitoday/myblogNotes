@@ -5,7 +5,7 @@ description: ""
 date:        2019-08-10
 author:      "麦子"
 image:       "https://get.pxhere.com/photo/snow-macro-snowflake-black-darkness-phenomenon-computer-wallpaper-screenshot-black-and-white-font-grass-night-midnight-1420032.jpg"
-tags:        ["服务脚本", "开发工具", "秘钥连接SSH"]
+tags:        ["shell", "开发工具", "秘钥连接SSH"]
 categories:  ["Tech" ]
 ---
 

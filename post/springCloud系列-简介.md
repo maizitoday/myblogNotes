@@ -5,7 +5,7 @@ description: ""
 date:        2019-04-17
 author:      "麦子"
 image:       "https://zhaohuabing.com/img/2018-12-27-the-obstacles-to-put-istio-into-production/background.jpg"
-tags:        ["springCloud", "简介"]
+tags:        ["springCloud"]
 categories:  ["Tech" ]
 ---
 

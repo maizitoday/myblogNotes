@@ -5,7 +5,7 @@ description: ""
 date:        2019-09-16
 author:      "麦子"
 image:       "https://c.pxhere.com/images/a1/23/147c2090573fcd3fbc38e7b7b5a7-1593571.jpg!d"
-tags:        ["mongodb","集群","分片","分片策略"]
+tags:        ["mongodb","集群-mongodb","分片","分片策略"]
 categories:  ["Tech" ]
 ---
 

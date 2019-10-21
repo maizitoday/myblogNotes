@@ -5,7 +5,7 @@ description: ""
 date:        2019-03-04
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
-tags:        ["nginx","负载均衡","应用服务器"]
+tags:        ["nginx","负载均衡","nginx","应用服务器"]
 categories:  ["Tech" ]
 ---
 
