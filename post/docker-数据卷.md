@@ -119,3 +119,14 @@ docker: Error response from daemon: error while mounting volume '': VolumeDriver
 ```
 
  
+
+# docker -v
+
+如果是单一的redis恢复数据， 只要把前面容器里面的数据，copy出来， 然后-v 直接复制进去，然后重启就OK了。
+
+```dockerfile
+sudo docker run --rm-i -t -v /home/hyzhou/docker:/data:rw ubuntu:14.04 /bin/bash
+
+将本机的/home/hyzhou/docker，挂载到镜像中的/data目录
+```
+

@@ -338,13 +338,23 @@ create view other as select a.name, a.age from user as a;
 
 
 
+# SQL注入
 
+Sql 注入攻击是通过将恶意的 Sql 查询或添加语句插入到应用的**输入参数中**，再在后台 Sql 服务器上解析执行进行的攻击，它目前黑客对数据库进行攻击的最常用手段之一。
 
+![Xnip2019-10-30_15-07-36](/img/Xnip2019-10-30_15-07-36.png)
 
+# Mysql 中的dual表
 
+简言之，from dual完全是一个可有可无的东西。只是为了方便使用select 语句中喜欢带上from的开发者。
 
+```sql
+ select sysdate() from  dual
+ 
+ select sysdate()
+```
 
-
+Oracle和MySQL中都有一张名称为dual的虚拟表。
 
 
 

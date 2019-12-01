@@ -51,6 +51,28 @@ JVM必须实现的选项，实现通用的功能，比如：检查JRE的版本�
 
 打印版本信息然后退出。经常使用该选项来查看JAVA的版本或验证java命令是否可用。
 
+### jps
+
+**作用：**显示当前系统用户的Java进程情况及其Id号
+
+```java
+68341 BootLanguagServerBootApp
+49574 Jps
+68287 org.eclipse.equinox.launcher_1.5.600.v20191014-2022.jar
+```
+
+### jconsole
+
+jconsole是jdk自带的工具，[使用jconsole工具来监控java运行情况]
+
+```java
+jconsole 68341
+```
+
+![Xnip2019-11-16_18-15-47](/img/Xnip2019-11-16_18-15-47.png)
+
+
+
 ### -Dproperty=value
 
 指定一个系统属性值。属性和属性值都为字符形式，其中属性名不能含有空白字符，属性值如果需要空白字符，需要使用双引号`"`包裹。一个正确的示例如下：

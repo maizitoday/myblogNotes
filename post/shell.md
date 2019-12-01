@@ -393,6 +393,7 @@ start(){
   if [ $? -eq "0" ]; then
     echo ">>> ${JAR_NAME} is already running PID=${pid} <<<"
   else
+    #这个命令就是说把执行结果的标准输出放入到log文件，又因为2>&1(标准错误也重定向到标准输入，之前标准输入已经重定向到了log),因此这个命令的正确执行和报错都会放入到log文件中
     nohup $JRE_HOME/bin/java -Xms256m -Xmx512m -jar $JAR_NAME >springboot.log 2>&1 &
     echo $! > $PID
     echo ">>> start $JAR_NAME successed PID=$! <<<"

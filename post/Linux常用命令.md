@@ -1,5 +1,5 @@
 ---
-title:       "Linux常用命令"
+title:       "Linux常用命令操作"
 subtitle:    ""
 description: ""
 date:        2019-04-09
@@ -227,6 +227,7 @@ chomd:
       chomd    g+w    other 其他人有writer的权限
       a+x 是给所有人加上可执行权限，包括所有者，所属组，和其他人
       o+x 只是给其他人加上可执行权限
+      -R, --recursive：对目录以及目录下的文件递归执行更改权限操作。
       
 Linux用户
     1、所有者（u）
@@ -335,9 +336,22 @@ systemctl status nginx.service
 #重新启动服务
 systemctl restart nginx.service
 #查看所有已启动的服务
-systemctl list-units --type=service
-  
+systemctl list-units --type=service  
 ```
+
+
+
+### 服务启动centos6版本
+
+```shell
+您的操作系统不使用systemd，systemctl但仍使用init.d或service命令：
+例如：
+sudo service {servicename} {stop|start|restart}
+要么
+/etc/init.d/{service} {stop|start|restart}
+```
+
+
 
 
 

@@ -69,7 +69,16 @@ systemctl status docker
 
 
 
-  
+# 错误  
 
+```java
+Job for kube-apiserver.service failed because the control process exited with error code. See "systemctl status kube-apiserver.service" and "journalctl -xe" for details.
+```
 
+我这里的原因是：端口被占用，修改端口号
+
+```shell
+vi /etc/kubernetes/apiserver 
+KUBE_API_PORT="--port=18080"
+```
 

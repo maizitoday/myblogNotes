@@ -9,7 +9,9 @@ tags:        ["nginx","负载均衡","nginx","应用服务器"]
 categories:  ["Tech" ]
 ---
 
-#### **tomcat** 与 **nginx**，**apache**的区别是什么？
+[TOC]
+
+# tomcat** 与 **nginx**，**apache**的区别是什么？
 
 虽然Tomcat也可以认为是HTTP服务器，但通常它仍然会和Nginx配合在一起使用：
 
@@ -24,22 +26,20 @@ apache用的越来越少了，大体上和nginx功能重合的更多。
 
 而应用服务器，则是一个应用执行的容器。它首先需要支持开发语言的 Runtime（对于 Tomcat 来说，就是 Java），保证应用能够在应用服务器上正常运行。其次，需要支持应用相关的规范，例如类库、安全方面的特性。对于 Tomcat 来说，就是需要提供 JSP/Sevlet 运行需要的标准类库、Interface 等。为了方便，应用服务器往往也会集成 HTTP Server 的功能，但是不如专业的 HTTP Server 那么强大，所以应用服务器往往是运行在 HTTP Server 的背后，执行应用，将动态的内容转化为静态的内容之后，通过 HTTP Server 分发到客户端。
 
-
-
-#### 什么是HOST文件
+# 什么是HOST文件
 
 Hosts是一个没有扩展名的系统文件，其基本作用就是将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，系统会立即打开对应网页，如果没有找到，
 则系统再会将网址提交DNS
 域名解析服务器进行IP地址的解析，如果发现是被屏蔽的IP或域名，就会禁止打开此网页！
 在我们开发中，我们可以设置一个好记住的名字， 有力于开发。 
 
-#### nginx多进程工作模式￼
+# nginx多进程工作模式￼
 
 master主进程控制多个work进程。work进程处理业务逻辑。 
 
 Nginx的高效得益于它的事件驱动机制，当完成后就告诉socker，这个时候socker就进行处理。 其中在等待的时候， sokcer可以接收其他的请求。 
 
-#### Nginx配置文件分析   nginx.conf
+# Nginx配置文件分析   nginx.conf
 
 ------
 
@@ -72,14 +72,12 @@ http {
    include /etc/nginx/conf.d/*.conf; #这个地方用来写入虚拟主机文件，对应的某一个域名访问的日志都在这个里面的。
 ```
 
-
-
-#### 什么是虚拟主机
+# 什么是虚拟主机
 
 虚拟主机，就是把一台物理服务器划分为多个“虚拟”服务器， 每一个虚拟主机都可以有独立的域名和独立的目录。
 阿里云就是做的虚拟主机。 nginx中一个server就是一个虚拟主机。 
 
-#### default.conf   具体虚拟主机配置
+# default.conf   具体虚拟主机配置
 
 ```nginx
 server {
@@ -119,7 +117,7 @@ location = /50x.html {
 }
 ```
 
-#### location 中root地址分析， 如下： 
+# location 中root地址分析， 如下： 
 
 ```nginx
    location ^~  /images/  {
@@ -129,7 +127,7 @@ location = /50x.html {
 
 http://localhost:9090/images/3.jpg  这个会到这里， 然后在去找 /tmp/ 然后是这个下面的images目录下面的3.jpg这个文件。 
 
-#### nginx命令参数 
+# nginx命令参数 
 
 ```nginx
 # nginx -t 测试配置是否正确 
@@ -145,7 +143,7 @@ http://localhost:9090/images/3.jpg  这个会到这里， 然后在去找 /tmp/ 
 # nginx -c xxx.conf  指定配置文件打开
 ```
 
-#### 反向代理和正向代理
+# 反向代理和正向代理
 
 正向代理简单地打个租房的比方**:**
 
@@ -185,7 +183,7 @@ A**(客户端)想租一个房子,**B**(代理)就把这个房子租给了他。
 1. 负载均衡，提高处理和响应速度。
 2. 保证内网安全，隐藏服务器信息，防止web攻击。
 
-#### 负载均衡
+# 负载均衡
 
 ```nginx
 nginx.conf  在这个地方设置
@@ -219,7 +217,7 @@ server {
 4. fair（第三方）           响应时间方式
 5. url_hash（第三方）  依据URL分配方式    
 
-#### 动静分离
+# 动静分离
 
 ```nginx
 location ~* \.(gif|jpg|jpeg|png|css|js|ico)$ { //包含这些后缀，请求被转发到静态池，否则转发到动态池
@@ -239,7 +237,7 @@ location ~ .*.(gif|jpg|jpeg|png|bmp|swf|css|js)$ {
 
 ```
 
-#### 高并发策略
+# 高并发策略
 
 1. 负载均衡： 集群
 2. 动静分离：使用Nginx，CDN（用第三方的一些js，不放到自己的服务器上）
@@ -247,7 +245,7 @@ location ~ .*.(gif|jpg|jpeg|png|bmp|swf|css|js)$ {
 4. 限流：流量控制
 5. 降级：服务降载，就是把不是核心的业务关掉。 比如不需要的日志业务给关掉。
 
-#### 安装ftp
+# 安装ftp
 
 yum  install  vsftpd
 
@@ -255,7 +253,7 @@ yum  install  vsftpd
 
 service  vsftpd restart   (注意他的端口也还是SSH的默认端口)
 
-#### SSH服务安装
+# SSH服务安装
 
 yum install openssh-server 
 
@@ -269,7 +267,7 @@ PermitRootLogin yes    最后一个重要！因为它是允许root用户直接�
 
 service sshd restart  
 
-#### 开机自启动sshd服务  
+# 开机自启动sshd服务  
 
 ```shell
 $ systemctl enable sshd.service     
@@ -282,7 +280,7 @@ $ systemctl enable sshd.service
 # 查看启动状态`
 ```
 
-#### 集群中的session
+# 集群中的session
 
 1. Session 保持
 
@@ -300,9 +298,7 @@ $ systemctl enable sshd.service
 
    既然会话保持和会话复制都不完美，那么我们为什么不把Session放在一个统一的地方呢，这样集群中的所有节点都  在一个地方进行Session的存取就可以解决问题。对于Session来说，肯定是频繁使用的，虽然你可以把它存放在数据库中，但是真正生产环境中我更推荐存放在性能更快的分布式KV数据中，例如：Memcached和Redis。
 
-
-
-#### springboot运行后，查看解压后的文件（负载均衡中，我这边直接使用springboot服务）
+# springboot运行后，查看解压后的文件（负载均衡中，我这边直接使用springboot服务）
 
 ```java
 jar uvf test.jar com\lovedata\bigdata\jar\NeedReplace.class
@@ -310,9 +306,7 @@ jar uvf test.jar com\lovedata\bigdata\jar\NeedReplace.class
 
 通过上面的命令，直接替换class文件。 如果是持续集成的话，就不要管了， 同时还可以在IDEA已经通过SSH替换了class后，我们在写一个shell命令， 进行再次打包。 
 
-
-
-#### nginx缓存的开启和禁用
+# nginx缓存的开启和禁用
 
 原文：**https://blog.csdn.net/weixin_36185028/article/details/80740142**
 
@@ -320,7 +314,7 @@ jar uvf test.jar com\lovedata\bigdata\jar\NeedReplace.class
 
 当程序调试好上线后，可以开启nginx缓存，**节省服务器的带宽流量，减少一些请求，降低服务器的压力。**
 
-##### 1.启用缓存
+## 1.启用缓存
 
 ```ruby
 location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ {
@@ -329,7 +323,7 @@ location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ {
 }
 ```
 
-##### 2.禁用缓存
+## 2.禁用缓存
 
 ```ruby
 location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ {
@@ -337,3 +331,7 @@ location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ {
   add_header Cache-Control no-store;
 }
 ```
+
+# nginx并发
+
+优化后可以达到20W， 对于一般的网站完全可以处理。

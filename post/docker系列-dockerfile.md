@@ -13,15 +13,17 @@ categories:  ["Tech" ]
 
 [TOC]
 
-### DockerFile作用
+好文：https://blog.fundebug.com/2017/05/15/write-excellent-dockerfile/
+
+# DockerFile作用
 
 Dockerfile是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。比用命令更加的灵活。 
 
-### Dockerfile 语法
+# Dockerfile 语法
 
 转载地址： https://www.cnblogs.com/boshen-hzb/p/6400272.html
 
-#### ADD
+## ADD
 
 ADD命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个URL，那该URL的内容将被下载并复制到容器中。
 
@@ -30,7 +32,7 @@ ADD命令有两个参数，源和目标。它的基本作用是从源系统的�
 #ADD /my_app_folder /my_app_folder` 
 ```
 
-#### CMD
+## CMD
 
 和RUN命令相似，CMD可以用于执行特定的命令。和RUN不同的是，这些命令不是在镜像构建的过程中执行的，而是在用镜像构建容器后被调用。
 
@@ -47,7 +49,7 @@ CMD ["param1","param2"] 提供给 ENTRYPOINT 的默认参数；
 
 
 
-#### ENTRYPOINT
+## ENTRYPOINT
 
 配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。每个 Dockerfile 中只能有一个 ENTRYPOINT，当指定多个时，只有最后一个起效。
 
@@ -59,13 +61,13 @@ ENTRYPOINT command param1 param2（shell中执行）。
 
    
 
-#### COPY
+## COPY
 
 格式为 COPY <src> <dest>,复制本地主机的 <src>（为 Dockerfile 所在目录的相对路径）到容器中的 <dest>。当使用本地目录为源目录时，推荐使用 COPY。
 
 
 
-#### ENV
+## ENV
 
 ENV命令用于设置环境变量。这些变量以”key=value”的形式存在，并可以在容器内被脚本或者程序调用。这个机制给在容器中运行应用带来了极大的便利。
 
@@ -78,7 +80,7 @@ ENV PATH $PATH:${JAVA_HOME}/bin
 
 
 
-#### EXPOSE
+## EXPOSE
 
 EXPOSE用来指定端口，使容器内的应用可以通过端口和外界交互。
 
@@ -92,7 +94,7 @@ EXPOSE 8080
 
 
 
-#### FROM
+## FROM
 
 FROM命令可能是最重要的Dockerfile命令。改命令定义了使用哪个基础镜像启动构建流程。基础镜像可以为任意镜 像。如果基础镜像没有被发现，Docker将试图从Docker image index来查找该镜像。FROM命令必须是Dockerfile的首个命令。
 
@@ -103,7 +105,7 @@ FROM ubuntu
 
 
 
-#### MAINTAINER
+## MAINTAINER
 
 我建议这个命令放在Dockerfile的起始部分，虽然理论上它可以放置于Dockerfile的任意位置。这个命令用于声明作者，并应该放在FROM的后面。
 
@@ -114,7 +116,7 @@ MAINTAINER authors_name
 
 
 
-#### RUN
+## RUN
 
 每一个RUN指令都会是在一个新的container里面运行,并提交为一个image作为下一个RUN的base
 
@@ -137,7 +139,7 @@ RUN命令有两种格式
 
 
 
-#### USER
+## USER
 
 USER命令用于设置运行容器的UID。
 
@@ -148,7 +150,7 @@ USER 751
 
 
 
-#### VOLUME
+## VOLUME
 
 通过dockerfile的 VOLUME 指令可以在镜像中创建挂载点，这样只要通过该镜像创建的容器都有了挂载点。还有一个区别是，通过 VOLUME 指令创建的挂载点，无法指定主机上对应的目录，是自动生成的。
 
@@ -163,13 +165,13 @@ VOLUME /var/log /var/db
 
 
 
-#### WORKDIR
+## WORKDIR
 
 设置工作目录,为后续的RUN、CMD、ENTRYPOINT指令配置工作目录。可以使用多个WORKDIR指令，后续命令如果参数时相对路径，则会基于之前命令指定的路径.
 
 
 
-### 如何使用Dockerfiles
+# 如何使用Dockerfiles
 
 使用Dockerfiles和手工使用Docker Daemon运行命令一样简单。脚本运行后输出为新的镜像ID。
 
@@ -181,7 +183,7 @@ sudo docker build -t my_mongodb .
 
 
 
-#### Dockerfile RUN，CMD，ENTRYPOINT命令区别
+## Dockerfile RUN，CMD，ENTRYPOINT命令区别
 
 转载地址：https://www.jianshu.com/p/f0a0f6a43907
 
@@ -191,7 +193,7 @@ Dockerfile中RUN，CMD和ENTRYPOINT都能够用于执行命令，下面是三者
 - CMD命令设置容器启动后默认执行的命令及其参数，但CMD设置的命令能够被`docker run`命令后面的命令行参数替换
 - ENTRYPOINT配置容器启动时的执行命令（不会被忽略，一定会被执行，即使运行 `docker run`时指定了其他命令）
 
-### DockerFile构建mycat
+## DockerFile构建mycat
 
  转载地址： https://hub.docker.com/r/longhronshens/mycat-docker/dockerfile
 

@@ -98,6 +98,8 @@ SELECT * FROM products WHERE name='Mouse' FOR UPDATE;
 
 #### 5.  支持自动增加列属性auto_increment。
 
+**innodb`引擎的`insert,update,delete`操作都会给操作数据加上排他锁(行级锁).这时候其他事务是没法对这行数据进行操作的.**
+
 
 
 ## MyIsam

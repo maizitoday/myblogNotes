@@ -54,3 +54,12 @@ Container模式示意图：
 ![5-23](/img/5-23.jpeg)
 
  
+
+## $ docker network create somenetwork 
+
+https://blog.csdn.net/gezhonglei2007/article/details/51627821
+
+**默认网络与自定义bridge网络的差异**
+
+默认网络docker0：网络中所有主机间只能用IP相互访问。通过--link选项创建的容器可以对链接的容器名(container-name)作为hostname进行直接访问。
+自定义网络(bridge)：网络中所有主机除ip访问外，还可以直接用**容器名**(container-name)作为hostname相互访问。
