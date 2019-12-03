@@ -87,7 +87,7 @@ Java语言系统自带有三个类加载器:
 
 2. **Extention ClassLoader** 扩展的类加载器，加载目录%JRE_HOME%\lib\ext目录下的jar包和class文件。还可以加载`-D java.ext.dirs`选项指定的目录。
 
-3. **Appclass Loader也称为SystemAppClass** 加载当前应用的classpath的所有类。
+3. **Appclass Loader也称为SystemAppClass** 加载当前应用的classpath的所有类。系统加载器， 来进行加载classpath里面的所有的jar的包。 所以以前我们是要把包都放到到classpath里面去的。 
 
    
 
@@ -98,6 +98,14 @@ Java语言系统自带有三个类加载器:
 3. AppClassLoader
 
  说明了它们加载的路径。并且还提到了`-Xbootclasspath`和`-D java.ext.dirs`这两个虚拟机参数选项。
+
+### 类的加载方式
+
+![Xnip2019-11-23_16-29-29](/img/Xnip2019-11-23_16-29-29.png)
+
+### 主动加载类
+
+![Xnip2019-11-23_16-07-56](/img/Xnip2019-11-23_16-07-56.png)
 
 
 
