@@ -267,11 +267,15 @@ public class Main {
 
 ## 运行结果
 
+```java
+游戏服务器已启动
+公告系统已启动
+活动系统已启动
+<Thread-活动系统>[event]活动系统运行中 ><
+<Thread-公告系统>[event]系统公告运行中 ><
+<Thread公告系统>[overEvent]
+<Thread活动系统>[overEvent]
 ```
-
-```
-
-
 
 # 总结
 
