@@ -168,3 +168,10 @@ Thread-0 长时间业务处理中.......
 回调数据--->name=maizi
 ```
 
+
+
+# jdk自带FutureTask示例
+
+## FutureTask的实现
+
+FutureTask是一个基于AQS同步队列实现的一个自定义同步组件，通过对同步状态state的竞争实现acquire或者release操作。
