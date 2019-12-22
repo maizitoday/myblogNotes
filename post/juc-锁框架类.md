@@ -1,11 +1,11 @@
 ---
-title:       "锁框架"
+title:       "juc-锁框架类"
 subtitle:    ""
 description: ""
 date:        2019-12-17
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
-tags:        ["多线程和高并发", "锁框架"]
+tags:        ["多线程和高并发","java基础"]
 categories:  ["Tech" ]
 ---
 
@@ -117,13 +117,9 @@ new ReentrantReadWriteLock(true);
 
 读写锁将对临界资源的访问分成了两个锁，一个读锁和一个写锁。正因为有了读写锁，才使得多个线程之间的读操作不会发生冲突。ReadWriteLock就是读写锁，它是一个接口，ReentrantReadWriteLock实现了这个接口。可以通过readLock()获取读锁，通过writeLock()获取写锁。
 
-
-
-
-
-
-
 # java.util.concurrent.locks包下常用的类与接口
+
+## 包结构图
 
 ![20170211102428481](/img/20170211102428481.png)
 

@@ -1,11 +1,11 @@
 ---
-title:       "原子类"
+title:       "juc-原子类"
 subtitle:    ""
 description: ""
 date:        2019-12-11
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
-tags:        ["多线程和高并发", "原子类"]
+tags:        ["多线程和高并发","java基础"]
 categories:  ["Tech" ]
 ---
 

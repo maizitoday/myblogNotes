@@ -1,11 +1,11 @@
 ---
-title:       "线程池框架"
+title:       "juc-线程池框架类"
 subtitle:    ""
 description: ""
 date:        2019-12-15
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
-tags:        ["多线程和高并发", "线程池框架"]
+tags:        ["多线程和高并发", "java基础"]
 categories:  ["Tech" ]
 ---
 
