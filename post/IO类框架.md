@@ -395,55 +395,57 @@ File类中还定义了一些对文件或目录进行管理、操作的方法，�
 
 # 按I/O类型来总体分类
 
-## 1. Memory
+### 1. Memory
 
 1）从/向内存数组读写数据: CharArrayReader、 CharArrayWriter、ByteArrayInputStream、ByteArrayOutputStream
 
 2）从/向内存字符串读写数据 StringReader、StringWriter、StringBufferInputStream
 
-## 2. Pipe管道实现管道的输入和输出（进程间通信）
+### 2. Pipe管道实现管道的输入和输出（进程间通信）
 
 PipedReader、PipedWriter、PipedInputStream、PipedOutputStream
 
-## 3. File 文件流对文件进行读、写操作
+### 3. File 文件流对文件进行读、写操作
 
  FileReader、FileWriter、FileInputStream、FileOutputStream
 
-## 4. ObjectSerialization(对象输入、输出)
+### 4. ObjectSerialization(对象输入、输出)
 
 ObjectInputStream、ObjectOutputStream
 
-## 5. DataConversion数据流 按基本数据类型读、写（处理的数据是Java的基本类型（如布尔型，字节，整数和浮点数））
+### 5. DataConversion数据流 按基本数据类型读、写（处理的数据是Java的基本类型（如布尔型，字节，整数和浮点数））
 
 DataInputStream、DataOutputStream
 
-## 6. Printing 包含方便的打印方法
+### 6. Printing 包含方便的打印方法
 
 PrintWriter、PrintStream
 
-## 7. Buffering缓冲  在读入或写出时，对数据进行缓存，以减少I/O的次数
+### 7. Buffering缓冲  在读入或写出时，对数据进行缓存，以减少I/O的次数
 
 BufferedReader、BufferedWriter、BufferedInputStream、BufferedOutputStream
 
-## 8. Filtering 滤流，在数据进行读或写时进行过滤
+### 8. Filtering 滤流，在数据进行读或写时进行过滤
 
 FilterReader、FilterWriter、FilterInputStream、FilterOutputStream
 
-## 9. Concatenation合并输入 把多个输入流连接成一个输入流
+### 9. Concatenation合并输入 把多个输入流连接成一个输入流
 
 SequenceInputStream
 
-## 10. Counting计数  在读入数据时对行记数
+### 10. Counting计数  在读入数据时对行记数
 
 LineNumberReader、LineNumberInputStream
 
-## 11. Peeking Ahead 通过缓存机制，进行预读
+### 11. Peeking Ahead 通过缓存机制，进行预读
 
 PushbackReader、PushbackInputStream
 
-## 12. Converting between Bytes and Characters 按照一定的编码/解码标准将字节流转换为字符流，或进行反向转换（Stream到Reader,Writer的转换类）
+### 12. Converting between Bytes and Characters 按照一定的编码/解码标准将字节流转换为字符流，或进行反向转换（Stream到Reader,Writer的转换类）
 
 InputStreamReader、OutputStreamWriter
+
+
 
 # 按数据来源（去向）分类
 
@@ -456,3 +458,19 @@ InputStreamReader、OutputStreamWriter
 **ByteArrayInputStream, ByteArrayOutputStream **
 
 ## 3、Char[]:
+
+**CharArrayReader, CharArrayWriter** 
+
+## 4、String
+
+**StringBufferInputStream, StringReader, StringWriter** 
+
+## 5、网络数据流
+
+**InputStream, OutputStream, Reader, Writer** 
+
+
+
+# 具体操作代码
+
+查看地址：https://juejin.im/post/5d1a275b6fb9a07f0b03daf1
