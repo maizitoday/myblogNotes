@@ -121,6 +121,10 @@ public class LombokTest {
     }
 ```
 
+相当于默认会去调用close()方法。 
+
+
+
 
 
 ## @EqualsAndHashCode
