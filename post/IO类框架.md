@@ -15,9 +15,15 @@ categories:  ["Tech" ]
 
 转载地址：https://blog.csdn.net/a18716374124/article/details/76504706
 
+转载地址： https://www.cnblogs.com/dengyungao/p/7525098.html
+
 # 概念
 
 流（Stream）的概念来源于UNIX中的管道（pipe）概念，在unix中，管道是一条不间断的字节流，用来实现程序和进程间的通信，或者读写外围设备、外部文件等。流，必须有源端和目的端，可以是文件，内存或者网络等。流的创建是为了更方便的处理数据的输入输出。简单的来说：输入流就是从外部文件输入到内存，输出流主要是从内存输出到文件。我们用Eclipse开发小程序在控制台输入数据就属于输入流，即从控制台输入到内存。
+
+# 结构图
+
+![21134209_eZJr](/img/21134209_eZJr.jpg)
 
 # 字节流和字符流的区别
 
@@ -40,23 +46,29 @@ categories:  ["Tech" ]
 - 字节流： 以8位的字节形式来读写的流。他们的标志是名称以Stream结尾。InputStream与OutputStream分别是所有字节输入流与字节输出流的抽象父类。
 - 字符流： 以字符形式来读写的流。它们的标志是名称以Reader或者Writer结尾。并且Reader和Writer分别是所有字符输入流与字符输出流的抽象父类。
 
-## 结构图
 
-![20170915145559782](/img/20170915145559782.png)
 
-# 字节流
+# 流式部分
+
+## 字节流
 
 字节流主要是操作byte类型数据，以byte数组为准，主要操作类就是OutputStream、InputStream。两者都是抽象类，是字节输入、输出流的父类。以InputStream为例，最常用到的子类有：FileInputStream，ByteArrayInputStream，ObjectInputStream，BufferedInputStream、DataInputStream、PushbackInputStream。
 
-## 缓冲字节流好处
+### 缓冲字节流好处
 
 BufferedInputStream和InputStream类都是字节流，而更确切地说，BufferedInputStream是缓冲字节流。
 
 InputStream是不带缓冲的操作，每读一个字节就要写入一个字节，由于涉及磁盘的IO操作相比内存的操作要慢很多，所以不带缓冲的流效率很低。BufferedInputStream带缓冲的流，可以一次读很多字节，但不向磁盘中写入，只是先放到内存里。等凑够了缓冲区大小的时候一次性写入磁盘，这种方式可以减少磁盘操作次数，速度就会提高很多！这是两者的区别。
 
+### 字节输入流
+
+#### 结构图
+
+![21134209_DSCU](/img/21134209_DSCU.gif)
 
 
-## 字节输入流
+
+#### 概述
 
 InputStream: 字节输入流、是所有字节输入流的父类、为所有字节输入流提供一个标准、和基本的与读取字节有关的方法及简单的实现
 
@@ -98,7 +110,13 @@ InputStream: 字节输入流、是所有字节输入流的父类、为所有字�
 
 
 
-## 字节输出流
+### 字节输出流
+
+#### 结构图
+
+![21134209_WFrb](/img/21134209_WFrb.gif)
+
+#### 概述
 
 OutputStream: 字节输出流、本身是一个抽象类、与InputStream作用一样、为所有字节输出流提供一个标准、定义了一些基本写入字节的方法与简单实现:
 
@@ -128,7 +146,11 @@ OutputStream: 字节输出流、本身是一个抽象类、与InputStream作用�
 
 字节数组输出流、用于将字节写入到其本身所带的一个内置缓存字节数组中、可将其内置缓存字节数组中的字节转化成字符串到程序中、也可以将它写入到另一个字节输出流中;
 
-# 字符流
+
+
+
+
+## 字符流
 
 在程序中一个字符等于两个字节，java提供了Reader、Writer两个专门操作字符流的类。两者同样是抽象类。已Reader为例，其常用的子类有：[BufferedReader](http://blog.csdn.net/sinat_26888717/article/details/47999637),[CharArrayReader](http://blog.csdn.net/sinat_26888717/article/details/47999637),[FilterReader](http://blog.csdn.net/sinat_26888717/article/details/47999637),[InputStreamReader](http://blog.csdn.net/sinat_26888717/article/details/47999637),[PipedReader](http://blog.csdn.net/sinat_26888717/article/details/47999637),[StringReader](http://blog.csdn.net/sinat_26888717/article/details/47999637) 。
 
@@ -146,7 +168,15 @@ BufferedReader从字符输入流中读取文本，缓冲各个字符，从而实
 
 
 
-## 字符输入流
+### 字符输入流
+
+#### 结构图
+
+![21134209_bOjq](/img/21134209_bOjq.gif)
+
+
+
+#### 概述
 
 Reader、意义与InputStream相同、为所有字符输入流提供一个标准、只有基本的读取方法的定义和简单的实现
 
@@ -186,7 +216,13 @@ StringReader 是读, 从一个String中读取,所以需要一个String ,通过�
 
 
 
-## 字符输出流
+### 字符输出流
+
+#### 结构图
+
+![21134209_ugym](/img/21134209_ugym.gif)
+
+#### 概述
 
 Writer ：字符输出流、是所有字符输出流的父类。与OutputStream意义一样、提供一个标准、一些基本写入的方法和简单的实现;
 
@@ -218,9 +254,9 @@ Writer ：字符输出流、是所有字符输出流的父类。与OutputStream�
 
 在字符串缓冲区中收集输出的字符流，可用于构造字符串， 关闭流无效，关闭后调用其他方法不会报异常
 
-# 常用方法
+## 常用方法
 
-## 字节流
+### 字节流
 
 | **read**()                           | 参见 `InputStream` 的 `read` 方法的常规协定。                |
 | ------------------------------------ | ------------------------------------------------------------ |
@@ -228,7 +264,7 @@ Writer ：字符输出流、是所有字符输出流的父类。与OutputStream�
 |                                      |                                                              |
 |                                      |                                                              |
 
-## 字符流
+### 字符流
 
 | **read**()                              | 读取单个字符。             |
 | --------------------------------------- | -------------------------- |
@@ -236,11 +272,13 @@ Writer ：字符输出流、是所有字符输出流的父类。与OutputStream�
 | **readLine**()                          | 读取一个文本行。           |
 |                                         |                            |
 
-# 示例代码
+
+
+## 示例代码
 
 
 
-## 不显示close()关闭流
+### 不显示close()关闭流
 
 ```java
    try (FileInputStream in = new FileInputStream("word.txt");) {// 读取文件
@@ -252,7 +290,7 @@ Writer ：字符输出流、是所有字符输出流的父类。与OutputStream�
 
 
 
-## 注解关掉流
+### 注解关掉流
 
 @Cleanup: 该注解能帮助我们自动调用close()方法，很大的简化了代码。
 
@@ -277,3 +315,144 @@ public class LombokTest {
 ```
 
 相当于执行完成后， 默认会去调用close()方法。 
+
+
+
+# 非流试部分
+
+## File
+
+用于文件或者目录的描述信息，例如生成新目录，修改文件名，删除文件，判断文件所在路径等。
+
+### 构造器
+
+File类共提供了三个不同的构造函数，以不同的参数形式灵活地接收文件和目录名信息。构造函数：
+
+1）File (String   pathname)  
+
+```java
+ 例:File  f1=new File("FileTest1.txt"); //创建文件对象f1，f1所指的文件是在当前目录下创建的FileTest1.txt
+```
+
+2）File (String  parent  ,  String child)
+
+```java
+例:File f2=new  File(“D:\\dir1","FileTest2.txt") ;//  注意：D:\\dir1目录事先必须存在，否则异常
+```
+
+3）File (File    parent  , String child)
+
+```java
+例:File  f4=new File("\\dir3");
+          File  f5=new File(f4,"FileTest5.txt");  //在如果 \\dir3目录不存在使用f4.mkdir()先创建
+```
+
+### 常用方法
+
+一个对应于某磁盘文件或目录的File对象一经创建， 就可以通过调用它的方法来获得文件或目录的属性。
+
+```java
+1）public boolean exists( ) 判断文件或目录是否存在
+2）public boolean isFile( ) 判断是文件还是目录 
+3）public boolean isDirectory( ) 判断是文件还是目录
+4）public String getName( ) 返回文件名或目录名
+5）public String getPath( ) 返回文件或目录的路径。
+6）public long length( ) 获取文件的长度 
+7）public String[ ] list ( ) 将目录中所有文件名保存在字符串数组中返回。
+```
+
+File类中还定义了一些对文件或目录进行管理、操作的方法，常用的方法有：
+
+```
+1） public boolean renameTo( File newFile );    重命名文件
+2） public void delete( );   删除文件
+3） public boolean mkdir( ); 创建目录
+```
+
+**说明：File类的方法:**
+
+```java
+(1) exists()测试磁盘中指定的文件或目录是否存在
+(2) mkdir()创建文件对象指定的目录（单层目录）
+(3) createNewFile()创建文件对象指定的文件
+(4) list()返回目录中所有文件名字符串
+```
+
+
+
+## RandomAccessFile（随机文件操作）
+
+它的功能丰富，可以从文件的任意位置进行存取（输入输出）操作。
+
+1. RandomAccessFile类的主要功能是完成随机读取功能，可以读取指定位置的内容
+2. RandomAccessFile写数据的时候可以将一个字符串写入，读的时候需要一个个的以字节的形式读取出来
+3. 如果要想操作文件内容的话，可以使用 RandomAccessFile完成
+
+### 小结
+
+1. RandomAccessFile类的作用
+2. RandomAccessFile类操作起来比较麻烦，所以在 IO中会提供专门的输入、输出操作
+
+# 按I/O类型来总体分类
+
+## 1. Memory
+
+1）从/向内存数组读写数据: CharArrayReader、 CharArrayWriter、ByteArrayInputStream、ByteArrayOutputStream
+
+2）从/向内存字符串读写数据 StringReader、StringWriter、StringBufferInputStream
+
+## 2. Pipe管道实现管道的输入和输出（进程间通信）
+
+PipedReader、PipedWriter、PipedInputStream、PipedOutputStream
+
+## 3. File 文件流对文件进行读、写操作
+
+ FileReader、FileWriter、FileInputStream、FileOutputStream
+
+## 4. ObjectSerialization(对象输入、输出)
+
+ObjectInputStream、ObjectOutputStream
+
+## 5. DataConversion数据流 按基本数据类型读、写（处理的数据是Java的基本类型（如布尔型，字节，整数和浮点数））
+
+DataInputStream、DataOutputStream
+
+## 6. Printing 包含方便的打印方法
+
+PrintWriter、PrintStream
+
+## 7. Buffering缓冲  在读入或写出时，对数据进行缓存，以减少I/O的次数
+
+BufferedReader、BufferedWriter、BufferedInputStream、BufferedOutputStream
+
+## 8. Filtering 滤流，在数据进行读或写时进行过滤
+
+FilterReader、FilterWriter、FilterInputStream、FilterOutputStream
+
+## 9. Concatenation合并输入 把多个输入流连接成一个输入流
+
+SequenceInputStream
+
+## 10. Counting计数  在读入数据时对行记数
+
+LineNumberReader、LineNumberInputStream
+
+## 11. Peeking Ahead 通过缓存机制，进行预读
+
+PushbackReader、PushbackInputStream
+
+## 12. Converting between Bytes and Characters 按照一定的编码/解码标准将字节流转换为字符流，或进行反向转换（Stream到Reader,Writer的转换类）
+
+InputStreamReader、OutputStreamWriter
+
+# 按数据来源（去向）分类
+
+## 1、File（文件） 
+
+**FileInputStream, FileOutputStream, FileReader, FileWriter **
+
+## 2、byte[]
+
+**ByteArrayInputStream, ByteArrayOutputStream **
+
+## 3、Char[]:
