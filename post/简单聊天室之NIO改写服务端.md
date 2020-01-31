@@ -17,6 +17,14 @@ categories:  ["Tech" ]
 
 在前面的《简易聊天室案例》文章的基础上进行修改 **TCPServer类 和 ClientHandler类**。
 
+
+
+![Xnip2020-01-30_18-01-38](/img/Xnip2020-01-30_18-01-38.png)
+
+
+
+![Xnip2020-01-26_13-47-53](/img/Xnip2020-01-26_13-47-53.png)
+
 # TCPServer
 
 ```java
