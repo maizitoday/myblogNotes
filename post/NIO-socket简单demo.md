@@ -13,7 +13,59 @@ categories:  ["Tech" ]
 
 **转载地址：https://juejin.im/post/5ae33c026fb9a07a9c03f45b**
 
-# 服务端
+# Socket
+
+
+
+## 读
+
+```java
+if (key.isReadable()) {
+    SocketChannel client = (SocketChannel) key.channel();
+    // 清空操作
+    byteBuffer.clear();
+    // 读取
+    int read = client.read(byteBuffer);
+    if (read > 0) {
+    // 丢弃换行符
+    String str = new String(byteBuffer.array(), 0, read);
+       // 通知到TCPServer
+       clientHandlerCallback.onNewMessageArrived(ClientHandler.this, str);
+    } else {
+       System.out.println("客户端已无法读取数据！");
+       // 退出当前客户端
+       ClientHandler.this.exitBySelf();
+       break;
+    }
+}
+```
+
+## 写
+
+```java
+byteBuffer.clear();
+byteBuffer.put(msg.getBytes());
+// 将bytebuffer的position改为0，读取时从0开始
+byteBuffer.flip();
+
+while (!done && byteBuffer.hasRemaining()) {
+try {
+      int len = socketChannel.write(byteBuffer);
+      // len = 0 合法
+      if (len < 0) {
+          System.out.println("客户端已无法发送数据！");
+          ClientHandler.this.exitBySelf();
+          break;
+      }
+    } catch (Exception e) {
+         e.printStackTrace();
+    }
+}
+```
+
+
+
+## 服务端
 
 ```java
 import java.io.IOException;
@@ -112,7 +164,7 @@ public class ChannelServer {
 
 
 
-# 客户端
+## 客户端
 
 ```java
 import java.io.IOException;
@@ -176,9 +228,9 @@ public class ChannelClient {
 
 ```
 
-# 运行结果
+## 运行结果
 
-## 服务端
+### 服务端
 
 ```java
 Client said: hello
@@ -195,7 +247,7 @@ Client said: hello
 closed.......
 ```
 
-## 客户端
+### 客户端
 
 ```java
 服务器连接成功!
@@ -203,3 +255,72 @@ closed.......
 Server said: Welcome maizi !!!
 ```
 
+
+
+# 读写操作
+
+```java
+public class NioReadWriter {
+
+    public static void main(String[] args) {
+        // 创建一个缓冲区
+        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+        String str = "Java_Android_IOS_Pyth_GO_HTML_CSS_JavaScript_SQL_docker_NOSQL_Frame";
+        // 数据放入到一个缓存区 
+        byteBuffer.put(str.getBytes());
+        // 查看这个缓存区
+        System.out.println("查看缓冲区: --> "+byteBuffer);
+
+        System.out.println("初始时-->limit--->" + byteBuffer.limit());
+        System.out.println("初始时-->position--->" + byteBuffer.position());
+        System.out.println("初始时-->capacity--->" + byteBuffer.capacity());
+        System.out.println("初始时-->mark--->" + byteBuffer.mark());
+
+
+        System.out.println("--------------------------------------------------->");
+        byteBuffer.flip();
+
+        System.out.println("flip-->limit--->" + byteBuffer.limit());
+        System.out.println("flip-->position--->" + byteBuffer.position());
+        System.out.println("flip-->capacity--->" + byteBuffer.capacity());
+        System.out.println("flip-->mark--->" + byteBuffer.mark());
+        System.out.println("查看缓冲区: --> "+byteBuffer);
+
+        byte[] bytes = new byte[byteBuffer.limit()];
+        // 缓冲区数据放入到byte数组中
+        byteBuffer.get(bytes);
+
+        System.out.println(new String(bytes));
+
+    }
+
+}
+```
+
+## 运行结果
+
+```java
+查看缓冲区: --> java.nio.HeapByteBuffer[pos=67 lim=1024 cap=1024]
+初始时-->limit--->1024
+初始时-->position--->67
+初始时-->capacity--->1024
+初始时-->mark--->java.nio.HeapByteBuffer[pos=67 lim=1024 cap=1024]
+--------------------------------------------------->
+flip-->limit--->67
+flip-->position--->0
+flip-->capacity--->1024
+flip-->mark--->java.nio.HeapByteBuffer[pos=0 lim=67 cap=1024]
+查看缓冲区: --> java.nio.HeapByteBuffer[pos=0 lim=67 cap=1024]
+Java_Android_IOS_Pyth_GO_HTML_CSS_JavaScript_SQL_docker_NOSQL_Frame
+```
+
+# 注意
+
+## Java异步I/O编程实现的两种方式：将来式和回调式
+
+1. 将来式：主线程发起I/O操作，主线程在读取数据过程继续完成别的事情，之后通过轮询等待结果完成。
+2. 回调式：采用事件处理机制。
+
+具体列子查看： https://blog.csdn.net/zmx729618/article/details/78919707 
+
+**异步IO通道有三种**： AsynchronousFileChannel   AsynchronousSocketChannel   AsynchronousServerSocketChannel

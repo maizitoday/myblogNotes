@@ -575,6 +575,122 @@ while(true) {
 
 
 
+### selector的wakeup理解
+
+转载地址：[https://www.hxlzpnyist.site/2017/12/21/NIO-selector%E7%9A%84wakeup/](https://www.hxlzpnyist.site/2017/12/21/NIO-selector的wakeup/)
+
+某个线程调用select()方法后阻塞了，即使没有通道已经就绪，也有办法让其从select()方法返回。只要让其它线程在第一个线程调用select()方法的那个对象上调用Selector.wakeup()方法即可。阻塞在select()方法上的线程会立马返回。
+
+如果有其它线程调用了wakeup()方法，但当前没有线程阻塞在select()方法上，下个调用select()方法的线程会立即“醒来（wake up）”
+
+#### 代码测试
+
+```java
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.util.concurrent.TimeUnit;
+
+public class NioWakeUp {
+
+    private Selector selector;
+
+    public void start() throws IOException {
+        // 开启选择器 selector
+        selector = Selector.open();
+
+        // 开启服务端 socket 通道
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        // 设置为非阻塞
+        serverSocketChannel.configureBlocking(false);
+        // 绑定服务端端口
+        serverSocketChannel.socket().bind(new InetSocketAddress(8888));
+        // 通道注册到选择器上 并监听 接收客户端事件
+        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+
+        // 因 selector.select 会阻塞当前线程 故异步处理
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    System.out.println("select 前执行");
+
+                    try {
+                        selector.select();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println("select 后执行");
+                }
+            }
+        }).start();
+
+    }
+
+    public void wakeup() {
+        System.out.println("开始唤醒");
+        selector.wakeup();
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        final NioWakeUp app = new NioWakeUp();
+        app.start();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    app.wakeup();
+                }
+            }
+        });
+
+        thread.start();
+
+        thread.join();
+    }
+
+}
+```
+
+#### 运行结果
+
+```java
+select----->前执行
+开始唤醒
+select----->后执行
+
+select----->前执行
+开始唤醒
+select----->后执行
+
+select----->前执行
+开始唤醒
+select----->后执行
+
+select----->前执行
+开始唤醒
+select----->后执行
+
+select----->前执行
+开始唤醒
+select----->后执行
+
+select----->前执行
+开始唤醒
+select----->后执行
+
+select----->前执行
+```
+
 # NIO vs IO
 
 学习了NIO之后我们都会有这样一个疑问：到底什么时候该用NIO，什么时候该用传统的I/O呢？
@@ -602,3 +718,12 @@ while(true) {
 1. Java NIO的选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。 
 
 ![401339-20171228231302459-2106552668](/img/401339-20171228231302459-2106552668.png)
+
+
+
+# 问题
+
+## 1.  FileChannel无法设置为非阻塞模式的原因
+
+在SelectableChannel中有configureBlocking方法，AbstractInterruptibleChannel中没有此方法，FileChannel类中也没有此方法。所以从源码的角度分析FileChannel不能切换到非阻塞模式，这就是原因。
+
