@@ -1,8 +1,8 @@
 ---
-title:       "NIO-SOCKET简单demo"
+title:       "NIO的网络编程-简单Demo(一)"
 subtitle:    ""
 description: ""
-date:        2020-01-30
+date:        2020-02-10
 author:      "麦子"
 image:       "https://c.pxhere.com/images/e4/46/bd237f6583029424694a0d16589b-1435053.jpg!d"
 tags:        ["网络编程","java基础"]
@@ -11,7 +11,7 @@ categories:  ["Tech" ]
 
 [TOC]
 
-**转载地址：https://juejin.im/post/5ae33c026fb9a07a9c03f45b**
+**转载地址： https://blog.csdn.net/MOTUI/article/details/52792146**
 
 # Socket
 
@@ -257,7 +257,7 @@ Server said: Welcome maizi !!!
 
 
 
-# 读写操作
+# 读写API操作
 
 ```java
 public class NioReadWriter {

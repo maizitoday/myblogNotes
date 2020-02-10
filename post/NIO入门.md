@@ -727,3 +727,5 @@ select----->前执行
 
 在SelectableChannel中有configureBlocking方法，AbstractInterruptibleChannel中没有此方法，FileChannel类中也没有此方法。所以从源码的角度分析FileChannel不能切换到非阻塞模式，这就是原因。
 
+## 2.  SelectionKey.cancel(); 取消读事件的监控
+
