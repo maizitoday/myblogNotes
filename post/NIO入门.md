@@ -727,5 +727,24 @@ select----->前执行
 
 在SelectableChannel中有configureBlocking方法，AbstractInterruptibleChannel中没有此方法，FileChannel类中也没有此方法。所以从源码的角度分析FileChannel不能切换到非阻塞模式，这就是原因。
 
+
+
 ## 2.  SelectionKey.cancel(); 取消读事件的监控
 
+链接：https://juejin.im/post/5da960185188257a63539646
+
+无论通过[channel.close()](https://docs.oracle.com/javase/8/docs/api/java/nio/channels/Channel.html#close--)还是通过[selectionKey.cancel()](https://docs.oracle.com/javase/8/docs/api/java/nio/channels/SelectionKey.html#cancel--)来`取消`一个`selectionKey` ，这个`selectionKey`都会被立即添加到`selector`的 ***cancelled-key**  set* 中，但是所关联的`channel`并没有立即被`撤销登记`，直到发生下次 **selection operations**, 这些`channel`才被从`selector`中`撤销登记`，与此同时这些**Cancelled keys**才会被从这个`selector`的所有`selectionKey set`（可能是_**key** set_、***selected-key** set*、***cancelled-key** set*）中移除，但是不会影响这些集合本身。
+
+
+
+## 3.  SocketChannel.register()和key.interestOps()之间的区别
+
+在[这个SO问题中](https://stackoom.com/link/aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMTc1NTY5MDEvamF2YS1oaWdoLWxvYWQtbmlvLXRjcC1zZXJ2ZXI=)找到的echo NIO服务器[中](https://stackoom.com/link/aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMTc1NTY5MDEvamF2YS1oaWdoLWxvYWQtbmlvLXRjcC1zZXJ2ZXI=) ，对于每个接受的密钥，都会调用一个寄存器来进行读操作。 然后，一旦读取消息，就再次调用寄存器以进行写操作。 但是，在写入消息之后，不是注册另一个读取操作，而是调用`key.interestOps(SelectionKey.OP_READ)` 。为什么用这个了？
+
+register()`将丢失或更改密钥附件，并可能完全返回一个新的`SelectionKey` ：未指定。 在这种情况下使用`interestOps()` 。
+
+
+
+## 4.  完全理解NIO Selector
+
+好文：https://juejin.im/post/5da960185188257a63539646
