@@ -13,7 +13,7 @@ categories:  ["Tech" ]
 
 /bin/bash    用这种来进行编译处理
 
-### 变量
+# 变量
 
 ```shell
 #变量
@@ -36,9 +36,7 @@ temp_name=$my_name
 echo $temp_name
 ```
 
- 
-
-### 加减乘除运算
+# 加减乘除运算
 
 ```shell
 #下面的不是单引号  加减乘除   进行四则运算的时候运算符号前后一定要有空格，乘法的时候需要进行转义
@@ -61,9 +59,7 @@ val=`expr $a / $b`
 echo $val
 ```
 
-
-
-### 判断语句
+# 判断语句
 
 ```shell
 #  if
@@ -116,9 +112,7 @@ case $1 in
 esac
 ```
 
-
-
-### 关系运算符
+# 关系运算符
 
 ```shell
 #这个只能用来比较数字类型或者数字类型的字符串，如果是字符串无法进行比较
@@ -143,9 +137,7 @@ if [[ $aa -ne $bb ]]; then
 fi
 ```
 
-
-
-### 字符串运算
+# 字符串运算
 
 ```shell
 #   =    两个字符串相等返回true
@@ -179,9 +171,7 @@ echo ${#temp}
 echo ${temp:0:5}
 ```
 
-
-
-### 数组
+# 数组
 
 ```shell
 array=(1 2 3 4 5 6) #定义数组 
@@ -199,9 +189,7 @@ count=${#array[@]}
 echo $count
 ```
 
-
-
-### 循环
+# 循环
 
 ```shell
 #    支持一维数组 ，没有限制数组的大小
@@ -241,9 +229,7 @@ echo ${#array_data[@]}
 echo ${#array_data[1]}
 ```
 
-
-
-### 函数
+# 函数
 
 ```shell
 sysout(){
@@ -267,9 +253,7 @@ show(){
 show "maizi_today"  "yub"
 ```
 
-
-
-### 重定向 
+# 重定向 
 
 ```shell
 # $echo result > file  #将结果写入文件，结果不会在控制台展示，而是在文件中，覆盖写
@@ -284,18 +268,14 @@ read  -p  “please input your name ”  name1
 
 ```
 
-
-
-### shell里面执行Linux命令
+# shell里面执行Linux命令
 
 ```shell
  ``  这个符号可以接收命令后执行的结果，   str =`date`， 单引号里面不要放入$符号
  同时也可以用 $(ls)  这样也可以在shell中执行Linux命令。
 ```
 
-
-
-### 函数只返回数据，不会返回字符串
+# 函数只返回数据，不会返回字符串
 
 ```shell
  Shell 函数返回值只能是整形数值，一般是用来表示函数执行成功与否的，0表示成功，其他值表示失败。
@@ -303,9 +283,7 @@ read  -p  “please input your name ”  name1
  往往会得到错误  提示：“numeric argument required”。
 ```
 
-
-
-### 传递参数和预定义变量
+# 传递参数和预定义变量
 
 ```shell
 echo "Shell 传递参数实例！";
@@ -320,9 +298,7 @@ echo "脚本运行的当前进程ID号"
 
 ![屏幕快照 2019-04-09 下午9.42.24](/img/4-9-5.png)
 
-
-
-### Linux nohup、&、 2>&1是什么
+# Linux nohup、&、 2>&1是什么
 
 **原文地址**：**https://blog.csdn.net/lovewebeye/article/details/82934049**
 
@@ -347,11 +323,11 @@ echo "脚本运行的当前进程ID号"
 
 **nohup放在命令的开头，表示不挂起（no hang up），也即，关闭终端或者退出某个账号，进程也继续保持运行状态，一般配合&符号一起使用。如nohup command &。**
 
-### &` 号
+# &` 号
 
 所以，可以在命令的末尾加上一个 `&` 号，将这个任务放到后台去执行：
 
-### 常用脚本列子
+# 常用脚本列子
 
 ```shell
 #!/bin/sh
@@ -460,4 +436,77 @@ esac
 
 exit 0
 ```
+
+# Java调用shell脚本
+
+转载地址：https://www.jianshu.com/p/462647582abe
+
+```java
+    String bashCommand = "/home/go/script/restart_go.sh";  //①
+    Runtime runtime = Runtime.getRuntime();
+    Process pro = runtime.exec(bashCommand);  //②
+    int status = pro.waitFor();  //③
+    if (status != 0){  //④
+        logger.error("restart go server error");
+        return;
+    }
+    logger.info("restart go server success");
+```
+
+①脚本在服务器上的绝对路径
+
+②进行脚本的调用
+
+③这里需要注意，需要调用waitFor()等待脚本执行完，不然的话，方法结束会导致脚本运行失败。
+
+④如果执行完的状态码是0，就代表脚本执行成功
+
+这里调用的脚本必须有执行的权限，不然的话会报错，如果报了没有权限的错误，那么把命令改成：
+
+```java
+String bashCommand = "chmod 777 /home/go/script/restart_go.sh";
+```
+
+# shell中不可不知的叹号
+
+## 简介
+
+shell 中！叫做事件提示符，英文是：Event Designators,可以方便的引用历史命令， 也就是history中记录的命令
+
+## 用法
+
+**!n** 
+
+会引用history中的第n个命令，比如输入！100，就是执行history列表中的第100条命令
+
+```shell
+#比如输入!-1,就会执行上一条命令
+> !-1
+ echo "22"
+22
+```
+
+**!string**
+
+引用最近的以 string 开始的命令。这条命令在你运行一个命令之后忘记了这个命令的参数是什么，直接!命令既可
+
+```shell
+> echo "123" "213" "33"
+123 213 33
+> !echo
+echo "123" "213" "33"
+123 213 33
+```
+
+**!?string[?]** 
+
+指向包含这个字符串的命令
+
+```shell
+> !?123
+echo "123" "213" "33"
+123 213 33
+```
+
+
 
