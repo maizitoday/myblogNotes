@@ -41,30 +41,63 @@ categories:  ["Tech" ]
 > source .bash_profile
 ```
 
-# 安装
+**注意**
 
-下载安装包https://studygolang.com/dl，按步骤安装即可。
+如果你是用Mac用brew安装的，下面的这个里面的GO文件也要删除掉
+
+```shell
+/usr/local/Cellar/go/1.12/libexec
+
+rm -rf  /usr/local/Cellar/go
+```
+
+如此， GO已经完成下载完成。 可用
+
+```shell
+ which go   
+```
+
+来处理，查看。 
+
+# brew安装
 
 ```go
+➜  ~ brew install go
 ➜  ~ go version
-go version go1.13.5 darwin/amd64
+go version go1.12 darwin/amd64
 
 ➜  ~ go env
-GO111MODULE=""
-GOARCH="amd64"
-GOBIN="/Users/maizi/go/bin"
-GOCACHE="/Users/maizi/Library/Caches/go-build"
-GOENV="/Users/maizi/Library/Application Support/go/env"
-GOOS="darwin"
 GOPATH="/Users/maizi/go"
-GOROOT="/usr/local/go"
+GOROOT="/usr/local/Cellar/go/1.12/libexec"
+```
+
+# brew install XXX一直卡在Updating Homebrew
+
+出现这个的时候， 先Ctrl+C , 然后在执行，就不会卡了， 就是这么囧的。
+
+# 更新版本
+
+```shell
+brew upgrade go
+```
+
+# 切换版本
+
+```shell
+brew switch go 1.5
+```
+
+# 卸载版本
+
+```shell
+brew uninstall go
 ```
 
 # 配置环境变量
 
 ```shell
 export GOPATH=/Users/maizi/go
-export GOROOT=/usr/local/go
+export GOROOT=/usr/local/Cellar/go/1.12/libexec
 export PATH=$PATH:$GOROOT/bin
 ```
 
@@ -83,7 +116,7 @@ export PATH=$PATH:$GOROOT/bin
 
 # 注意
 
-千万不要把`GOPATH`设置成go的安装路径。
+**千万不要把`GOPATH`设置成go的安装路径。**
 
 # VSCODE配置
 
@@ -106,10 +139,11 @@ export PATH=$PATH:$GOROOT/bin
     "go.useCodeSnippetsOnFunctionSuggest": false,
     "go.formatOnSave": true,
     "go.formatTool": "goreturns",
-    "go.goroot": "/usr/local/go",
+    "go.goroot": "/usr/local/Cellar/go/1.12/libexec",
     "go.gopath": "/Users/maizi/go",
     "go.gocodeAutoBuild": false,
 //-----------------------------------------
 ```
 
 然后点击 Run Code运行即可。  
+
