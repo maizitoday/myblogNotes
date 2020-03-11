@@ -5,7 +5,7 @@ description: ""
 date:        2019-07-09
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
-tags:        ["java基础", "ThreadLocal", "并发编程"]
+tags:        ["java基础", "并发编程"]
 categories:  ["Tech" ]
 ---
 

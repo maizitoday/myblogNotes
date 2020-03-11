@@ -5,7 +5,7 @@ description: ""
 date:        2019-03-27
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
-tags:        ["docker","dockerfile"]
+tags:        ["docker"]
 categories:  ["Tech" ]
 ---
 
