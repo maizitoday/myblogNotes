@@ -3,7 +3,6 @@ title:       "互联网架构演变"
 subtitle:    ""
 description: ""
 date:        2020-03-13
-type:        archive
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
 tags:        ["java相关概念", "互联网架构演变"]
