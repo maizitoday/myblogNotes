@@ -9,6 +9,10 @@ tags:        ["开发工具", "vscode开发常用技巧记录", "vscode开发快
 categories:  ["Tech" ]
 ---
 
+# 文档资料
+
+https://geek-docs.com/vscode/vscode-tutorials/vscode-create-terminal.html
+
 # 快捷键
 
 **官方具体快捷键：<https://code.visualstudio.com/docs/getstarted/keybindings#_customizing-shortcuts>**
@@ -64,6 +68,18 @@ categories:  ["Tech" ]
 
 
 
+### 删除一行
+
+ctrl + K 
+
+
+
+### 复制一行
+
+ctrl + G 
+
+
+
 ### 搜索和替换
 
 对所有字符都可以进行搜索和替换： ⇧⌘R
@@ -73,6 +89,12 @@ categories:  ["Tech" ]
 ### 文件类搜索
 
 选中一个字符串， 然后按下 ：⌘G 可以显示出这个文件的所有的这个字符出来， 比 ⌘F要方便一点
+
+
+
+查看源码固定类
+
+⌘+O，然后输入你要查看的类，比如 String，这样就可以查看String的源码类了。
 
 
 

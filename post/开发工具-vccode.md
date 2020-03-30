@@ -93,6 +93,10 @@ Ctrl + H　　#查找替换
 Ctrl + /　　#添加单行注释
 
 Shift + Alt + A　　#添加多行注释
+
+ctrl + K #删除一行
+ctrl + G #复制一行
+
 ```
 
 

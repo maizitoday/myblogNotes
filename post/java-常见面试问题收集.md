@@ -13,6 +13,8 @@ categories:  ["Tech" ]
 
 # java基础
 
+
+
 ## 1.  final类型的数据， 可以进行反射修改其中的值否
 
 https://www.jianshu.com/p/50830768bd52  
@@ -23,6 +25,16 @@ https://www.jianshu.com/p/50830768bd52
 
 
 
+# web方向
+
+
+
+## 1.怎么统计在线人员
+
+
+
 # NOSQL
+
+
 
 ## 1.  Redis和数据库Mysql的同步

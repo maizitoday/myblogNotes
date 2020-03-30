@@ -1,8 +1,8 @@
 ---
-title:       "简单聊天室之NIO改写服务端"
+title:       "NIO群聊"
 subtitle:    ""
 description: ""
-date:        2020-01-30
+date:        2020-03-20
 author:      "麦子"
 image:       "https://c.pxhere.com/images/e4/46/bd237f6583029424694a0d16589b-1435053.jpg!d"
 tags:        ["网络编程"]
@@ -11,7 +11,7 @@ categories:  ["Tech" ]
 
 [TOC]
 
-**转载地址：https://blog.csdn.net/weixin_42089175/article/details/89255145**
+**说明文章资料来源：尚硅谷韩顺平Netty视频教程（2019发布） https://www.bilibili.com/video/av76227904?p=36 **
 
 # 说明
 
@@ -25,378 +25,273 @@ categories:  ["Tech" ]
 
 ![Xnip2020-01-26_13-47-53](/img/Xnip2020-01-26_13-47-53.png)
 
-# TCPServer
+# GroupChatServer
 
 ```java
-public class TCPServer implements ClientHandler.ClientHandlerCallback {
-    private final int port;
-    private ClientListener listener;
-    private List<ClientHandler> clientHandlerList = new ArrayList<>();
-    private final ExecutorService forwardingThreadPoolExecutor;
+ package com.nio.chargroup;
+/*
+ * @Description: 请输入....
+ * @Author: 麦子
+ * @Date: 2020-03-19 15:10:49
+ * @LastEditTime: 2020-03-20 13:52:47
+ * @LastEditors: 麦子
+ */
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channel;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.util.Iterator;
+
+public class GroupChatServer {
+
+    // 定义属性
     private Selector selector;
-    private ServerSocketChannel server;
+    private ServerSocketChannel listenChannel;
+    private static final int PORT = 6667;
 
-    public TCPServer(int port) {
-        this.port = port;
-        // 转发线程池
-        this.forwardingThreadPoolExecutor = Executors.newSingleThreadExecutor();
-    }
+    // 初始化工作
+    public GroupChatServer() {
 
-    public boolean start() {
         try {
+            // 得到选择器
             selector = Selector.open();
-            ServerSocketChannel server = ServerSocketChannel.open();
-            // 设置为非阻塞
-            server.configureBlocking(false);
-            // 绑定本地端口
-            server.socket().bind(new InetSocketAddress(port));
-            // 注册客户端连接到达监听
-            server.register(selector, SelectionKey.OP_ACCEPT);
+            listenChannel = ServerSocketChannel.open();
+            // 绑定端口
+            listenChannel.socket().bind(new InetSocketAddress(PORT));
+            // 设置非阻塞模式
+            listenChannel.configureBlocking(false);
+            // 将该 listenChannel 注册到 selector
+            listenChannel.register(selector, SelectionKey.OP_ACCEPT);
 
-            this.server = server;
-
-            System.out.println("服务器信息：" + server.getLocalAddress().toString());
-
-            // 启动客户端监听
-            ClientListener listener = this.listener = new ClientListener();
-            listener.start();
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public void stop() {
-        if (listener != null) {
-            listener.exit();
-        }
-
-        CloseUtils.close(server);
-        CloseUtils.close(selector);
-
-        synchronized (TCPServer.this) {
-            for (ClientHandler clientHandler : clientHandlerList) {
-                clientHandler.exit();
-            }
-
-            clientHandlerList.clear();
-        }
-
-        // 停止线程池
-        forwardingThreadPoolExecutor.shutdownNow();
-    }
-
-    public synchronized void broadcast(String str) {
-        for (ClientHandler clientHandler : clientHandlerList) {
-            clientHandler.send(str);
         }
     }
 
-    @Override
-    public synchronized void onSelfClosed(ClientHandler handler) {
-        clientHandlerList.remove(handler);
-    }
-
-    @Override
-    public void onNewMessageArrived(final ClientHandler handler, String str) {
-        // 去掉回车换行符，打印到屏幕(但出了某些问题)
-        str = str.replaceAll("\r", "");
-        str = str.replaceAll("\n", "");
-        System.out.println("Received-" + handler.getClientInfo() + ":" + str);
-        // 异步提交转发任务
-        String finalStr = str;
-        forwardingThreadPoolExecutor.execute(() -> {
-            synchronized (TCPServer.this) {
-                for (ClientHandler clientHandler : clientHandlerList) {
-                    if (clientHandler.equals(handler)) {
-                        // 跳过自己
-                        continue;
-                    }
-                    // 对其他客户端发送消息
-                    clientHandler.send(finalStr);
-                }
-            }
-        });
-
-    }
-
-    private class ClientListener extends Thread {
-        private boolean done = false;
-
-        @Override
-        public void run() {
-            super.run();
-            Selector selector = TCPServer.this.selector;
-            System.out.println("服务器准备就绪～");
-            // 等待客户端连接
-            do {
-                // 得到客户端
-                try {
-                    if (selector.select() == 0) {
-                        if (done) {
-                            break;
-                        }
-                        continue;
-                    }
-
+    // 监听
+    public void listen() {
+        try {
+            while (true) {
+                int count = selector.select();
+                if (count > 0) {// 有事件处理
+                    // 遍历得到 selectionKey 集合
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
-                        if (done) {
-                            break;
-                        }
-
+                        // 取出 selectionkey
                         SelectionKey key = iterator.next();
-                        iterator.remove();
-
-                        // 检查当前Key的状态是否是我们关注的
-                        // 客户端到达状态
                         if (key.isAcceptable()) {
-                            ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
-                            // 非阻塞状态拿到客户端连接
-                            SocketChannel socketChannel = serverSocketChannel.accept();
-
-                            try {
-                                // 客户端构建异步线程
-                                ClientHandler clientHandler = new ClientHandler(socketChannel, TCPServer.this);
-                                // 读取数据并打印
-                                clientHandler.readToPrint();
-                                // 添加同步处理
-                                synchronized (TCPServer.this) {
-                                    clientHandlerList.add(clientHandler);
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                System.out.println("客户端连接异常：" + e.getMessage());
-                            }
+                            SocketChannel sc = listenChannel.accept();
+                            sc.configureBlocking(false);
+                            // 将该 sc 注册到 seletor
+                            sc.register(selector, SelectionKey.OP_READ);
+                            // 提示
+                            System.out.println(sc.getRemoteAddress() + " 上线 ");
                         }
+                        if (key.isReadable()) {// 通道发送 read 事件，即通道是可读的状态
+                            // 处理读 (专门写方法..)
+                            readData(key);
+                        }
+                        // 当前的 key 删除，防止重复处理
+                        iterator.remove();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } else {
+                    System.out.println("等待....");
                 }
+            }
 
-            } while (!done);
+        } catch (Exception e) {
+            e.printStackTrace();
 
-            System.out.println("服务器已关闭！");
+        } finally { // 发生异常处理....
+
         }
+    }
 
-        void exit() {
-            done = true;
-            // 唤醒当前的阻塞
-            selector.wakeup();
+    // 读取客户端消息
+    private void readData(SelectionKey key) {
+        // 取到关联的 channle
+        SocketChannel channel = null;
+
+        try { 
+            // 得到 channel
+            channel = (SocketChannel) key.channel(); 
+            // 创建 buffer
+            ByteBuffer buffer = ByteBuffer.allocate(1024);
+            // 根据 count 的值做处理
+            int count = channel.read(buffer); 
+            if (count > 0) { 
+                // 把缓存区的数据转成字符串
+                String msg = new String(buffer.array()); 
+                // 输出该消息
+                System.out.println("form 客户端: " + msg);
+                // 向其它的客户端转发消息(去掉自己), 专门写一个方法来处理
+                sendInfoToOtherClients(msg, channel);
+            }
+
+        } catch (IOException e) {
+            try {
+                System.out.println(channel.getRemoteAddress() + " 离线了.."); // 取消注册
+                key.cancel(); // 关闭通道
+                channel.close();
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
         }
+    }
+
+    // 转发消息给其它客户(通道)
+    private void sendInfoToOtherClients(String msg, SocketChannel self) throws IOException {
+        System.out.println("服务器转发消息中..."); 
+        // 遍历 所有注册到 selector 上的 SocketChannel,并排除 self
+        for (SelectionKey key : selector.keys()) {
+            // 通过 key 取出对应的 SocketChannel
+            Channel targetChannel = key.channel();
+            // 排除自己
+            if (targetChannel instanceof SocketChannel && targetChannel != self) {
+                // 转型
+                SocketChannel dest = (SocketChannel) targetChannel; // 将 msg 存储到 buffer
+                ByteBuffer buffer = ByteBuffer.wrap(msg.getBytes());
+                // 将 buffer 的数据写入 通道
+                dest.write(buffer);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        // 创建服务器对象
+        GroupChatServer groupChatServer = new GroupChatServer();
+        groupChatServer.listen();
     }
 }
 ```
 
-
-
-# ClientHandler
-
-在这里开了两条线程， 里面进行了读写的分开。 
+# GroupChatClient
 
 ```java
+ package com.nio.chargroup;
+/*
+ * @Description: 请输入....
+ * @Author: 麦子
+ * @Date: 2020-03-19 15:21:21
+ * @LastEditTime: 2020-03-19 15:34:03
+ * @LastEditors: 麦子
+ */
+
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Scanner;
 
-import com.chatroom.clink.utils.CloseUtils;
+public class GroupChatClient {
 
-public class ClientHandler {
+    // 定义相关的属性
+    private final String HOST = "127.0.0.1";
+    // 服务器的 ip
+    private final int PORT = 6667;
+    // 服务器端口
+    private final Selector selector;
     private final SocketChannel socketChannel;
-    private final ClientReadHandler readHandler;
-    private final ClientWriteHandler writeHandler;
-    private final ClientHandlerCallback clientHandlerCallback;
-    private final String clientInfo;
+    private final String username;
 
-    public ClientHandler(SocketChannel socketChannel, ClientHandlerCallback clientHandlerCallback) throws IOException {
-        this.socketChannel = socketChannel;
+    public GroupChatClient() throws IOException {
 
-        // 设置非阻塞模式
+        selector = Selector.open(); // 连接服务器
+        socketChannel = SocketChannel.open(new InetSocketAddress(HOST, PORT));
+        // 设置非阻塞
         socketChannel.configureBlocking(false);
+        // 将 channel 注册到 selector
+        socketChannel.register(selector, SelectionKey.OP_READ);
+        // 得到 username
+        username = socketChannel.getLocalAddress().toString().substring(1);
+        System.out.println(username + " is ok...");
 
-        Selector readSelector = Selector.open();
-        socketChannel.register(readSelector, SelectionKey.OP_READ);
-        this.readHandler = new ClientReadHandler(readSelector);
-
-        Selector writeSelector = Selector.open();
-        socketChannel.register(writeSelector, SelectionKey.OP_WRITE);
-        this.writeHandler = new ClientWriteHandler(writeSelector);
-
-        this.clientHandlerCallback = clientHandlerCallback;
-        this.clientInfo = socketChannel.getRemoteAddress().toString();
-        System.out.println("新客户端连接：" + clientInfo);
     }
 
-    public String getClientInfo() {
-        return clientInfo;
-    }
+    // 向服务器发送消息
+    public void sendInfo(String info) {
 
-    public void exit() {
-        readHandler.exit();
-        writeHandler.exit();
-        CloseUtils.close(socketChannel);
-        System.out.println("客户端已退出::::：" + clientInfo);
-    }
-
-    public void send(String str) {
-        writeHandler.send(str);
-    }
-
-    public void readToPrint() {
-        readHandler.start();
-    }
-
-    private void exitBySelf() {
-        exit();
-        clientHandlerCallback.onSelfClosed(this);
-    }
-
-    public interface ClientHandlerCallback {
-        // 自身关闭通知
-        void onSelfClosed(ClientHandler handler);
-
-        // 收到消息时通知
-        void onNewMessageArrived(ClientHandler handler, String msg);
-    }
-
-    class ClientReadHandler extends Thread {
-        private boolean done = false;
-        private final Selector selector;
-        private final ByteBuffer byteBuffer;
-
-        ClientReadHandler(Selector selector) {
-            this.selector = selector;
-            this.byteBuffer = ByteBuffer.allocate(256);
+        info = username + " 说：" + info;
+        try {
+            socketChannel.write(ByteBuffer.wrap(info.getBytes()));
+        } catch (final IOException e) {
+            e.printStackTrace();
         }
+    }
 
-        @Override
-        public void run() {
-            super.run();
-            try {
-                do {
-                    // 客户端拿到一条数据
-                    if (selector.select() == 0) {
-                        if (done) {
-                            break;
-                        }
-                        continue;
+    // 读取从服务器端回复的消息
+    public void readInfo() {
+        try {
+            final int readChannels = selector.select();
+            if (readChannels > 0) {
+                // 有可以用的通道
+                final Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
+                while (iterator.hasNext()) {
+                    final SelectionKey key = iterator.next();
+                    if (key.isReadable()) {
+                        // 得到相关的通道
+                        final SocketChannel sc = (SocketChannel) key.channel(); 
+                        // 得到一个 Buffer
+                        final ByteBuffer buffer = ByteBuffer.allocate(1024); 
+                        // 读取
+                        sc.read(buffer); 
+                        // 把读到的缓冲区的数据转成字符串
+                        final String msg = new String(buffer.array());
+                        System.out.println(msg.trim());
                     }
-
-                    Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
-                    while (iterator.hasNext()) {
-                        if (done) {
-                            break;
-                        }
-
-                        SelectionKey key = iterator.next();
-                        iterator.remove();
-
-                        if (key.isReadable()) {
-                            SocketChannel client = (SocketChannel) key.channel();
-                            // 清空操作
-                            byteBuffer.clear();
-                            // 读取
-                            int read = client.read(byteBuffer);
-                            if (read > 0) {
-                                // 丢弃换行符
-                                String str = new String(byteBuffer.array(), 0, read);
-                                // 通知到TCPServer
-                                clientHandlerCallback.onNewMessageArrived(ClientHandler.this, str);
-                            } else {
-                                System.out.println("客户端已无法读取数据！");
-                                // 退出当前客户端
-                                ClientHandler.this.exitBySelf();
-                                break;
-                            }
-                        }
-                    }
-                } while (!done);
-            } catch (Exception e) {
-                if (!done) {
-                    System.out.println("连接异常断开");
-                    ClientHandler.this.exitBySelf();
                 }
-            } finally {
-                // 连接关闭
-                CloseUtils.close(selector);
+                // 删除当前的 selectionKey, 防止重复操作
+                iterator.remove(); 
+            } else {
+                // System.out.println("没有可以用的通道...");
             }
+        } catch (final Exception e) {
+            e.printStackTrace();
         }
 
-        void exit() {
-            done = true;
-            selector.wakeup();
-            CloseUtils.close(selector);
-        }
     }
 
-    class ClientWriteHandler {
-        private boolean done = false;
-        private final Selector selector;
-        private final ByteBuffer byteBuffer;
-        private final ExecutorService executorService;
-
-        ClientWriteHandler(Selector selector) {
-            this.selector = selector;
-            this.byteBuffer = ByteBuffer.allocate(256);
-            this.executorService = Executors.newSingleThreadExecutor();
-        }
-
-        void exit() {
-            done = true;
-            CloseUtils.close(selector);
-            executorService.shutdownNow();
-        }
-
-        void send(String str) {
-            if (done) {
-                return;
-            }
-            executorService.execute(new WriteRunnable(str));
-        }
-
-        class WriteRunnable implements Runnable {
-            private final String msg;
-
-            WriteRunnable(String msg) {
-                this.msg = msg + '\n';
-            }
-
-            @Override
+    public static void main(final String[] args) throws Exception {
+        final GroupChatClient chatClient = new GroupChatClient();
+        // 启动一个线程, 每个 3 秒，读取从服务器发送数据
+        new Thread() {
             public void run() {
-                if (ClientWriteHandler.this.done) {
-                    return;
-                }
-
-                byteBuffer.clear();
-                byteBuffer.put(msg.getBytes());
-                // 将bytebuffer的position改为0，读取时从0开始
-                byteBuffer.flip();
-
-                while (!done && byteBuffer.hasRemaining()) {
+                while (true) {
+                    chatClient.readInfo();
                     try {
-                        int len = socketChannel.write(byteBuffer);
-                        // len = 0 合法
-                        if (len < 0) {
-                            System.out.println("客户端已无法发送数据！");
-                            ClientHandler.this.exitBySelf();
-                            break;
-                        }
-                    } catch (Exception e) {
+                        Thread.currentThread().sleep(3000);
+                    } catch (final InterruptedException e) {
                         e.printStackTrace();
                     }
+
                 }
+
             }
+        }.start();
+
+        // 发送数据给服务器端
+        final Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()) {
+            final String s = scanner.nextLine();
+            chatClient.sendInfo(s);
         }
+
     }
 }
 ```
 
 # 运行结果
 
-![Xnip2020-01-31_12-58-52](/img/Xnip2020-01-31_12-58-52.png)
+ ![Xnip2020-03-20_13-59-36](/img/Xnip2020-03-20_13-59-36.png)
+
+# 说明
+
+这里的群聊都是通过服务器转发消息的，但是这种转发是很消耗性能的，通过Netty有更好的处理方式，后期文章进行优化处理。 
