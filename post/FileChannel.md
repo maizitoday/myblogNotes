@@ -1,7 +1,7 @@
 ---
 title:       "FileChannel和MappedByteBuffer"
 subtitle:    ""
-description: ""
+description: "处理IO场景需求"
 date:        2020-03-18
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
