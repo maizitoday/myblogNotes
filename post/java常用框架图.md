@@ -1,7 +1,7 @@
 ---
 title:       "java常用框架图"
 subtitle:    ""
-description: ""
+description: "JUC结构图，集合结构图，线程池结构图，锁结构图，网络结构图，IO体系架构图，数据基本类型图"
 date:        2019-12-24
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"

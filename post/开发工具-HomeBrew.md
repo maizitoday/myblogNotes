@@ -99,3 +99,9 @@ brew deps * — 显示包依赖
 brew server *  —启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包
 brew -h brew   —帮助
 ```
+
+
+
+# brew install XXX一直卡在Updating Homebrew
+
+出现这个的时候， 先Ctrl+C , 然后在执行，就不会卡了， 就是这么囧的。

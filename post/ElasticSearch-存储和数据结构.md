@@ -1,11 +1,11 @@
 ---
 title:       "ElasticSearch-存储和数据结构"
 subtitle:    ""
-description: ""
+description: "ElasticSearch存储和数据结构类型介绍"
 date:        2019-09-22
 author:      "麦子"
 image:       "https://c.pxhere.com/images/e4/46/bd237f6583029424694a0d16589b-1435053.jpg!d"
-tags:        ["elasticSearch","存储","数据结构","数据类型"]
+tags:        ["elasticSearch","存储","数据类型"]
 categories:  ["Tech" ]
 ---
 
