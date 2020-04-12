@@ -615,6 +615,20 @@ public class GroupChatClientHandler extends SimpleChannelInboundHandler<String> 
 
 **可以看到 channelGroup 的size大小**
 
+
+
+## 多人多聊天室思路
+
+原文链接：https://blog.csdn.net/baidu_37147070/article/details/99703622
+
+其实，实现的方法并不难，我是借助使用redis来实现的，我们从代码中可以知道，对于每个聊天的channel，是通过ChannelGroup来管理的，也就是每个进来的通道，我都会把它放进ChannelGroup中。那么每当我们接收到来访问的请求时，可以把每个聊天室的唯一ID传过来，在redis中，根据这个聊天室ID，把所有属于这个聊天室ID的channel都放到同一个HashMap，并且缓存到redis中，这样，每当一个channel需要推送消息，我们就根据消息中的聊天室ID去redis中拿所有的channel，然后再向这些channel循环推送消息，这样，一个简单的多聊天室就实现了。
+
+
+
+## 聊天室的房间意思
+
+**如此也就理解网络上一个游戏房间是什么意思了，相当于同一个标识的channel的集合。** 
+
 # Netty 心跳检测机制案例
 
 ## 实现需求
