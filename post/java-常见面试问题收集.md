@@ -19,7 +19,7 @@ categories:  ["Tech" ]
 
 转载：https://mp.weixin.qq.com/s/zX_O-uv8RKRh1K6pI9s8ig?
 
-![16ca4e326c3132c8](../../../../Users/maizi/Desktop/16ca4e326c3132c8.png)
+![16ca4e326c3132c8](/img/16ca4e326c3132c8.png)
 
 最近jdk14的相关文章：https://mp.weixin.qq.com/s/WjTz1-jSIeFd4c06NewxPg
 

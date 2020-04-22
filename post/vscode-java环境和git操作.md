@@ -1,12 +1,11 @@
 ---
-
 title:       "vccode-java环境和git操作"
 subtitle:    ""
-description: ""
+description: "vscode中java环境配置，maven环境配置，git插件详细操作，分支操作"
 date:        2019-07-24
 author:      "麦子"
 image:       "https://c.pxhere.com/images/aa/a6/2c425d9c6f81e52b34d87e5c3989-1424141.jpg!d"
-tags:        ["开发工具", "vccode"]
+tags:        ["开发工具"]
 categories:  ["Tech" ]
 ---
 

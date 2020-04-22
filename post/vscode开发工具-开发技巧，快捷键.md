@@ -1,13 +1,19 @@
 ---
-title:       "vscode开发常用技巧记录"
+title:       "vscode开发技巧，快捷键"
 subtitle:    ""
 description: "java快捷键，Maven快捷键，调试"
 date:        2019-07-25
 author:      "麦子"
 image:       "https://get.pxhere.com/photo/photography-sea-fog-horizon-water-calm-shore-black-and-white-morning-sky-pier-mist-ocean-haze-fixed-link-1445001.jpg"
-tags:        ["开发工具", "vscode开发常用技巧记录", "vscode开发快捷键"]
+tags:        ["开发工具"]
 categories:  ["Tech" ]
 ---
+
+[TOC]
+
+
+
+**注意：有些快捷键已经无法实现或者冲突，或者是版本升级后有修改。** 
 
 # 文档资料
 
@@ -77,6 +83,20 @@ ctrl + K
 ### 复制一行
 
 ctrl + G 
+
+
+
+### 跳转多少行
+
+ctrl+G   直接跳转到多少行，直接输入就好
+
+
+
+### 多个字符统一修改
+
+选中一个字符，cmd+G   ，然后就可以改这个字符的所有的地方了。 
+
+
 
 ### 自动添加方法注释
 

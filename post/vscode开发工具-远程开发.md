@@ -1,10 +1,10 @@
 ---
-title:       "远程开发和调试"
+title:       "远程开发和调试，SFTP,remote-ssh"
 subtitle:    ""
-description: ""
+description: "remote-ssh，远程连接Linux服务器，远程直接上传jar或者class文件,SFTP"
 date:        2019-08-10
 author:      "麦子"
-image:       "https://get.pxhere.com/photo/fishing-fisherman-lake-hobby-nature-sports-man-sunset-action-active-activity-casting-catch-catching-evening-freshwater-landscape-leisure-lure-male-dusk-silhouette-water-sky-sunrise-reflection-horizon-calm-morning-sea-dawn-atmosphere-afterglow-cloud-sun-night-darkness-1437559.jpg"
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
 tags:        ["开发工具", "远程开发"]
 categories:  ["Tech" ]
 ---
