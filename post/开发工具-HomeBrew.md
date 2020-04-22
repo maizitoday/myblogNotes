@@ -1,7 +1,7 @@
 ---
 title:       "HomeBrew"
 subtitle:    ""
-description: ""
+description: "mac环境包的管理工具，安装，卸载，搜索等软件管理"
 date:        2020-03-10
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"

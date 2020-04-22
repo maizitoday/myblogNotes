@@ -1,7 +1,7 @@
 ---
 title:       "vscode开发常用技巧记录"
 subtitle:    ""
-description: ""
+description: "java快捷键，Maven快捷键，调试"
 date:        2019-07-25
 author:      "麦子"
 image:       "https://get.pxhere.com/photo/photography-sea-fog-horizon-water-calm-shore-black-and-white-morning-sky-pier-mist-ocean-haze-fixed-link-1445001.jpg"
@@ -123,12 +123,6 @@ ctrl + alt + F  快捷键
     "editor.tabSize": 4,
 ```
 
- 
-
-
-
-
-
 ## 
 
 ## 切换左边工具栏
@@ -211,6 +205,12 @@ Shift+Alt+O， 如果是一个对象有多个类的话，会不进行导入，�
 ### 选中一行
 
  快捷键：⌥↑ 
+
+
+
+### 自动保存就格式化java代码
+
+打开设置，找到  Format On Save 选中，搜索 Default Formatter ， 找到你需要的java格式化的模板。 
 
 
 

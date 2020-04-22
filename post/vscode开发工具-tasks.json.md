@@ -1,7 +1,7 @@
 ---
 title:       "tasks.json"
 subtitle:    ""
-description: ""
+description: "任务模式的脚本"
 date:        2020-03-09
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"

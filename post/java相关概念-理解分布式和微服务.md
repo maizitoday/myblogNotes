@@ -1,7 +1,7 @@
 ---
 title:       "理解分布式和微服务"
 subtitle:    ""
-description: ""
+description: "分布式， 微服务， "
 date:        2019-07-08
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
