@@ -51,17 +51,21 @@ sftp.jso 格式如下：更多配置看官网地址：<https://marketplace.visua
 
 ```
 {
-    "name": "sftp测试",
-    "host": "10.211.55.6",
+    "name": "mycentos7",
+    "host": "192.168.0.2",
     "protocol": "sftp",
-    "port": 22,
-    "username": "parallels",
-    "remotePath": "/home/parallels/Music",
+    "port": 6666,
+    "username": "maizissh",
+    "password": "maizi_today",
+    "remotePath": "/home/maizissh/",
     "uploadOnSave": true
 }
+
 ```
 
+配置好后，直接就可以使用，上传了。 
 
+![Xnip2020-04-26_11-46-21](/img/Xnip2020-04-26_11-46-21.png)
 
 # 远程调试代码
 

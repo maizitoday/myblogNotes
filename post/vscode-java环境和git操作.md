@@ -61,6 +61,21 @@ categories:  ["Tech" ]
 }
 ```
 
+# 直接创建一个class
+
+双击创建一个文本，命名已.java结尾，然后直接就可以进行编写main函数，然后就可以运行了，用来做测试很方便的。 
+
+```java
+public class test {
+    public static void main(String[] args) {
+        System.out.println("直接创建一个class");
+    }
+}
+
+```
+
+这样直接就可以运行了。 
+
 # 快捷键
 
 ```yaml

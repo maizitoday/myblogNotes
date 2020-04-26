@@ -1,7 +1,7 @@
 ---
 title:       "vscode开发技巧，快捷键"
 subtitle:    ""
-description: "java快捷键，Maven快捷键，调试"
+description: "java快捷键，Maven快捷键，调试，适应无鼠标操作"
 date:        2019-07-25
 author:      "麦子"
 image:       "https://get.pxhere.com/photo/photography-sea-fog-horizon-water-calm-shore-black-and-white-morning-sky-pier-mist-ocean-haze-fixed-link-1445001.jpg"
@@ -25,14 +25,11 @@ https://geek-docs.com/vscode/vscode-tutorials/vscode-create-terminal.html
 
 - Command（或 Cmd）⌘
 - Shift ⇧
-
 - Option（或 Alt）⌥
 - Control（或 Ctrl）⌃
-
 - Caps Lock ⇪
 - Fn
-
-
+- ⌃ （Control 键）option+Shift+i
 
 
 
@@ -58,6 +55,32 @@ https://geek-docs.com/vscode/vscode-tutorials/vscode-create-terminal.html
 
 
 
+### 并排编辑
+
+键盘快捷键：⌘\    ,  把文件分割成多个。 
+
+
+
+### 在编辑之间切换
+
+键盘快捷键：⌘1，，2，⌘3
+
+
+
+### 关闭当前打开的文件夹
+
+键盘快捷键：⌘W
+
+
+
+### 切换边栏
+
+键盘快捷键：⌘B
+
+
+
+
+
 ### 关闭当前打开的文件夹
 
 键盘快捷键：⌘W， 快速关闭你打开的java类或者其他。 
@@ -80,9 +103,21 @@ ctrl + K
 
 
 
+### 选中一行
+
+⌘+ > ,然后shift+向上箭头
+
+
+
 ### 复制一行
 
-ctrl + G 
+shift + alt + 向下箭头
+
+
+
+### 切换集成终端
+
+在快捷键中搜索终端，然后设置快捷键就好。 
 
 
 
@@ -125,6 +160,12 @@ ctrl + alt + F  快捷键
 ### 导航到特定行
 
 键盘快捷键：⌘L
+
+
+
+### 终端
+
+
 
 
 
@@ -266,6 +307,8 @@ Shift+Alt+O， 如果是一个对象有多个类的话，会不进行导入，�
 
 ### 自定义代码片段 
 
+https://code.visualstudio.com/docs/editor/userdefinedsnippets 官方文档
+
 ```json
 {
 	/***
@@ -348,4 +391,12 @@ demo open /Users/maizi/Desktop/demo/target/classes/com/example/demo/DemoApplicat
 ### 面板详细查看变量数据
 
 ![debug_data_inspection](/img/debug_data_inspection.gif)
+
+# 前端
+
+## Emmet使用
+
+https://code.visualstudio.com/docs/editor/emmet 官方文档
+
+他可以让一些大量的HTML标签批量的生成显示出来。 
 

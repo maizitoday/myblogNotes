@@ -1,7 +1,7 @@
 ---
 title:       "秘钥连接SSH"
 subtitle:    ""
-description: ""
+description: "SSH环境监测，上传id_rsa.pub文件，配置Mac，直接运行ssh命令远程"
 date:        2019-08-10
 author:      "麦子"
 image:       "https://get.pxhere.com/photo/snow-macro-snowflake-black-darkness-phenomenon-computer-wallpaper-screenshot-black-and-white-font-grass-night-midnight-1420032.jpg"

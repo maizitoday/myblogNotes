@@ -33,3 +33,11 @@ Matching Java Virtual Machines (3):
 
 可以看到当前安装了3个JDK版本， 最下面的jdk-14表示的是当前的版本。 
 
+# Iterm工具
+
+快捷键，马上显示出来
+
+```
+ctrl 按两下
+```
+

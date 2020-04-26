@@ -1,11 +1,11 @@
 ---
 title:       "centos安装docker环境"
 subtitle:    ""
-description: ""
+description: "安装k8s环境"
 date:        2019-05-08
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["docker", "centos安装环境", "centos"]
+tags:        ["docker", "centos关闭防火墙"]
 categories:  ["Tech" ]
 
 ---

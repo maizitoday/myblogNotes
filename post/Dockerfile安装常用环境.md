@@ -1,7 +1,7 @@
 ---
 title:       "Dockerfile安装常用环境"
 subtitle:    ""
-description: ""
+description: "Nginx,MySql，Oracle，Redis，MongoDB，ElasticSearch,Kibana,Logstash,RockerMQ,Centos7等环境安装"
 date:        2019-08-21
 author:      "麦子"
 image:       "https://c.pxhere.com/photos/50/b0/tree_road_archway_symmetry_and_black_white-99031.jpg!d"
@@ -24,7 +24,95 @@ docker tag  XX镜像id   XX新的名字
 
 ```
 
-# nginx
+
+
+# Centos7
+
+安装Centos7，java，maven，SSH
+
+```dockerfile
+
+# install centos7
+FROM centos:7
+RUN yum -y install net-tools  
+
+#常用命令下载
+RUN yum -y install wget
+RUN yum install -y curl
+
+
+#配置ssh 
+RUN yum -y  install  openssh-server
+RUN sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
+RUN cat /etc/ssh/sshd_config 
+
+
+#创建一个新用户
+RUN useradd  maizissh -d /home/maizissh
+RUN mkdir /home/maizissh/.ssh
+RUN chown -R maizissh. /home/maizissh/.ssh
+COPY id_rsa.pub /usr/local/macrsa/
+RUN cd /usr/local/macrsa/ && ls -l 
+RUN cat /usr/local/macrsa/id_rsa.pub >> /home/maizissh/.ssh/authorized_keys
+RUN cat /home/maizissh/.ssh/authorized_keys
+RUN chmod 700 /home/maizissh/.ssh
+RUN chmod 600 /home/maizissh/.ssh/authorized_keys
+
+
+
+# install java
+COPY jdk-8u11-linux-x64.tar.gz /usr/local/java/
+RUN cd /usr/local/java/ && ls && tar -xvf jdk-8u11-linux-x64.tar.gz && ls
+ENV JAVA_HOME /usr/local/java/jdk1.8.0_11
+ENV CLASSPATH $JAVA_HOME/lib;$JAVA_HOME/jre/lib
+ENV PATH $PATH:$JAVA_HOME/bin
+RUN java -version
+RUN echo "java success"
+
+
+# install maven
+RUN cd /usr/local/ && mkdir maven
+RUN wget http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+RUN mv apache-maven-3.3.9-bin.tar.gz  /usr/local/maven/  && ls 
+RUN cd /usr/local/maven/ && tar -xzvf apache-maven-3.3.9-bin.tar.gz && ls
+ENV MAVEN_HOME /usr/local/maven/apache-maven-3.3.9
+ENV PATH $JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
+RUN mvn -version
+RUN echo "maven success"
+
+
+# COPY java_maven.sh /usr/bin/java_maven.sh
+# RUN  chmod +x  /usr/bin/java_maven.sh
+
+#安装java和maven环境
+# CMD [ "java_maven.sh" ]
+# CMD ["/usr/sbin/init"]
+
+ # 编译 
+ # docker build -t mycentos7 .
+ 
+ #启动
+ #docker run -itd --name mycentos7 -p 22:22 --privileged=true mycentos7 /usr/sbin/init
+```
+
+进入容器后，设置root密码
+
+```
+passwd  回车
+然后设置root密码
+```
+
+ 修改添加用户的密码
+
+```
+passwd   设置root密码
+passwd   maizissh  修改用户密码， 这个命令只适合用户。 
+```
+
+
+
+# Nginx
 
 ```dockerfile
 FROM nginx
@@ -51,7 +139,7 @@ EXPOSE  8081
 
 
 
-# mysql
+# Mysql
 
 ```dockerfile
  FROM mysql
@@ -65,7 +153,7 @@ EXPOSE  8081
  
 ```
 
-# oracle
+# Oracle
 
 ```dockerfile
  FROM absolutapps/oracle-12c-ee
@@ -84,7 +172,7 @@ EXPOSE  8081
 
 
 
-# redis
+# Redis
 
 <https://hub.docker.com/_/redis>
 
@@ -145,7 +233,7 @@ cd  /usr/local/bin
 root@369a39fe77bf:/usr/local/bin# redis-server /etc/redis/redis.conf
 ```
 
-# mongodb
+# MongoDB
 
 ```yml
 FROM mongo
@@ -216,7 +304,7 @@ docker run -itd --name elasticsearch --net esk -p 9200:9200 -p 9300:9300 -e "dis
 
 
 
-## kibana
+## Kibana
 
 ```yml
 FROM kibana:6.8.3
@@ -319,7 +407,7 @@ output {
 
 我的ES和logstash, 一个是Networks：esk  一个是Networks：bridge，但是依然可以OK， 不知道为什么。 我的电脑是mac系统。 后期在来解答。 
 
-# rocketmq
+# Rocketmq
 
 ## 单主机模式
 

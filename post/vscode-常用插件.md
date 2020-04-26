@@ -1,7 +1,7 @@
 ---
 title:       "vscode-常用插件集合"
 subtitle:    ""
-description: "runcode，koroFileHeader，Jira，Checkstyle，注释, 代码检查，前端调试插件集合"
+description: "runcode，koroFileHeader，Jira，Checkstyle，注释,日志文件查看，代码检查，前端调试插件集合"
 date:        2020-04-20
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
@@ -204,6 +204,70 @@ check
 
 
 
+# SonarLint
+
+SonarLint是一个IDE扩展，可帮助您在检测代码的规范问题，同时安装完成后，会在你的左边栏Maven栏的下面会出现他的这个插件标志，点击这个标志可以查看这个插件的各种代码的的规则的详细文档。  
+
+点击有些问题可以自动修复fix处理。
+
+# 阿里巴巴
+
+
+
+## Java P3C Checker
+
+阿里巴巴Java编程规范 (P3C/阿里巴巴Java开发手册) 规约检查 Alibaba Java Coding Guidelines Check
+
+
+
+## Alibaba/Ant/Ascp intellisense coding
+
+阿里巴巴/ Ant / Ascp智能编码
+
+参考intellicode设计，利用vscode提供得lsp / complete / snippets机制为开发者提供定制化的文档，片段，输入提示。
+
+
+
+## Alibaba Cloud Toolkit
+
+Cloud Toolkit是免费的本地IDE插件，可以帮助开发者更高效地开发，测试，诊断和部署应用。通过插件，可以将本地应用一键部署到任意服务器，甚至云端（ECS，EDAS，Kubernetes和小程序云等）；并且还内置了Arthas诊断，Dubbo工具，终端终端，文件上传，函数计算和MySQL执行器等工具。（产品官网：[https](https://www.aliyun.com/product/cloudtoolkit) : [//www.aliyun.com/product/cloudtoolkit](https://www.aliyun.com/product/cloudtoolkit)）
+
+Cloud Toolkit 帮助开发者将本地应用程序一键部署到任意的服务器上。
+当您每次修改完代码后，是否正在经历反复地打包？采用 SCP 工具上传？使用 XShell 或 SecureCRT 登陆服务器？替换部署包？重启？
+现在开始，请把这些重复繁琐的工作交给 Cloud Toolkit 吧。
+
+### 连接远程服务器
+
+![Xnip2020-04-26_11-40-10](/img/Xnip2020-04-26_11-40-10.png)
+
+![Xnip2020-04-26_11-40-18](/img/Xnip2020-04-26_11-40-18.png)
+
+![Xnip2020-04-26_11-40-30](/img/Xnip2020-04-26_11-40-30.png)
+
+
+
+### 替换文件或者是jar包
+
+![Xnip2020-04-26_11-40-39](/img/Xnip2020-04-26_11-40-39.png)
+
+### 执行命令
+
+![Xnip2020-04-26_11-40-55](/img/Xnip2020-04-26_11-40-55.png) 
+
+
+
+### Arthas诊断
+
+
+
+
+
+# Log File Highlighter
+
+在日志文件中添加颜色突出显示，以使跟踪日志事件流和发现问题变得更加容易。
+
+该扩展名与`.log`文件关联，并将颜色应用于文件中的不同元素，用于查看.log日志文件。
+
 # Debug Visualizer
 
 Debug Visualizer 可视化调试， 这个用来看数据结构调试。安装此扩展程序后，使用命令Debug Visualizer: New View打开一个新的可视化器视图。在此视图中，您可以输入一个表达式，在逐步浏览应用程序时可以对其进行评估和可视化。
@@ -224,9 +288,7 @@ Debug Visualizer 可视化调试， 这个用来看数据结构调试。安装�
 
 VS Code的浏览器预览功能使您可以在编辑器中打开可以调试的真实浏览器预览。
 
-# SonarLint
-
-SonarLint是一个IDE扩展，可帮助您在编写代码时检测和修复质量问题，目前直接用的是自带的checkStyle插件。   
+ 
 
 
 

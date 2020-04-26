@@ -193,6 +193,9 @@ history:     查看所有的命令历史记录
 ```shell
 id  root      查看一个用户  
 useradd  maizi      用户添加 
+passwd              设置root密码
+passwd   用户       修改用户密码， 这个命令只适合用户。 
+
 userdel  -r maizi   用户删除 
 
 #把一个用户加入到另外一个组 

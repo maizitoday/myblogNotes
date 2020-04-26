@@ -11,6 +11,12 @@ categories:  ["Tech" ]
 
 [TOC]
 
+**官方文档：**
+
+**https://code.visualstudio.com/docs/editor/debugging   **
+
+**https://code.visualstudio.com/docs/editor/tasks**
+
 # 简介
 
 通过命令， 进行一键处理相关程序处理。 

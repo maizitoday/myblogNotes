@@ -1,7 +1,7 @@
 ---
 title:       "注释标记TODO,FIXME"
 subtitle:    ""
-description: "TODO,FIXME如何在vscode中查看"
+description: "TODO,FIXME如何在vscode中查看，作为代码被打断时候做一个标记"
 date:        2020-04-22
 author:      "麦子"
 image:       "https://c.pxhere.com/images/aa/a6/2c425d9c6f81e52b34d87e5c3989-1424141.jpg!d"
