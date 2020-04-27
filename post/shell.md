@@ -1,7 +1,7 @@
 ---
 title:       "shell"
 subtitle:    ""
-description: ""
+description: "shell语法，常用脚本记录,nohup、&、 2>&1"
 date:        2019-04-09
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/docker.jpg"

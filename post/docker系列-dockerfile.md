@@ -47,6 +47,30 @@ CMD ["param1","param2"] 提供给 ENTRYPOINT 的默认参数；
 如果用户启动容器时候指定了运行的命令，则会覆盖掉 CMD 指定的命令。
 ```
 
+用法1：
+
+带有中括号的形式。这时，命令没有再任何shell终端环境下，如果我们要执行shell，必须把shell加入到中括号的参数中。这种用法就像一个c语言的exec函数，意思是我们要执行一个进程。如果采用非shell的方法，那么上面的例子要修改为：
+
+```dockerfile
+FROM centos
+ 
+CMD ["/bin/bash", "-c", "echo 'hello cmd!'"]
+```
+
+用法2：
+
+shell form，即没有中括号的形式。那么命令command默认是在“/bin/sh -c”下执行的。比如下面的dockerfile：
+
+```dockerfile
+FROM centos
+ 
+CMD echo "hello cmd!"
+```
+
+**注意：推荐第一种**
+
+
+
 
 
 ## ENTRYPOINT

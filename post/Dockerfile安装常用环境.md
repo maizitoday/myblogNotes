@@ -31,7 +31,6 @@ docker tag  XX镜像id   XX新的名字
 安装Centos7，java，maven，SSH
 
 ```dockerfile
-
 # install centos7
 FROM centos:7
 RUN yum -y install net-tools  
@@ -60,15 +59,18 @@ RUN chmod 700 /home/maizissh/.ssh
 RUN chmod 600 /home/maizissh/.ssh/authorized_keys
 
 
-
 # install java
 COPY jdk-8u11-linux-x64.tar.gz /usr/local/java/
+COPY start.sh /usr/local/
 RUN cd /usr/local/java/ && ls && tar -xvf jdk-8u11-linux-x64.tar.gz && ls
-ENV JAVA_HOME /usr/local/java/jdk1.8.0_11
-ENV CLASSPATH $JAVA_HOME/lib;$JAVA_HOME/jre/lib
-ENV PATH $PATH:$JAVA_HOME/bin
-RUN java -version
+RUN echo 'export JAVA_HOME=/usr/local/java/jdk1.8.0_11' >> /etc/profile
+RUN echo 'export CLASSPATH=$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar' >> /etc/profile
+RUN echo 'export PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile
+
+RUN echo "查看-----------------"
+RUN cat /etc/profile
 RUN echo "java success"
+
 
 
 # install maven
@@ -76,24 +78,30 @@ RUN cd /usr/local/ && mkdir maven
 RUN wget http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
 RUN mv apache-maven-3.3.9-bin.tar.gz  /usr/local/maven/  && ls 
 RUN cd /usr/local/maven/ && tar -xzvf apache-maven-3.3.9-bin.tar.gz && ls
-ENV MAVEN_HOME /usr/local/maven/apache-maven-3.3.9
-ENV PATH $JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
-RUN mvn -version
+RUN echo 'export MAVEN_HOME=/usr/local/maven/apache-maven-3.3.9'>>/etc/profile
+RUN echo 'export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH'>>/etc/profile
+
+RUN echo "查看-----------------"
+RUN cat /etc/profile
 RUN echo "maven success"
+
 
 
 # COPY java_maven.sh /usr/bin/java_maven.sh
 # RUN  chmod +x  /usr/bin/java_maven.sh
 
 #安装java和maven环境
-# CMD [ "java_maven.sh" ]
-# CMD ["/usr/sbin/init"]
+RUN chmod 777 /usr/local/start.sh
+ENTRYPOINT [ "sh", "-c", "/usr/local/start.sh" ]
+#CMD sh /usr/local/start.sh
 
- # 编译 
- # docker build -t mycentos7 .
+
+# 编译 
+# docker build -t mycentos7 .
+
+#启动
+#docker run -itd --name mycentos7 -p 6666:22 --privileged=true mycentos7 /usr/sbin/init
  
- #启动
- #docker run -itd --name mycentos7 -p 22:22 --privileged=true mycentos7 /usr/sbin/init
 ```
 
 进入容器后，设置root密码
@@ -110,7 +118,31 @@ passwd   设置root密码
 passwd   maizissh  修改用户密码， 这个命令只适合用户。 
 ```
 
+**注意：这里需要通过 追加到 >> /etc/profile文件中，这样才会永久生效，不然只有这一次连接才有java和maven环境**
 
+## start.sh
+
+```shell
+
+#!/usr/bin/env bash
+ 
+#!/bin/bash
+
+echo "开始执行容器启动脚本"
+source /etc/profile
+cat /etc/profile
+
+#防止容器启动后退出
+tail -f /dev/null
+```
+
+## 问题
+
+1. CMD无法执行这个脚本， 还不知道什么原因， 所以运行后，手动执行这个脚本，让 /etc/profile文件生效就好。 
+
+2. 改用ENTRYPOINT命令执行， 可以执行脚本， 但是  source  /etc/profile依然无法运行，所以还是要手动进行执行这个命令，同时怀疑是权限导致，后期设置root权限启动查看是否可以，在进行测试。 
+
+   
 
 # Nginx
 

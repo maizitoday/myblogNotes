@@ -1,7 +1,7 @@
 ---
 title:       "linux下利用nohup后台运行jar文件包程序"
 subtitle:    ""
-description: ""
+description: "不挂断一直运行脚本，nohup，&"
 date:        2019-08-19
 author:      "麦子"
 image:       "https://get.pxhere.com/photo/Dodge-Daytona-low-key-toy-car-white-black-motor-vehicle-black-and-white-automotive-design-mode-of-transport-darkness-sports-car-monochrome-photography-photography-light-vehicle-performance-car-automotive-lighting-automotive-exterior-computer-wallpaper-monochrome-night-sky-bumper-city-car-wheel-driving-midnight-compact-car-executive-car-full-size-car-headlamp-1423465.jpg"

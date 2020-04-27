@@ -41,9 +41,9 @@ java-1.7.0-openjdk-1.7.0.51-2.4.5.5.el7.x86_64
 
 ```shell
 tar -xvf jdk-8u11-linux-x64.tar.gz
-export JAVA_HOME=/usr/local/java/jdk1.8.0_11
-export CLASSPATH=$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-export PATH=$PATH:$JAVA_HOME/bin
+echo 'export JAVA_HOME=/usr/local/java/jdk1.8.0_11'>>/etc/profile
+echo 'export CLASSPATH=$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar'>>/etc/profile
+echo 'export PATH=$PATH:$JAVA_HOME/bin'>>/etc/profile
 source /etc/profile
 java -version
 ```
