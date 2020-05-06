@@ -41,3 +41,19 @@ Matching Java Virtual Machines (3):
 ctrl 按两下
 ```
 
+
+
+# 查看java安装版本和目录
+
+```java
+/usr/libexec/java_home -V
+
+
+14.0.1, x86_64:	"Java SE 14.0.1"	/Library/Java/JavaVirtualMachines/jdk-14.0.1.jdk/Contents/Home
+    14, x86_64:	"AdoptOpenJDK 14"	/Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk/Contents/Home
+    11.0.7, x86_64:	"AdoptOpenJDK 11"	/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+    1.8.0_252, x86_64:	"AdoptOpenJDK 8"	/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+    1.8.0_101, x86_64:	"Java SE 8"	/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home
+    1.7.0_71, x86_64:	"Java SE 7"	/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home
+```
+

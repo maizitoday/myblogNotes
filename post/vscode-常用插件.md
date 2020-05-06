@@ -46,11 +46,13 @@ Vscode runcode插件支持运行C, C++, Java, JS, PHP, Python, Perl, Ruby, Go, L
 
 
 
-# 代码注释插件koroFileHeader
+# 代码注释插件
+
+## koroFileHeader
 
 插件地址：https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 
-## 常规配置
+### 常规配置
 
 ```json
   //--------------------koroFileHeader插件设置---------------------
@@ -99,18 +101,40 @@ Vscode runcode插件支持运行C, C++, Java, JS, PHP, Python, Perl, Ruby, Go, L
 },
 ```
 
-## 文件头部注释快捷键
+### 文件头部注释快捷键
 
 ```
 ctrl+cmd+i
 ```
 
-## 函数注释快捷键
+### 函数注释快捷键
 
 ```
 ctrl+alt+f #原来这个快捷键
 修改为
 //        #这个快捷键
+```
+
+
+
+## Javadoc Tools
+
+https://marketplace.visualstudio.com/items?itemName=madhavd1.javadoc-tools  通过命令可以批量生产javaDoc注释
+
+
+
+## Apex Javadoc
+
+https://marketplace.visualstudio.com/items?itemName=btamburrino.apex-javadoc  可以同  /** 自动生成javaDoc注释
+
+```java
+ /**
+     *
+     * @param name
+     * @param password
+     * @return
+     * @throws Exception
+     */
 ```
 
 
