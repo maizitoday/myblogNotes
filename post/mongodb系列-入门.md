@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-09-15
 author:      "麦子"
-image:       "https://c.pxhere.com/images/a1/23/147c2090573fcd3fbc38e7b7b5a7-1593571.jpg!d"
+image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
 tags:        ["mongodb", "$type运用", "capped collection", "objectid分析"]
 categories:  ["Tech" ]
 ---

@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2020-01-08
 author:      "麦子"
-image:       "https://c.pxhere.com/images/e4/46/bd237f6583029424694a0d16589b-1435053.jpg!d"
+image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
 tags:        ["网络编程"]
 categories:  ["Tech" ]
 ---

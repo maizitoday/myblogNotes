@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-04-23
 author:      "麦子"
-image:       "https://img.zhaohuabing.com/in-post/2018-4-25-istio-auto-injection-with-webhook/lion.jpg"
+image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
 tags:        ["服务注册", "Zookeeper"]
 categories:  ["Tech" ]
 ---

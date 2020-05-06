@@ -4,7 +4,7 @@ subtitle:    ""
 description: ""
 date:        2019-09-22
 author:      "麦子"
-image:       "https://c.pxhere.com/images/e4/46/bd237f6583029424694a0d16589b-1435053.jpg!d"
+image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
 tags:        ["elasticSearch","Filebeat"]
 categories:  ["Tech" ]
 ---
