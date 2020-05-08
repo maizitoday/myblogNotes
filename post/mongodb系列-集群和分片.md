@@ -1,7 +1,7 @@
 ---
 title:       "mongodb-集群和分片"
 subtitle:    ""
-description: ""
+description: "如何搭建集群，分片的配置，分片策略处理"
 date:        2019-09-16
 author:      "麦子"
 image:       "https://c.pxhere.com/images/a1/23/147c2090573fcd3fbc38e7b7b5a7-1593571.jpg!d"
@@ -27,9 +27,11 @@ bind_ip=127.0.0.1
 replSet=maizi  // 集群的名称
 ```
 
-# 集群
+# 集群配置
 
-## docker-compose.yml
+**转载地址：http://bazingafeng.com/2017/06/19/create-mongodb-replset-cluster-using-docker/**
+
+## 第一步：docker-compose.yml 安装容器
 
 ```yml
 version: '3'
@@ -70,11 +72,20 @@ docker-compose stop    停止
 
 
 
-## 查看容器IP
+## 第二步：配置容器IP，修改host文件
+
+查看每一个IP地址， 然后修改， 把其他的容器IP加入进来。**也可以设置 network_mode: "host"**，修改每一个容器的host文件，保证容器之间是可以进行ping的通的。
+
+```shell
+apt-get update
+apt-get install vim
+apt-get install inetutils-ping
+apt-get install net-tools
+```
 
 ```dockerfile
-docker exec m1 cat /etc/hosts
-
+docker exec m1 
+vi /etc/hosts
 
 172.18.0.4   r3
 172.18.0.3   r2
@@ -82,6 +93,14 @@ docker exec m1 cat /etc/hosts
 ```
 
 ![Xnip2019-09-17_02-34-19](/img/Xnip2019-09-17_02-34-19.png)
+
+## 第三步：集群配置，命令设置搭建
+
+进入其中一个mongodb的容器，通过mongo命令设置集群配置。
+
+```dockerfile
+docker exec -ti 2017mg mongo --port 27017
+```
 
 
 
@@ -91,8 +110,8 @@ rs.initiate()
 // 查看集群配置
 rs.conf()
 // 向集群中添加成员
+rs.add("172.18.0.2:27017")
 rs.add("172.18.0.3:27017")
-rs.add("172.18.0.4:27017")
 
 // 查看状态
 rs.status()
@@ -233,7 +252,7 @@ rs.status()
 
 
 
-## 验证同步
+## 第四步：验证同步
 
 ![Xnip2019-09-17_03-02-13](/img/Xnip2019-09-17_03-02-13.png)
 
@@ -245,7 +264,7 @@ db.getMongo().setSlaveOk()
 
 
 
-## 故障转移
+## 第五步：故障转移
 
 副本集模式下，如果Primary不可用，整个集群将会选举出新的Primary来继续对外提供读写服务
 
