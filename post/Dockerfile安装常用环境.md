@@ -1,5 +1,5 @@
 ---
-title:       "Dockerfile安装常用环境"
+192.168.0.2title:       "Dockerfile安装常用环境"
 subtitle:    ""
 description: "Nginx,MySql，Oracle，Redis，MongoDB，ElasticSearch,Kibana,Logstash,RockerMQ,Centos7等环境安装"
 date:        2019-08-21
@@ -487,6 +487,8 @@ services:
 ```
 
 ### broker.conf
+
+注意修改 brokerIP1这个地址，这个地址就是你的broker的节点的IP。 
 
 ```properties
 # 所属集群名字
