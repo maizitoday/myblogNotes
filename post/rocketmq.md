@@ -1,7 +1,7 @@
 ---
 title:       "rocketmq系列一基础认识"
 subtitle:    ""
-description: ""
+description: "队列的好处，缺点，集群搭建，事物消息，生产者和消费者，架构认识"
 date:        2019-03-04
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/istio-install_and_example/post-bg.jpg"

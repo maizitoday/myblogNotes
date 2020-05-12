@@ -1,7 +1,7 @@
 ---
 title:       "MongoDB-API-常用操作"
 subtitle:    ""
-description: ""
+description: "同步操作API，异步操作API，响应式API"
 date:        2020-02-27
 author:      "麦子"
 image:       "https://c.pxhere.com/images/a1/23/147c2090573fcd3fbc38e7b7b5a7-1593571.jpg!d"
