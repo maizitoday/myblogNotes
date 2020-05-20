@@ -1,7 +1,7 @@
 ---
 title:       "kibana常用操作"
 subtitle:    ""
-description: ""
+description: "kibana定义，ELK介绍，什么是搜索引擎，PB数据概念，常用操作"
 date:        2019-09-25
 author:      "麦子"
 image:       "https://c.pxhere.com/images/e4/46/bd237f6583029424694a0d16589b-1435053.jpg!d"
@@ -10,6 +10,10 @@ categories:  ["Tech" ]
 ---
 
 [TOC]
+
+# 定义
+
+Kibana 是一款开源的前端应用程序，其基础是 Elastic Stack，可以为 Elasticsearch 中索引的数据提供搜索和数据可视化功能。
 
 # ELK一般用来做啥
 

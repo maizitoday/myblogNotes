@@ -56,4 +56,3 @@ ctrl 按两下
     1.8.0_101, x86_64:	"Java SE 8"	/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home
     1.7.0_71, x86_64:	"Java SE 7"	/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home
 ```
-

@@ -239,6 +239,29 @@ HotSpot实现常用功能的选项，其他JVM不一定实现。**此类选项�
  -XX:LogFile=/data/log/hotspot.log
 ```
 
+
+
+# 执行指定的JDK版本运行jar
+
+```
+#!/bin/bash
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home
+JAVA=$JAVA_HOME/bin/java
+nohup $JAVA -jar zookeeper-visualizer.jar -Djava.ext.dirs=$JAVA_HOME/lib &
+```
+
+# -D
+
+**原文链接：https://blog.csdn.net/cyony/article/details/74375251**
+
+-D 是设置系统的属性
+
+## java.ext.dirs
+
+java命令引入jar时可以-cp参数，但时-cp不能用通配符(多个jar时什么烦要一个个写,不能*.jar)，面通常的jar都在同一目录，且多于1个。前些日子找到（发现）-Djava.ext.dirs太好。
+
+-Djava.ext.dirs会覆盖Java本身的ext设置，java.ext.dirs指定的目录由ExtClassLoader加载器加载，如果您的程序没有指定该系统属性，那么该加载器默认加载$JAVA_HOME/jre/lib/ext目录下的所有jar文件。但如果你手动指定系统属性且忘了把$JAVA_HOME/jre/lib/ext路径给加上，那么ExtClassLoader不会去加载$JAVA_HOME/lib/ext下面的jar文件，这意味着你将失去一些功能，例如java自带的加解密算法实现。
+
 # 注意
 
 还有很多命令请查看这篇原文， 上面主要记录常用的命令。 

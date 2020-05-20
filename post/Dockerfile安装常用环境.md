@@ -488,7 +488,7 @@ services:
 
 ### broker.conf
 
-注意修改 brokerIP1这个地址，这个地址就是你的broker的节点的IP。 
+注意修改 brokerIP1这个地址，**这个地址就是你的本机物理IP，也就是你当前宿主机的IP地址**
 
 ```properties
 # 所属集群名字
@@ -531,7 +531,20 @@ DefaultCluster    broker-a                0     172.20.0.4 :10911      V4_4_0   
 
 
 
+# Zookeeper
 
+```dockerfile
+FROM zookeeper
+EXPOSE 2181
+
+
+#编译
+# docker build -t myzookeeper .
+
+#运行
+# docker run  -itd  -p 2181:2181 --name myzookeeper --privileged -v $(pwd)/conf/:/conf/   myzookeeper
+
+```
 
 
 

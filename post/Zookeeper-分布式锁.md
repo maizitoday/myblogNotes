@@ -25,6 +25,25 @@ categories:  ["Tech" ]
 
 重现Lock接口，这一块可以提出来作为一个公共工具类。
 
+
+
+## pom.xml
+
+```xml
+ <dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+      <version>3.6.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.101tec</groupId>
+      <artifactId>zkclient</artifactId>
+      <version>0.11</version>
+    </dependency>
+```
+
+
+
 ## Lock接口重写类
 
 ```java

@@ -13,6 +13,8 @@ categories:  ["Tech" ]
 
 **视频资料：https://www.bilibili.com/video/av59635085?from=search&seid=15914016610413035041**
 
+**好的资料：http://www.tianshouzhi.com/api/tutorials/rocketmq/50**
+
 ### 消息队列好处
 
 ##### 1. 解耦:   
@@ -258,75 +260,6 @@ maxMessageSize=65536
 ```
 
 
-
-### 生产者
-
-```java
-public class SyncProducer {
-
-    public static void main(String[] args) throws MQClientException, UnsupportedEncodingException, RemotingException,
-            MQBrokerException, InterruptedException {
-   
-        DefaultMQProducer producer = new DefaultMQProducer("maizi_007");
-        // Specify name server addresses.
-        producer.setNamesrvAddr("192.168.1.100:9876");
-        // Launch the instance.
-        producer.start();
-        for (int i = 0; i < 10; i++) {
-            // Create a message instance, specifying topic, tag and message body.
-            Message msg = new Message("yb-007" /* Topic */, "TagA" /* Tag */,
-                    ("maizi_today, Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
-            );
-            // Call send message to deliver message to one of brokers.
-            SendResult sendResult = producer.send(msg);
-            System.out.printf("%s%n", sendResult);
-        }
-        // Shut down once the producer instance is not longer in use.
-        // 把这个隐掉后，才控制台才可以看到你的生产组
-        // producer.shutdown();
-    }
-
-}
-```
-
-
-
-### 消费者
-
-```java
-public class Consumer {
-
-    public static void main(String[] args) throws MQClientException {
-         // Instantiate with specified consumer group name.
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("myconsumer");
-         
-        // Specify name server addresses.
-        consumer.setNamesrvAddr("192.168.1.100:9876");
-        
-        // Subscribe one more more topics to consume.
-        consumer.subscribe("yb-007", "*");
-        // Register callback to execute on arrival of messages fetched from brokers.
-        consumer.registerMessageListener(new MessageListenerConcurrently() {
-
-            @Override
-            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
-                ConsumeConcurrentlyContext context) {
-                msgs.forEach(item->System.out.println(new String(item.getBody())));
-
-                System.out.printf("--------------------------------");
-
-                // System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-            }
-        });
-
-        //Launch the consumer instance.
-        consumer.start();
-
-        System.out.printf("Consumer Started.%n");
-     }
-}
-```
 
 
 
