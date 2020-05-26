@@ -2,7 +2,7 @@
 title:       "阿里巴巴Java开发手册笔记"
 subtitle:    ""
 description: "代码规范，命名风格，异常日志，MySQL数据库，服务器"
-date:        2020-06-25
+date:        2020-05-26
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
 tags:        ["java基础", "开发手册代码规范"]
