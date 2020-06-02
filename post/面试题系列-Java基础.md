@@ -5,7 +5,7 @@ description: "java基础问题面试题收集"
 date:        2020-06-01
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["面试题系列","java基础面试题收集"]
+tags:        ["面试题系列","java基础"]
 categories:  ["Tech" ]
 ---
 

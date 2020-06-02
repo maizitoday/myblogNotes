@@ -1,11 +1,11 @@
 ---
 title:       "java基础-jvm"
 subtitle:    ""
-description: ""
+description: "虚拟机, jvm调优，类加载流程，GC算法， jvm的性能优化"
 date:        2019-04-22
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["java基础", "jvm", "虚拟机", "jvm调优"]
+tags:        ["java基础", "jvm", "面试题系列"]
 categories:  ["Tech" ]
 ---
 
@@ -286,8 +286,20 @@ Java中的栈
 1、每当启用一个线程时，JVM就为他分配一个Java栈，栈是以帧为单位保存当前线程的运行状态。某个线程正在执行的方法称为当前方法，当前方法使用的栈帧称为当前帧，当前方法所属的类称为当前类，当前类的常量池称为当前常量池。当线程执行一个方法时，它会跟踪当前常量池。
 2、每当线程调用一个Java方法时，JVM就会在该线程对应的栈中压入一个帧，这个帧自然就成了当前帧。当执行这个方法时，它使用这个帧来存储参数、局部变量、中间运算结果等等。
 3、Java栈上的所有数据都是私有的。任何线程都不能访问另一个线程的栈数据。所以我们不用考虑多线程情况下栈数据访问同步的情况。
- 
 
 
- 
+
+# 思维脑图
+
+
+
+## JVM和性能优化
+
+ [JVM和性能优化.xmind](/img/JVM和性能优化.xmind) 
+
+
+
+## 深入理解java虚拟机
+
+  [深入理解java虚拟机.xmind](/img/深入理解java虚拟机.xmind) 
 
