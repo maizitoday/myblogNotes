@@ -118,3 +118,10 @@ public @interface AutoConfigurationPackage {
 **对应的就是   *server.port*=8081** 
 
 **J2EE的整体整合解决方案和自动配置都在spring-boot-autoconfigure-1.5.9.RELEASE.jar；**
+
+
+
+# springboot知识导图笔记
+
+ [springboot知识导图笔记.xmind](/img/springboot知识导图笔记.xmind) 
+
