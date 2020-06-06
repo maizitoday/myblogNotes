@@ -39,6 +39,10 @@ master主进程控制多个work进程。work进程处理业务逻辑。
 
 Nginx的高效得益于它的事件驱动机制，当完成后就告诉socker，这个时候socker就进行处理。 其中在等待的时候， sokcer可以接收其他的请求。 
 
+Master 进程：读取及评估配置和维持
+
+Worker 进程：处理请求
+
 # Nginx配置文件分析   nginx.conf
 
 ------

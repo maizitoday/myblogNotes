@@ -1,12 +1,11 @@
 ---
 title:       "Serverless架构理解"
 subtitle:    ""
-description: ""
+description: "Serverless架构理解"
 date:        2020-03-10
-type:        archive
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["java相关概念", "Serverless架构理解"]
+tags:        ["java相关概念"]
 categories:  ["Tech" ]
 ---
 

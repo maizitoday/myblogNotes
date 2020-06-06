@@ -1,7 +1,7 @@
 ---
 title:       "互联网架构演变"
 subtitle:    ""
-description: ""
+description: "QPS、TPS, 从单机到集群架构演变，读写分离和分库分表区别"
 date:        2020-03-13
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"

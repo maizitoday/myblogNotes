@@ -1,11 +1,11 @@
 ---
 title:       "mongodb-入门"
 subtitle:    ""
-description: ""
+description: "$type运用, capped collection, objectid分析 "
 date:        2019-09-15
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
-tags:        ["mongodb", "$type运用", "capped collection", "objectid分析"]
+tags:        ["mongodb"]
 categories:  ["Tech" ]
 ---
 
@@ -106,8 +106,6 @@ mogodb是无模式的文档数据库。
 ## 长度大小限制
 
 mogodb天生就是分布式的，可扩展，高性能，遵循CAP。**既然是分布式部署，存在两个问题，内存->粒度太多  网络带宽-> 多而碎,  他的长度是16M。redis的value是512M(String)**
-
-
 
 # capped collection(上线集合)
 
@@ -240,7 +238,9 @@ db.getCollection("teacher").find({"password":{$type:2}})
 
 **注意：还可以通过正则表达式来处理数据。**
 
+# 名字空间(namespace)是什么?
 
+MongoDB 存储 BSON 对象在丛集(collection)中。数据库名字和丛集名字以句点连结起来叫做名字空间(namespace)。
 
 # ObjectId
 

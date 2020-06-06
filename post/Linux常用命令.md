@@ -121,7 +121,7 @@ iostat:   CPU利用率和I/O   -c 显示CPU使用率
 # 网络 ， 查看进程 ，端口
 
 ```shell
-netstat:   命令用于显示网络状态。  -l  显示所有监听   -t 显示TCP    -u 显示udp信息   
+netstat:   命令用于显示网络状态。  -l  显示所有监听   -t 显示TCP端口    -u 显示udp信息   
            如果启动很多服务就可以查看了。  
            netstat -ap | grep ssh     找出程序运行的端口  
            netstat -anpt | grep ':8080'    找出运行在指定端口的进程
@@ -137,6 +137,14 @@ netstat:   命令用于显示网络状态。  -l  显示所有监听   -t 显示
     top:    动态显示活动的进程和系统资源利用率。 -b  将输出编排成易处理的格式   -H 显示线程   
      nc:    TCP 和 UDP的连接和监听。nc -v -z -w2 192.168.0.3 1-10000   连接2秒，查看端口
 ```
+
+```shell
+netstat -ntlp   //查看当前所有tcp端口·
+netstat -ntulp |grep 80   //查看所有80端口使用情况·
+netstat -an | grep 3306   //查看所有3306端口使用情况·
+```
+
+
 
 # 推送和拉取
 

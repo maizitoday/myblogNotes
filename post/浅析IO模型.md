@@ -1,7 +1,7 @@
 ---
 title:       "浅析I/O模型"
 subtitle:    ""
-description: ""
+description: "BIO，Reactor模式，NIO，AIO"
 date:        2020-01-28
 author:      "麦子"
 image:       "https://c.pxhere.com/images/e4/46/bd237f6583029424694a0d16589b-1435053.jpg!d"

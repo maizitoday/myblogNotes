@@ -1,11 +1,11 @@
 ---
 title:       "MySQL数据库"
 subtitle:    ""
-description: ""
+description: "三种虚拟表, mysql基本了解, 表空间, 索引，视图，分库分表"
 date:        2019-05-19
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
-tags:        ["mysql系列", "mysql基本了解", "表空间", "三种虚拟表"]
+tags:        ["mysql系列"]
 categories:  ["Tech" ]
 ---
 
