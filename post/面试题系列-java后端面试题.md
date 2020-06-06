@@ -11,6 +11,8 @@ categories:  ["Tech" ]
 
 [TOC]
 
+**说明：以下文字来源网络各相关面试题目收集**
+
 # List 和 Set 的区别
 
 List , Set 都是继承自 Collection 接口 List 特点：元素有放入顺序，元素可重复 ，
