@@ -1,7 +1,7 @@
 ---
 title:       "aop理解"
 subtitle:    ""
-description: ""
+description: "AOP专业术语，自定义一个AOP"
 date:        2019-07-12
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"

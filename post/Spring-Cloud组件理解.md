@@ -1,7 +1,7 @@
 ---
 title:       "springCloud系列-组件理解"
 subtitle:    ""
-description: ""
+description: "Eureka，Ribbon, Hystrix,Feign,Zuul,Config,Bus,Stream,Sleuth,Shiro,spring-boot-actuator,Spring Boot Batch"
 date:        2019-04-09
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/istio-install_and_example/post-bg.jpg"
@@ -158,16 +158,20 @@ spring boot加上这个插件，才可以使用Java -jar命令来启动jar包，
 注意：在用idea调试的时候加不加插件都可以启动，看不出来不同，所以必须要独立启动jar包才可以看出来。
 而且如果用了spring boot但是不需要独立启动，就不要加这个插件，否则spring boot会因为找不到启动类而导致报错。
 
----------------------
-作者：蓝白沙 
-来源：CSDN 
-原文：https://blog.csdn.net/qiuyinthree/article/details/80488947 
-版权声明：本文为博主原创文章，转载请附上博文链接！
-
 
 
 # spring-boot-actuator  
 
 Spring Boot Actuator 的关键特性是在应用程序里提供众多 Web 接口，通过它们了解应用程序运行时的内部状况。Actuator 提供了 13 个接口，可以分为三大类：配置接口、度量接口和其它接口，具体如下表所示。主要来监控系统的一些内存数据，主要是监控作用， 这个主要是监控服务端的服务器的。
 
- 
+Spring boot actuator 是 spring 启动框架中的重要功能之一。Spring boot 监视器可帮助您访 问生产环境中正在运行的应用程序的当前状态。有几个指标必须在生产环境中进行检查和
+
+监控。即使一些外部应用程序可能正在使用这些服务来向相关人员触发警报消息。监视器 模块公开了一组可直接作为 HTTP URL 访问的 REST 端点来检查状态。
+
+
+
+# Spring Boot Batch 
+
+提供可重用的函数，这些函数在处理大量记录时非常重要，包括日志/跟 踪，事务管理，作业处理统计信息，作业重新启动，跳过和资源管理。它还提供了更先进
+
+的技术服务和功能，通过优化和分区技术，可以实现极高批量和高性能批处理作业。简单 以及复杂的大批量批处理作业可以高度可扩展的方式利用框架处理重要大量的信息。

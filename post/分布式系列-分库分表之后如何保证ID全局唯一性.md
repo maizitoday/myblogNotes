@@ -1,11 +1,11 @@
 ---
 title:       "分库分表之后如何保证ID全局唯一性,订单号唯一"
 subtitle:    ""
-description: ""
+description: "ID全局唯一性，雪花算法"
 date:        2019-05-21
 author:      "麦子"
 image:       "https://c.pxhere.com/images/20/93/7f06e2f103e3f5a5b7cfcffaa709-1433419.jpg!d"
-tags:        ["分布式系列", "ID全局唯一性"]
+tags:        ["分布式系列"]
 categories:  ["Tech" ]
 ---
 

@@ -163,5 +163,66 @@ redis默认支持16个数据库，可以通过调整redis的配置文件redis/re
 
 
 
+# 单线程的 redis怎么理解
+
+单线程-多路复用IO模型：处理网络请求和真正的处理都是在同一个也是唯一的一个线程环境中执行的，因此一个慢操作会导致redis的并发量降下来。
+
+具体查看博客[《浅析I/O模型》](https://maizitoday.github.io/post/浅析io模型/#1-阻塞io模型-bio)
+
+
+
+# Redis 如何保持和MySQL数据一致
+
+转载地址：https://blog.csdn.net/Thousa_Ho/article/details/78900563?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase 
+
+[canal](https://github.com/alibaba/canal)插件直接配置同步处理。
+
+## 1. MySQL持久化数据,Redis只读数据
+
+redis在启动之后，从数据库加载数据。
+
+读请求：
+
+不要求强一致性的读请求，走redis，要求强一致性的直接从mysql读取
+
+写请求：
+
+数据首先都写到数据库，之后更新redis（先写redis再写mysql，如果写入失败事务回滚会造成redis中存在脏数据）
+
+
+
+## 2.MySQL和Redis处理不同的数据类型
+
+MySQL处理实时性数据，例如金融数据、交易数据
+
+Redis处理实时性要求不高的数据，例如网站最热贴排行榜，好友列表等
+
+**在并发不高的情况下**，读操作优先读取redis，不存在的话就去访问MySQL，并把读到的数据写回Redis中；写操作的话，直接写MySQL，成功后再写入Redis(可以在MySQL端定义CRUD触发器，在触发CRUD操作后写数据到Redis，也可以在Redis端解析binlog，再做相应的操作)
+
+**在并发高的情况下**，读操作和上面一样，写操作是异步写，写入Redis后直接返回，然后定期写入MySQL
+
+**说明：上面转载地址有模拟事例说明。**
+
+
+
+# mybatis与redis整合
+
+```xml
+	<!-- 增加mybatis-redis依赖，这里只有beta版本 -->
+	<dependency>
+	    <groupId>org.mybatis.caches</groupId>
+	    <artifactId>mybatis-redis</artifactId>
+	    <version>1.0.0-beta2</version>
+	</dependency>
+```
+
+
+
+
+
+
+
+
+
 
 

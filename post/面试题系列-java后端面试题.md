@@ -1,7 +1,7 @@
 ---
 title:       "面试题系列-java后端面试题"
 subtitle:    ""
-description: ""
+description: "重复请求处理，在线人员统计，集合类问题"
 date:        2020-06-06
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
@@ -189,6 +189,70 @@ String[] cars = new String[4];//③
 # Spring知识导图笔记
 
  [Spring知识导图笔记.xmind](/img/Spring知识导图笔记.xmind) 
+
+
+
+# 怎么统计在线人员
+
+**转载：https://my.oschina.net/u/854926/blog/84375**
+
+我们给出的代码是使用session的监听器，因为我们知道一连接一个用户，就会产生一个新的session。而断开一个用户则会销毁一个session。我们分别在产生和销毁时对在线用户数加1或是-1。这样的数据与当前用户数大致相同。说大致相同是因为session的销毁要在用户退出后的一段时间。所以会造成一定的偏差。
+
+```java
+public class OnlineCountListener implements HttpSessionListener {
+
+private static int sessionCount = 0;
+
+public void sessionCreated(HttpSessionEvent event) {
+        HttpSession session = event.getSession();
+        ServletContext application = session.getServletContext();
+        sessionCount++;
+        application.setAttribute(“onlineCount”, sessionCount);
+}
+
+public void sessionDestroyed(HttpSessionEvent event) {
+        HttpSession session = event.getSession();
+        ServletContext application = session.getServletContext();
+        if(sessionCount >= 1){
+            sessionCount = sessionCount – 1;
+        }
+        application.setAttribute(“onlineCount”, sessionCount);
+
+    }
+}
+```
+
+
+
+# 如何处理重复提交的问题
+
+转载地址：https://my.oschina.net/u/2371923/blog/1921153
+
+工作流程：
+
+1. 用户访问表单添加页面->spring防重复token拦截器拦截请求url，判断url对应的controller方法是是否注解有生成防重复token的标识也就是有没有这个注解标识->
+2. 生成防重复token保存到redis中RedisUtil.getRu().setex("formToken_" + uuid, "1", 60 * 60);同时将本次生成的防重复token放到session中->
+3. 转到表单页面时从session中取出token放入表单->
+4. 用户填写完信息提交表单->spring防重复token拦截器拦截请求url，判断提交的url对应controller方法是否注解有处理防重复提交token的标识->
+5. redis中formToken做原子减1操作RedisUtil.getRu().decr("formToken_" + clinetToken);如果redis中formToken值做了减1操作后值不为0，则为重复提交，返回false。
+
+**防重复提交token生成流程图**
+
+![a5d807e0fb2ce08800b83afd0647439974d.jpg](/img/a5d807e0fb2ce08800b83afd0647439974d.jpg.png)
+
+
+
+**防重复表单提交处理流程图**
+
+![2962cf5113610aa0ad01ac6623bd93a783b.jpg](/img/2962cf5113610aa0ad01ac6623bd93a783b.jpg.png)
+
+
+
+
+
+
+
+
 
 
 
