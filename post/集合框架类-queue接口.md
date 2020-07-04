@@ -1,5 +1,5 @@
 ---
-title:       "集合框架类-queue接口"
+title:       "集合框架类-队列(queue)接口"
 subtitle:    ""
 description: ""
 date:        2019-12-24
@@ -261,7 +261,7 @@ ArrayDeque 是一个用数组实现的双端队列 Deque，为满足可以同时
 ### 概述
 
 阻塞队列 (BlockingQueue)是Java util.concurrent包下重要的数据结构，BlockingQueue提供了线程安全的队列访问方式：当阻塞队列进行插入数据时，如果队列已满，线程将会阻塞等待直到队列非满；从阻塞队列取数据时，如果队列已空，线程将会阻塞等待直到队列非空。阻塞队列常用于生产者和消费者的场景，生产者是往队列里添加元素的线程，消费者是从队列里拿元素的线程。并发包下很多高级同步类的实现都是基于BlockingQueue实现的。
- 
+
 
 ### 核心方法
 
@@ -356,7 +356,7 @@ SynchronousQueue 是一个特殊的队列，它的内部同时只能够容纳单
 2. 构造函数的可选参数是容量的界限，用来阻止容量过度扩展的一种方法。也就是说，虽然是双向链表，但也可以指定其容量大小。容量（如果未指定）等于Integer.MAX_VALUE。若节点数量没有到达容量的界限，链接节点在每次插入时都会动态创建。
 3. 大多数操作在恒定时间运行，异常包括remove，removeFirstOccurrence，removeLastOccurrence，contains，iterator.remove()和批量操作，所有这些都是以线性时间运行的。
 4. 可以指定元素的插入位置：头部还是尾部。
-    
+  
 
 #### LinkedTransferQueue
 

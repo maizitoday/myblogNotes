@@ -17,6 +17,35 @@ categories:  ["Tech" ]
 
 函数式接口是为了 lambda 表达式服务，函数式接口的存在是 lambda 表达式出现的前提，lambda 表达式想关于重写了函数式接口中的唯一方法。
 
+
+
+# 比较
+
+就是以前的一种接口的实现方法的另一种形式。 
+
+```java
+public class App implements jdk18 {
+    public static void main(final String[] args) {
+
+        MyInterface myInterface = (a, b) -> {
+            return a + b;
+        };
+        int show = myInterface.show(1, 2);
+        System.out.println(show);
+
+        MyInterface a = new MyInterface() {
+            @Override
+            public int show(int a, int b) {
+                return a + b;
+            }
+        };
+
+    }
+}
+```
+
+
+
 # 内置4大核心函数式接口
 
 我们用的Lambda表达式是需要函数式接口的，所以java1.8已经内置了很多我们需要的函数式接口。
