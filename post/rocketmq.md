@@ -388,3 +388,11 @@ https://www.infoq.cn/article/2018/08/rocketmq-4.3-release
 https://www.cnblogs.com/hzmark/p/rocket_txn.html
 
 https://www.cnblogs.com/hzmark/p/rocket_txn.html
+
+
+
+# 跟我学RocketMQ之消息幂等
+
+转载：https://cloud.tencent.com/developer/article/1483781
+
+好文， 写的很透彻。 

@@ -942,3 +942,24 @@ SUCCESS: 线程序号:12, Thread-90,获取锁成功，锁ID：2937f358-bec9-40f9
  INFO:释放锁.....  Thread-90,UUID:2937f358-bec9-40f9-bbd3-1a42633f9029
 ```
 
+
+
+# Redis 的停止与启动
+
+原文链接：https://blog.csdn.net/Lin_Miao_09/article/details/92803966
+
+```shell
+进入到对应的Redis的目录中。
+
+停止Redis
+
+无密码
+./src/redis-cli   shutdown
+
+有密码（密码123）
+./src/redis-cli -a 123  shutdown
+
+启动Redis
+./src/redis-server ./redis.conf
+```
+

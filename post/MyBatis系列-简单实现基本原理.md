@@ -5,7 +5,7 @@ description: ""
 date:        2019-08-21
 author:      "麦子"
 image:       "https://c.pxhere.com/images/1f/8d/7a12ae7fcd86cdc43f624556db3b-1451061.jpg!d"
-tags:        ["数据库", "MyBatis框架简单实现"]
+tags:        ["数据库", "mybatis系列"]
 categories:  ["Tech" ]
 ---
 
