@@ -391,8 +391,17 @@ https://www.cnblogs.com/hzmark/p/rocket_txn.html
 
 
 
+# RocketMQ如何做到消息不丢失
+
+好文：https://www.cnblogs.com/goodAndyxublog/p/12563813.html
+
+
+
 # 跟我学RocketMQ之消息幂等
 
 转载：https://cloud.tencent.com/developer/article/1483781
 
 好文， 写的很透彻。 
+
+
+
