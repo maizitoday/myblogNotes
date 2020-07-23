@@ -4,8 +4,8 @@ subtitle:    ""
 description: ""
 date:        2020-01-01
 author:      "麦子"
-image:       "https://get.pxhere.com/photo/nature-wilderness-ground-prairie-cute-looking-wildlife-wild-fur-portrait-small-usa-mammal-squirrel-rodent-fauna-vertebrate-herbivorous-marmot-north-dakota-prairie-dog-black-tailed-prairie-dog-theodore-roosevelt-national-park-1280413.jpg"
-tags:        ["go语言基础"]
+image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
+tags:        ["golang", "golang"]
 categories:  ["Tech" ]
 ---
 

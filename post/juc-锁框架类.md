@@ -1,7 +1,7 @@
 ---
 title:       "juc-锁框架类"
 subtitle:    ""
-description: ""
+description: "Lock,Synchronized,ReadWriteLock,"
 date:        2019-12-17
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"

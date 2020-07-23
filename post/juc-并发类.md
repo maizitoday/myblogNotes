@@ -1,7 +1,7 @@
 ---
 title:       "juc-并发类"
 subtitle:    ""
-description: ""
+description: "AQS,CountDownLatch,CyclicBarrier,Semaphore,Phaser"
 date:        2019-12-12
 author:      "麦子"
 image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
