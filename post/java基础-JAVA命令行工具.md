@@ -1,7 +1,7 @@
 ---
 title:       "JAVA命令行工具"
 subtitle:    ""
-description: ""
+description: "vmArgs，args，springboot启动优化，-Xmx,-Xmn"
 date:        2019-07-17
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
@@ -265,3 +265,49 @@ java命令引入jar时可以-cp参数，但时-cp不能用通配符(多个jar时
 # 注意
 
 还有很多命令请查看这篇原文， 上面主要记录常用的命令。 
+
+
+
+
+
+**-XX:PermSize=64M -XX:MaxPermSize**
+
+-XX:PermSize分配非堆最小内存，默认为物理内存的1/64；-XX:MaxPermSize分配非堆最大内存，默认为物理内存的1/4。
+
+
+
+- Cmd + Shift + F（Win 用户是 Ctrl + Shift +F）：在全局的文件夹中进行搜索。效果如下：
+
+
+
+
+
+
+
+cloudfoundry-manifest.ls.java.vmargs
+
+spring-boot.ls.java.vmargs
+
+
+
+```json
+"spring-boot.ls.java.vmargs": [
+  "-Xms100m",
+  "-Xmx300m",
+  "-XX:CompressedClassSpaceSize=128m",
+  "-XX:MetaspaceSize=200m",
+  "-XX:MaxMetaspaceSize=200m"
+],
+"cloudfoundry-manifest.ls.java.vmargs": [
+  "-Xms100m",
+  "-Xmx300m",
+  "-XX:CompressedClassSpaceSize=128m",
+  "-XX:MetaspaceSize=200m",
+  "-XX:MaxMetaspaceSize=200m"
+],
+```
+
+
+
+
+

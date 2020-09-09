@@ -1,5 +1,5 @@
 ---
-192.168.0.2title:       "Dockerfile安装常用环境"
+title:       "Dockerfile安装常用环境"
 subtitle:    ""
 description: "Nginx,MySql，Oracle，Redis，MongoDB，ElasticSearch,Kibana,Logstash,RockerMQ,Centos7等环境安装"
 date:        2019-08-21

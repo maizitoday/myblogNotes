@@ -136,7 +136,7 @@ http://localhost:9090/images/3.jpg  这个会到这里， 然后在去找 /tmp/ 
 ```nginx
 # nginx -t 测试配置是否正确 
 
-# nginx -s reload 作用加载最新配置 
+# nginx -s reload 作用加载最新配置 ，也相当于重启Nginx服务
 
 # nginx -s stop 立刻停止
 
@@ -144,7 +144,8 @@ http://localhost:9090/images/3.jpg  这个会到这里， 然后在去找 /tmp/ 
 
 # nginx -s reopen 重新打开日志
 
-# nginx -c xxx.conf  指定配置文件打开
+# nginx -c xxx.conf  指定配置文件启动
+
 ```
 
 # 反向代理和正向代理

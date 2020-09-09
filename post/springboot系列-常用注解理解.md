@@ -1,7 +1,7 @@
 ---
 title:       "springboot系列-常用注解理解"
 subtitle:    ""
-description: ""
+description: "@Configuration,@bean,@Component,@ComponentScan,@Scope,@Autowired,@Resource,spring的容器理解"
 date:        2019-06-11
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
@@ -15,7 +15,7 @@ categories:  ["Tech" ]
 
 **转载地址： https://www.cnblogs.com/duanxz/p/7493276.html**
 
-@Configuration用于定义配置类，可替换xml配置文件，被注解的类内部包含有一个或多个被@Bean注解的方法，这些方法将会被AnnotationConfigApplicationContext或AnnotationConfigWebApplicationContext类进行扫描，并用于构建bean定义，初始化Spring容器。
+@Configuration用于定义配置类，可替换xml配置文件，**被注解的类内部包含有一个或多个被@Bean注解的方法，这些方法将会被AnnotationConfigApplicationContext或AnnotationConfigWebApplicationContext类进行扫描，并用于构建bean定义，初始化Spring容器。**
 
 相当于以前定义beans文件，我们以前一般都是在这里定义所有需要的容器加载后，就可以用的bean对象。比如数据库等这样的操作。 **spring容器启动就可以用的java实例对象**。 
 
@@ -42,6 +42,8 @@ categories:  ["Tech" ]
 实例运行效果如下：
 
 ![Xnip2019-06-11_17-09-48](/img/Xnip2019-06-11_17-09-48.png)
+
+@Configuration类里面一般都有@bena注解，这些bean就是直接被实例化，spring容器进行托管处理。 **并且保证对象在容器化中只实例化一次。https://www.cnblogs.com/nihaofenghao/p/12612437.html** 
 
 # @bean 
 
@@ -119,6 +121,12 @@ public class AppConfig {
 
 ![Xnip2019-06-11_17-33-03](/img/Xnip2019-06-11_17-33-03.png)
 
+## @Bean(initMethod = "init",destroyMethod = "destory")
+
+好文：https://blog.csdn.net/liujun03/article/details/81671041?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.channel_param
+
+
+
 ## 什么时候调用
 
 @Configuration用于定义配置类，可替换xml配置文件，被注解的类内部包含有一个或多个被@Bean注解的方法，这些方法将会被AnnotationConfigApplicationContext或AnnotationConfigWebApplicationContext类进行扫描，并用于构建bean定义，初始化Spring容器。
@@ -131,7 +139,7 @@ public class AppConfig {
 
 转载地址：https://blog.csdn.net/pange1991/article/details/81356594
 
-在应用中，有时没有把某个类注入到IOC容器中，但在运用的时候需要获取该类对应的bean，此时就需要用到@Import注解。
+在应用中，有时没有把某个类注入到IOC容器中，但在**运用的时候**需要获取该类对应的bean，此时就需要用到@Import注解。
 
 ![Xnip2019-06-11_18-02-13](/img/Xnip2019-06-11_18-02-13.png)
 
@@ -139,13 +147,15 @@ public class AppConfig {
 
 把普通pojo实例化到spring容器中，相当于配置文件中的<bean id="" class=""/>
 
+
+
 ## @component和@Bean的区别
 
 转载地址：https://blog.csdn.net/w605283073/article/details/89221522
 
-@Component`（和`@Service`和`@Repository`）用于自动检测和使用类路径扫描自动配置bean。注释类和bean之间存在隐式的一对一映射（即每个类一个bean）。这种方法对需要进行逻辑处理的控制非常有限，因为它纯粹是声明性的。
+@Component`（和`@Service`和`@Repository`）**用于自动检测和使用类路径扫描自动配置bean**。注释类和bean之间存在隐式的一对一映射（即每个类一个bean）。这种方法对需要进行逻辑处理的控制非常有限，因为它纯粹是声明性的。
 
-@Bean`用于显式声明单个bean，而不是让Spring像上面那样自动执行它。它将bean的声明与类定义分离，并允许您精确地创建和配置bean。
+@Bean`用于**显式声明单个bean**，而不是让Spring像上面那样自动执行它。它将bean的声明与类定义分离，并允许您精确地创建和配置bean。
 
 ```java
 @Component
@@ -175,6 +185,10 @@ public class WebSocketConfig {
  
 }
 ```
+
+上面可以看出一个是相当于实例化了对象，一个只是声明了一个bean对象。 
+
+
 
 ## 为什么有了@Compent,还需要@Bean呢
 
@@ -244,7 +258,7 @@ public class DruidConfig {
 
 Spring的注解形式：@Repository、@Service、@Controller，它们分别对应存储层Bean，业务层Bean，和展示层Bean。
 
-这4种注解是没什么本质区别,都是声明作用,取不同的名字只是为了更好区分各自的功能。
+**这4种注解是没什么本质区别,都是声明作用,取不同的名字只是为了更好区分各自的功能**。
 
 ## 为什么有时候不用@Repostitory注解
 
@@ -265,6 +279,8 @@ Spring的注解形式：@Repository、@Service、@Controller，它们分别对�
 # @Autowired, @Resource
 
 @Resource和@Autowired注解都是用来实现依赖注入的。只是@AutoWried按by type自动注入(实例对象类型比较)，而@Resource默认按byName自动注入(对象名字)。
+
+
 
 ## 依赖注入，控制反转
 
@@ -413,6 +429,182 @@ global session只有应用在基于porlet的web应用程序中才有意义，它
 @RequestMapping("/zyh/{type}")
 public String zyh(@PathVariable(value = "type") int type)
 ```
+
+
+
+# @Inject
+
+转载地址：https://www.cnblogs.com/pjfmeng/p/7551340.html
+
+1、@Inject是JSR330 (Dependency Injection for Java)中的规范，需要导入javax.inject.Inject;实现注入。 **他是java注解**
+
+2、@Inject是根据**类型**进行自动装配的，如果需要按名称进行装配，则需要配合@Named；
+
+3、@Inject可以作用在变量、setter方法、构造函数上。
+
+**a、**将@Inject可以作用在变量、setter方法、构造函数上，和@Autowired一样
+
+![1050601-20170919114448087-472523137](/img/1050601-20170919114448087-472523137.png)
+
+**b、@Named**
+
+**@Named("XXX") 中的 XX是 Bean 的名称，所以 @Inject和 @Named结合使用时，自动注入的策略就从 byType 转变成 byName 了。**
+
+![1050601-20170919114552321-1115699816](/img/1050601-20170919114552321-1115699816.png)
+
+# @Qualifier
+
+@Qualifier("XXX") 中的 XX是 Bean 的名称，所以 @Autowired 和 @Qualifier 结合使用时，自动注入的策略就从 byType 转变成 byName 了。不过需要注意的是@Autowired 可以对成员变量、方法以及构造函数进行注释，而 @Qualifier 的标注对象是成员变量、方法**入参**、构造函数**入参**。
+
+```java
+@Autowired
+public void setDataSource(@Qualifier("myDataSource") DataSource dataSouce){
+     //这里就是直接把 bean  myDataSource对象直接使用了， 
+     dataSouce.get....
+}
+```
+
+# @Aspect
+
+转载地址：https://www.cnblogs.com/lc0605/p/10694489.html
+
+要想把一个类变成切面类，需要两步，
+
+① 在类上使用 @Component 注解 把切面类加入到IOC容器中 
+② 在类上使用 @Aspect 注解 使之成为切面类
+
+```java
+@Aspect
+@Component
+public class AspectTest {
+    /**
+     * 前置通知：目标方法执行之前执行以下方法体的内容
+     * @param jp
+     */
+    @Before("execution(* com.springboot.aop.controller.*.*(..))")
+    public void beforeMethod(JoinPoint jp){
+        String methodName = jp.getSignature().getName();
+        System.out.println("【前置通知】the method 【" + methodName + "】 begins with " + Arrays.asList(jp.getArgs()));
+    }
+
+    /**
+     * 返回通知：目标方法正常执行完毕时执行以下代码
+     * @param jp
+     * @param result
+     */
+    @AfterReturning(value="execution(* com.springboot.aop.controller.*.*(..))",returning="result")
+    public void afterReturningMethod(JoinPoint jp, Object result){
+        String methodName = jp.getSignature().getName();
+        System.out.println("【返回通知】the method 【" + methodName + "】 ends with 【" + result + "】");
+    }
+
+    /**
+     * 后置通知：目标方法执行之后执行以下方法体的内容，不管是否发生异常。
+     * @param jp
+     */
+    @After("execution(* com.springboot.aop.controller.*.*(..))")
+    public void afterMethod(JoinPoint jp){
+        System.out.println("【后置通知】this is a afterMethod advice...");
+    }
+
+    /**
+     * 异常通知：目标方法发生异常的时候执行以下代码
+     */
+    @AfterThrowing(value="execution(* com.springboot.aop.controller.*.*(..))",throwing="e")
+    public void afterThorwingMethod(JoinPoint jp, NullPointerException e){
+        String methodName = jp.getSignature().getName();
+        System.out.println("【异常通知】the method 【" + methodName + "】 occurs exception: " + e);
+    }
+
+  /**
+   * 环绕通知：目标方法执行前后分别执行一些代码，发生异常的时候执行另外一些代码
+   * @return
+   */
+  @Around(value="execution(* com.springboot.aop.controller.*.*(..))")
+  public Object aroundMethod(ProceedingJoinPoint jp){
+      String methodName = jp.getSignature().getName();
+      Object result = null;
+      try {
+          System.out.println("【环绕通知中的--->前置通知】：the method 【" + methodName + "】 begins with " + Arrays.asList(jp.getArgs()));
+          //执行目标方法
+          result = jp.proceed();
+          System.out.println("【环绕通知中的--->返回通知】：the method 【" + methodName + "】 ends with " + result);
+      } catch (Throwable e) {
+          System.out.println("【环绕通知中的--->异常通知】：the method 【" + methodName + "】 occurs exception " + e);
+      }
+
+      System.out.println("【环绕通知中的--->后置通知】：-----------------end.----------------------");
+      return result;
+  }
+}
+```
+
+# 动态注入bean
+
+
+
+## @ConditionalOnResource
+
+转载地址：https://www.jianshu.com/p/d05f5c146452
+
+当**指定的资源文件**出现在classpath中生效
+
+**定义**
+
+```java
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Conditional(OnResourceCondition.class)
+public @interface ConditionalOnResource {
+
+    /**
+     * 资源文件必须指定
+     */
+    String[] resources() default {};
+
+}
+```
+
+**示例**
+
+```java
+org.apache.shiro.spring.boot.autoconfigure.ShiroAutoConfiguration类中
+
+@Bean
+@ConditionalOnResource(resources="classpath:shiro.ini")
+protected Realm iniClasspathRealm()
+```
+
+
+
+## @Conditional
+
+转载地址：https://blog.csdn.net/xcy1193068639/article/details/81491071
+
+@Conditional是Spring4新提供的注解，它的作用是按照一定的条件进行判断，满足条件给容器注册bean。根据判断是否实例化bean对象。动态注入Bean的处理。 
+
+
+
+## @ConditionalOnMissingBean
+
+转载地址：https://www.cnblogs.com/YuyuanNo1/p/12511121.html
+
+Spring4推出了@Conditional注解，方便程序根据当前环境或者容器情况来动态注入bean， 继@Conditional注解后，又基于此注解推出了很多派生注解，比如@ConditionalOnBean、@ConditionalOnMissingBean  @ConditionalOnExpression、@ConditionalOnClass......动态注入bean变得更方便了。 
+
+说明： 配置类中有两个Computer类的bean，一个是笔记本电脑，一个是备用电脑。如果当前容器中已经有电脑bean了，就不注入备用电脑，如果没有，则注入备用电脑，这里需要使用到@ConditionalOnMissingBean。
+
+ 
+
+# 如何理解spring的容器的概念
+
+容器只是给我们提供一个管理对象的空间而已。
+
+好文：https://zhuanlan.zhihu.com/p/69010848
+
+# 总结
+
+ Spring框架包含Ioc和Aop，其中很多注解都是为了方便创建对象，以及什么时候创建bean的判断，我们一个请求过来，为什么进入@Controller中，也是因为在扫描这个@Controller注解，看是否有方法和他的value值相等，然后找到特定的方法中来，**所以也就是一个路牌，为了就是为了找到对应的方法**，找到对应的类中，找到了就执行方法处理起来。 
 
 
 

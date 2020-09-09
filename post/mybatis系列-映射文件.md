@@ -252,6 +252,49 @@ Play(id=1, name=篮球, sid=1,
 studentList=[Student(id=1, name=篮球, sex=男, age=8, addressBus=湖南-17路, play=null)])
 ```
 
+### 具体列子
+
+```xml
+<resultMap id="locationDataMap" type="com.example.mybatisconfig.mysql.bean.Play">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="org_address" property="orgAddress" jdbcType="VARCHAR" />
+    <collection property="attachmentList" ofType="com.example.mybatisconfig.mysql.bean.Student"            
+                column="id" select="getAttachmentList">
+    </collection>
+</resultMap>
+
+
+ <select id="getAttachmentList" parameterType="java.lang.Integer" resultType="com.example.mybatisconfig.mysql.bean.Student">
+          select 
+                 id as id,
+                 party_map_id as partyMapId, 
+                 cloud_path as cloudPath, 
+                 sort as sort, 
+                 created_time as createdTime
+                 from t_party_organization_location_attachment 
+                 where status = 1 and party_map_id = #{partyMapId} order by sort asc
+  </select>
+  
+  <!--列表-->
+  <select id="findList" parameterType="java.util.Map" resultMap="locationDataMap">
+         select * from t_party_organization_location where org_name is not null order by id desc
+  </select>
+
+需要注意：  resultMap  和  resultType， partyMapId 这个值和 父表id对应。 
+```
+
+## column说明
+
+```
+column说明：数据库的列名或者列标签别名，column	数据库的列名或者列标签别名。与传递给resultSet.getString(columnName)的参数名称相同。注意： 在处理组合键时，您可以使用column=“{prop1=col1,prop2=col2}”这样的语法，设置多个列名传入到嵌套查询语句。这就会把prop1和prop2设置到目标嵌套选择语句的参数对象中。
+```
+
+
+
 ## 5.  对于多表查询，可以进行分布查询
 
 相当于，多表查询，可以拆分为几次sql查询，还可以进行开启延迟加载模式，相当于用到的时候才去执行sql语句。 但是感觉这也增加了和数据库进行交互的次数。所以用的比较的少。 

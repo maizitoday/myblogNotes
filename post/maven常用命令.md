@@ -1,7 +1,7 @@
 ---
 title:       "maven常用命令"
 subtitle:    ""
-description: ""
+description: "pom.xml标签解释，常用mvn命令"
 date:        2019-04-28
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
