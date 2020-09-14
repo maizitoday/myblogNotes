@@ -1,11 +1,11 @@
 ---
 title:       "springCloud系列-Eureka"
 subtitle:    ""
-description: ""
+description: "Eureka和Zookeeper的区别,Eureka集群,常见yaml的配置,服务注册和发现"
 date:        2019-04-17
 author:      "麦子"
 image:       "https://zhaohuabing.com/img/2018-12-27-the-obstacles-to-put-istio-into-production/background.jpg"
-tags:        ["springCloud", "Eureka","服务注册和发现"]
+tags:        ["springCloud"]
 categories:  ["Tech" ]
 ---
 
@@ -118,6 +118,14 @@ eureka:
 
 **一句话：某时刻某一个微服务不可用了，eureka不会立刻清理，依旧会对该微服务的信息进行保存**
 
+**Eureka Server 在运行期间会去统计心跳失败比例在 15 分钟之内是否低于 85%，如果低于 85%，Eureka Server 即会进入自我保护机制。**
+
+```properties
+eureka.server.enable-self-preservation=true
+```
+
+
+
 # Eureka和Zookeeper比较
 
 **转载地址： https://www.cnblogs.com/Eternally-dream/p/9833464.html**
@@ -133,3 +141,30 @@ eureka:
  ![18-5](/img/18-5.png)
 
 ![18-6](/img/18-7.png)
+
+
+
+# yaml说明
+
+```yaml
+server:
+  port: 8000
+management:  
+  port: 9000   # spring-boot-starter-acturator(监控系统健康)  一个管理端口
+eureka:
+  server:
+    eviction-interval-timer-in-ms: 30000 #续期时间，即扫描失效服务的间隔时间。(默认是60秒)
+    enable-self-preservation: false  #关闭自我保护模式 (缺省为打开)
+  instance:
+    hostname: localhost   # eureka服务端的实力名称
+  client:
+    service-url:    
+      # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址(单机版)
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    register-with-eureka: false   # false表示自己不需要向注册中心注册自己
+    fetch-registry: false # false表示自己就是注册中心。我的职责就是维护服务实例，并不需要去检索服务
+security:
+  basic:
+    enabled: false  # 配置不需要登录验证
+```
+

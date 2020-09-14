@@ -1,7 +1,7 @@
 ---
 title:       "Settings.xml文件详解"
 subtitle:    ""
-description: "settings，ActiveProfiles，Servers等常用元素说明"
+description: "Settings.xml常用标签说明，ActiveProfiles，Servers等常用元素说明"
 date:        2020-09-05
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
