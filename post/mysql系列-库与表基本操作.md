@@ -1,11 +1,13 @@
-title:       "mysql系列-库与表基本操作以及数据增删改"
+---
+title:       "mysql系列-库与表基本操作"
 subtitle:    ""
-description: ""
+description: "库与表基本操作,数据增删改"
 date:        2019-08-26
-author:      "麦子"
-image:       "https://c.pxhere.com/images/e8/66/3d717bad8449de9495d9c9761d57-1423465.jpg!d"
-tags:        ["mysql系列", "库与表基本操作","数据增删改"]
+author:      "麦子"
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["mysql系列", "库与表基本操作,数据增删改"]
 categories:  ["Tech" ]
+---
 
 [TOC]
 
@@ -81,7 +83,7 @@ DELETE FROM 表名[ 删除条件子句]
 
 4. 表有外键关联，truncate table删除表数据为逐行删除
 
-   
+    
 
 ### 注意
 
@@ -143,7 +145,7 @@ WHERE id IN (1,2,3)
 5. 避免UPDATE建有很多索引的列。
 6. 避免UPDATE在WHERE子句条件中的列。
 
-### 
+###  
 
 ## REPLACE语句
 
@@ -282,12 +284,14 @@ drop database[ if exists] 数据库名
 
 ```sql
 ALTER TABLE 【表名字】 DROP 【列名称】
+
 ```
 
 ### 增加列
 
 ```sql
 ALTER TABLE 【表名字】 ADD 【列名称】 INT NOT NULL COMMENT ‘注释说明’
+
 ```
 
 ### 修改列的类型信息
@@ -344,6 +348,7 @@ Alter table tablename drop index emp_name;
 
 ```sql
 SHOW TABLES；
+
 ```
 
 
@@ -354,6 +359,7 @@ SHOW TABLES；
  SHOW CREATE TABLE 表名    （信息更详细）
     DESC 表名 / DESCRIBE 表名 / EXPLAIN 表名 / SHOW COLUMNS FROM 表名 [LIKE 'PATTERN']
     SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern']
+
 
 ```
 

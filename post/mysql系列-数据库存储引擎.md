@@ -1,11 +1,11 @@
 ---
 title:       "mysql系列-数据库存储引擎"
 subtitle:    ""
-description: ""
+description: "InnoDB, MyISAM, Mrg_Myisam，3种存储引擎对比"
 date:        2019-08-28
 author:      "麦子"
-image:       "https://c.pxhere.com/images/e8/66/3d717bad8449de9495d9c9761d57-1423465.jpg!d"
-tags:        ["mysql系列", "InnoDB", "MyISAM", "Mrg_Myisam"]
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["mysql系列", "InnoDB, MyISAM, Mrg_Myisam，3种存储引擎对比"]
 categories:  ["Tech" ]
 ---
 

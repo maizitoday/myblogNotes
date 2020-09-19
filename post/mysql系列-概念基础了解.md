@@ -1,11 +1,11 @@
 ---
-title:       "MySQL数据库"
+title:       "mysql系列-概念基础了解"
 subtitle:    ""
-description: "三种虚拟表, mysql基本了解, 表空间, 索引，视图，分库分表"
+description: "三种虚拟表, mysql基本了解, 表空间, 索引，视图，分库分表,数据库设计，数据库系统配置，SQL注入, dual表"
 date:        2019-05-19
 author:      "麦子"
-image:       "https://img.zhaohuabing.com/in-post/2018-05-23-service_2_service_auth/background.jpg"
-tags:        ["mysql系列"]
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["mysql系列","三种虚拟表, mysql基本了解, 表空间, 索引，索引类型，视图，分库分表，数据库设计，数据库系统配置，SQL注入, dual表"]
 categories:  ["Tech" ]
 ---
 
@@ -197,16 +197,6 @@ show variables like '%innodb_file_per_table%' ;
     drop index age on s1; #删除唯一索引，就和普通索引一样，不用在index前加unique来删，直接就可以删了
     alter table s1 drop primary key; #删除主键(因为它添加的时候是按照alter来增加的，那么我们也用alter来删)
 ```
-
-
-
-### 索引的优化
-
-![5-19-1](/img/5-19-1.png)
-
-![5-19-2](/img/5-19-2.png)
-
-
 
 # mysql三种虚拟表
 

@@ -1,11 +1,11 @@
 ---
-title:       "mysql系列-查找优化、外连接、多表联合查询"
+title:       "mysql系列-多表join连接方式"
 subtitle:    ""
-description: ""
+description: "inner join,left join,left outer join,right join，right outer join，full join, cross join, 笛卡尔积，union用法"
 date:        2019-08-26
 author:      "麦子"
-image:       "https://c.pxhere.com/images/e8/66/3d717bad8449de9495d9c9761d57-1423465.jpg!d"
-tags:        ["mysql系列", "外连接、多表联合查询","查询注意点","查询小技巧"]
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["mysql系列","inner join,left join,left outer join,right join，right outer join，full join, cross join, 笛卡尔积，union用法"]
 categories:  ["Tech" ]
 ---
 
@@ -45,7 +45,7 @@ categories:  ["Tech" ]
 
 # 基本连接方法
 
-## 内连接
+## 内连接（inner join）
 
 用比较运算符根据每个表**共有的列的值**匹配两个表中的行（=或>、<）
 
@@ -66,9 +66,19 @@ select * from  school.student  stu
 
 **很容器看出是两者都满足才查出，7 和 8 没有对应的所以没有出来。**
 
+### 概述
+
+也叫等值连接，**得到的满足条件的A和B表内部的数据**（必须两边都满足才查出）。如果不添加 ON条件约束的话，取得的是表的笛卡尔积。在添加了ON条件约束后，获取的是同时符合ON条件的 A表和B表数据。
+
+![Xnip2020-09-19_16-30-12](/img/Xnip2020-09-19_16-30-12.png)
 
 
-## 外连接之左连接
+
+
+
+
+
+## 外连接之左连接（left join）
 
 首先是左表数据全部罗列，然后有满足条件的右表数据都会全部罗列出。**若两条右表数据对左表一条数据，则会用对应好的左表数据补足作为一条记录。**
 
@@ -88,7 +98,19 @@ select * from  school.student  stu
 | 2    | 小花 | 女   | 5    | 6    | 语文 | 张老师 | 88   | 2    |
 | 5    | 小星 | 男   | 30   |      |      |        |      |      |
 
-### 左连接升级
+### 概述
+
+**以左表为驱动表，取得左表全部的数据**。然后右表满足条件的数据会对应在左表数据后面，作为添加的外部行列出。
+
+如果没有满足左表的数据，则会用NULL全部填充到外部行。
+
+如果有多条满足左表数据，那么会用左表对应的数据补足，按行逐条对应右表数据。（**也就是左表数据重复生成**，右表的每条记录都生成一行，然后对应同一个左表数据）
+
+![Xnip2020-09-19_16-34-21](/img/Xnip2020-09-19_16-34-21.png)
+
+
+
+## 左连接升级(left outer join)
 
 **[left join 或者left outer join(等同于left join)] + [where B.column is null], 查出和两张表中没有关联的数据。
 
@@ -104,9 +126,17 @@ select * from  school.student  stu
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 |      |      |      |      |      |      |      |      |      |
 
+### 概述
 
+**[left join 或者left outer join(等同于left join)] + [where B.column is null]**
+查询出A表数据，但是排除掉A表和B表的关联数据。
+右连接升级同理。同时，也可以把左连接升级和右连接升级的结果 用 union 联合起来，就取到了A和B的消除重复项的集合。
 
-## 外连接之右连接
+![Xnip2020-09-19_16-37-08](/img/Xnip2020-09-19_16-37-08.png)
+
+ 
+
+## 外连接之右连接（right join）
 
 与左连恰恰相反，首先是右表数据全部罗列，**然后有满足条件的左表数据都会全部罗列出。若两条左表数据对右表一条数据，则会用对应好的右表数据补足作为一条记录。**
 
@@ -127,9 +157,13 @@ select * from  school.student  stu
 |      |      |      |      | **7** | **地理** | **地老师** | **60** | **6** |
 |      |      |      |      | **8** | **历史** | **历老师** | **65** | **7** |
 
+### 概述
+
+跟左连接相反，会以右表为驱动表。
 
 
-### 右连接升级
+
+## 右连接升级（right out join）
 
 查出和两张表中没有关联的数据。
 
@@ -145,9 +179,13 @@ select * from  school.student  stu
 | ---- | ---- | ---- | ---- | ----- | -------- | ---------- | ------ | ----- |
 |      |      |      |      | **8** | **历史** | **历老师** | **65** | **7** |
 
+### 概述
+
+跟左外连接相反，会以右表为驱动表。
 
 
-## 外连接之全外连接
+
+## 外连接之全外连接(full [outer] join )
 
 full join （mysql不支持，但是可以用 left join union right join代替）
 
@@ -174,6 +212,8 @@ select * from  school.student  stu
 |      |      |      |      | 7    | 地理 | 地老师 | 60   | 6    |
 |      |      |      |      | 8    | 历史 | 历老师 | 65   | 7    |
 
+![Xnip2020-09-19_16-49-22](/img/Xnip2020-09-19_16-49-22.png)
+
 因为只要满足 union上面的sql或者下面的sql一种情况就ok了。 如下我们可以升级,查询出两种表中没有关系的数据：
 
 ```sql
@@ -194,9 +234,11 @@ select * from  school.student  stu
 |      |      |      |      | 7    | 地理 | 地老师 | 60   | 6    |
 |      |      |      |      | 8    | 历史 | 历老师 | 65   | 7    |
 
+![Xnip2020-09-19_16-50-00](/img/Xnip2020-09-19_16-50-00.png)
 
 
-## 交叉连接
+
+## 交叉连接(cross join)
 
 交叉联接返回左表中的所有行，左表中的每一行与右表中的所有行组合。
 
@@ -291,27 +333,23 @@ select * from  school.student  stu, school.score sc
 | 4    | 小五 | 女   | 6    | 4    | 体育 | 易老师 | 99   | 4    |
 | 4    | 小五 | 女   | 6    | 5    | 化学 | 科老师 | 50   | 4    |
 
-# 超大型数据优化
 
 
+## UNION用法
 
-## 超大型数据尽可能尽力不要写子查询，使用连接（JOIN）去替换它
-
-
-
-## 使用联合(UNION)来代替手动创建的临时表
+超大型数据尽可能尽力不要写子查询，使用连接（**JOIN**）去替换它，使用联合(UNION)来代替手动创建的临时表。
 
 **UNION是会把结果排序**，union查询，它可以把需要使用临时表的两条或更多的select查询合并的一个查询中（即把两次或多次查询结果合并起来。）。在客户端的查询会话结束的时候，临时表会被自动删除，从而保证数据库整齐、高效。使用union来创建查询的时候，我们只需要用UNION作为关键字把多个select语句连接起来就可以了，要注意的是所有select语句中的字段数目要想同。
 
-### 要求
+**要求**
 
 两次查询的列数必须一致
 
-### 推荐
+**推荐**
 
 列的类型可以不一样，但推荐查询的每一列，想对应的类型以一样
 
-### 可以来自多张表的数据
+**可以来自多张表的数据**
 
 多次sql语句取出的列名可以不一致，此时以第一个sql语句的列名为准。
 
@@ -349,7 +387,7 @@ select * from  school.student  stu, school.score sc
 
 
 
-## UNION ALL的作用和语法
+### UNION ALL的作用和语法
 
 默认地，UNION 操作符选取不同的值。如果允许重复的值，请使用 UNION ALL。当 ALL 随 UNION 一起使用时（即 UNION ALL），不消除重复行。
 
@@ -378,92 +416,12 @@ select * from  school.student  stu, school.score sc
 
 
 
-# 查询编写的优化点
+### 关于 UNION 和 UNION ALL 的区别
 
-## 对查询进行优化，要尽量避免全表扫描
+原文链接：https://www.jianshu.com/p/048d93d3ee54
 
-首先应考虑在 where 及 order by 涉及的列上建立索引。
+1. **union 会对联合后的结果集去重**，而union all 不会去重，可能取得相同的数据。
+2. UNION 会按照结果的第一个字段进行默认排序**（重点）。UNION ALL只是简单的取集合。但是相对的 UNION ALL的效率会更高。
+3. 如果想自定义排序，可以在UNION 结束之后，自定义order by 条件。
 
-
-
-## 应尽量避免在 where 子句中对字段进行 null 值判断
-
-否则将导致引擎放弃使用索引而进行全表扫描，如：
-
-```sql
-//最好不要给数据库留NULL，尽可能的使用 NOT NULL填充数据库.
-select id from t where num is null
-```
-
-不要以为 NULL 不需要空间，比如：char(100) 型，在字段建立时，空间就固定了， 不管是否插入值（NULL也包含在内），都是占用 100个字符的空间的，**如果是varchar这样的变长字段， null 不占用空间。**可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：
-
-```sql
-select id from t where num = 0
-```
-
-
-
-## in 和 not in 也要慎用，否则会导致全表扫描
-
-```sql
-select id from t where num in(1,2,3)
-```
-
-对于连续的数值，能用 between 就不要用 in 了：
-
-```sql
-select id from t where num between 1 and 3		
-```
-
-很多时候用 exists 代替 in 是一个好的选择：
-
-```sql
-select num from a where num in(select num from b)
-//用这个去替换
-select num from a where exists(select 1 from b where num=a.num)
-```
-
-
-
-## like全表扫描
-
-```sql
-select id from t where name like ‘%abc%’
-```
-
-**上面这种查询也将导致全表扫描，若要提高效率，可以考虑全文检索。**
-
-
-
-## 尽量使用数字型字段
-
-若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连 接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。
-
-
-
-## select * from t 
-
-任何地方都不要使用 select * from t ，用具体的字段列表代替“*”，不要返回用不到的任何字段。
-
-
-
-## 尽量使用表变量来代替临时表。
-
-如果表变量包含大量数据，请注意索引非常有限（只有主键索引）。
-
-
-
-## 在Join表的时候使用相当类型的例，并将其索引
-
-如果你的应用程序有很多 JOIN 查询，你应该确认两个表中Join的字段是被建过索引的。这样，MySQL内部会启动为你优化Join的SQL语句的机制。
-
-而且，这些被用来Join的字段，应该是相同的类型的。例如：如果你要把 DECIMAL 字段和一个 INT 字段Join在一起，MySQL就无法使用它们的索引。对于那些STRING类型，还需要有相同的字符集才行。（两个表的字符集有可能不一样）
-
-```sql
-//在state中查找company
-SELECT company_name FROM users
-    LEFT JOIN companies ON (users.state = companies.state)
-    WHERE users.id = $user_id"
-    //两个 state 字段应该是被建过索引的，而且应该是相当的类型，相同的字符集
-```
-
+ 

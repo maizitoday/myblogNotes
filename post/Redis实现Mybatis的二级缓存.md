@@ -1,11 +1,11 @@
 ---
 title:       "Redis实现Mybatis的二级缓存"
 subtitle:    ""
-description: "配置文件中开启二级缓存, 实现Mybatis的Cache接口,二级缓存的实用"
+description: "配置文件中开启二级缓存,Redis实现Mybatis的二级缓存, 实现Mybatis的Cache接口,二级缓存的实用"
 date:        2020-07-06
 author:      "麦子"
-image:       "https://img.zhaohuabing.com/in-post/2018-04-16-using-helm-to-deploy-to-kubernetes/buffalo.jpg"
-tags:        ["redis", "mysql系列"]
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["redis", "mysql系列","配置文件中开启二级缓存,Redis实现Mybatis的二级缓存, 实现Mybatis的Cache接口,二级缓存的实用"]
 categories:  ["Tech" ]
 ---
 

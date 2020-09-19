@@ -5,7 +5,7 @@ description: "gateway,网关,zuul,默认路由规则,与GateWay对比,跨域问�
 date:        2020-09-14
 author:      "麦子"
 image:       "https://zhaohuabing.com/img/2018-12-27-the-obstacles-to-put-istio-into-production/background.jpg"
-tags:        ["springCloud"]
+tags:        ["springCloud",""]
 categories:  ["Tech" ]
 ---
 

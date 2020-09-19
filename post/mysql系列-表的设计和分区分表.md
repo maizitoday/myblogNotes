@@ -1,11 +1,11 @@
 ---
-title:       "mysql系列-表的设计与优化（单表、多表）"
+title:       "mysql系列-表的设计和分区分表"
 subtitle:    ""
-description: ""
+description: "表的设计，分区分表"
 date:        2019-08-28
 author:      "麦子"
-image:       "https://c.pxhere.com/images/e8/66/3d717bad8449de9495d9c9761d57-1423465.jpg!d"
-tags:        ["mysql系列", "表的设计", "表的优化", "单表、多表", "分区分表"]
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["mysql系列", "表的设计，分区分表"]
 categories:  ["Tech" ]
 ---
 
@@ -216,7 +216,7 @@ blob保存二进制数据；text保存字符数据，有字符集。text和blob�
 ### 定义
 
 分表是将一个大表按照一定的规则分解成多张具有独立存储空间的实体表，我们可以称为子表，每个表都对应三个文件，MYD数据文件，.MYI索引文件，.frm表结构文件。这些子表可以分布在同一块磁盘上，也可以在不同的机器上。**app读写的时候根据事先定义好的规则得到对应的子表名，然后去操作它。**
- 
+
 
 ### 分表拆分方式
 

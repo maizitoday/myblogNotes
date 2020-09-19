@@ -1,11 +1,11 @@
 ---
-title:       "mysql系列-常用方法和伪造数据函数"
+title:       "mysql系列-常用方法和伪造百万数据函数"
 subtitle:    ""
-description: ""
-date:        2019-08-29
+description: "伪造百万数据函数，常用函数"
+date:        2020-09-19
 author:      "麦子"
-image:       "https://c.pxhere.com/images/e8/66/3d717bad8449de9495d9c9761d57-1423465.jpg!d"
-tags:        ["mysql系列", "常用方法", "伪造数据函数"]
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["mysql系列","伪造百万数据函数，常用函数"]
 categories:  ["Tech" ]
 ---
 
@@ -68,4 +68,28 @@ end $$
 call ptestInndb();
 
 ```
+
+# 常用函数
+
+
+
+原理的博客中就有常用函数， 把他找出来， 然后统一总结起来。 
+
+
+
+[CAST与CONVERT 函数的用法](https://www.cnblogs.com/chenqionghe/p/4675844.html)   
+
+
+
+ find_in_set    
+
+
+
+ GROUP_CONCAT  分组连接   https://blog.csdn.net/qq_35067322/article/details/104218222  
+
+https://baijiahao.baidu.com/s?id=1595349117525189591&wfr=spider&for=pc  
+
+https://blog.csdn.net/drose29/article/details/92830231?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.add_param_isCf&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.add_param_isCf
+
+
 

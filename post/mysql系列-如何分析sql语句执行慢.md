@@ -1,11 +1,11 @@
 ---
-title:       "mysql系列-非索引设计与单表查询优化"
+title:       "mysql系列-如何分析sql语句执行慢"
 subtitle:    ""
-description: ""
+description: "慢日志,explain执行任务，profiling查询分析"
 date:        2019-08-26
 author:      "麦子"
-image:       "https://c.pxhere.com/images/e8/66/3d717bad8449de9495d9c9761d57-1423465.jpg!d"
-tags:        ["mysql系列", "库与表基本操作","数据增删改","数据库"]
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["mysql系列", "慢日志,explain执行任务，profiling查询分析"]
 categories:  ["Tech" ]
 ---
 
@@ -53,11 +53,7 @@ categories:  ["Tech" ]
 
 ## 查询的流程
 
-1. 客户端发送一条查询给服务器。
-2. 服务器先检查查询缓存，如果命中了缓存，则立刻返回存储在缓存中的结果，否则进入下一阶段。
-3. 服务器进行SQL解析，预处理，再由优化器生成对应的执行计划。
-4. mysql根据优化器生成的执行计划，调用存储引擎的API来执行查询。
-5. 将结果返回给客户端。
+![cb39a58ccf17cc1b96db94010b9cd47e955c83e4](/img/cb39a58ccf17cc1b96db94010b9cd47e955c83e4.png)
 
 # 优化查询前的几个工具
 
@@ -367,39 +363,3 @@ show profile for query 12;  // 得到对应SQL语句执行的详细信息
 | closing tables                | 0.000062 |
 | freeing items                 | 0.000283 |
 | cleaning up                   | 0.000049 |
-
-# 单表查询步步优化(暂不讨论索引)
-
-### 1.  明确需要的字段，要多少就写多少字段。
-
-### 2.  使用分页语句优化
-
-limit start , count 或者条件 where子句。有什么可限制的条件尽量加上，查一条就limit一条。做到不多拿不乱拿。对limit的使用再优化，利用自增主键，避免offset的使用（演示在积分表score，商品表设计得不太好），约是上面方法的1/3时间。
-
-```sql
-select * from school.student limit 0,1;  
-
-select * from school.student where id > 1 limit 2; 
-```
-
-### 3.  如果是有序的查询，可使用ORDER BY
-
-```sql
-select *
-		from
-		score 
-		WHERE id>0
-		ORDER BY score ASC
-		LIMIT 10000
-		;
-```
-
-### 4. 开启查询缓存
-
-大多数的MySQL服务器都开启了查询缓存。这是提高性最有效的方法之一。当有很多相同的查询被执行了多次的时候，这些查询结果会被放到一个缓存中，这样，后续的相同的查询就不用操作表而直接访问缓存结果了。
-
-#### 命中缓存条件
-
-1. 缓存存在一个hash表中,通过查询SQL,查询数据库,客户端协议等作为key.在判断是否命中前,MySQL不会解析SQL,而是直接使用SQL去查询缓存,**SQL任何字符上的不同,如空格,注释,都会导致缓存不命中.**
-2. 如果查询中有不确定数据,**例如CURRENT_DATE()和NOW()函数,那么查询完毕后则不会被缓存**.所以,包含不确定数据的查询是肯定不会找到可用缓存的
-  

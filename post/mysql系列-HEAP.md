@@ -4,8 +4,8 @@ subtitle:    ""
 description: "mysql内存表"
 date:        2020-06-08
 author:      "麦子"
-image:       "https://c.pxhere.com/images/e8/66/3d717bad8449de9495d9c9761d57-1423465.jpg!d"
-tags:        ["mysql系列"]
+image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
+tags:        ["mysql系列","mysql内存表"]
 categories:  ["Tech" ]
 ---
 
