@@ -1,11 +1,11 @@
 ---
 title:       "mysql系列-索引类型和数据关系"
 subtitle:    ""
-description: "索引和数据关系，索引类型和回表"
+description: "索引和数据关系，索引类型和回表，索引优化，索引类型"
 date:        2020-09-19
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["mysql系列", "索引和数据关系，索引类型和回表"]
+tags:        ["mysql系列", "索引和数据关系，索引类型和回表，索引优化，索引类型"]
 categories:  ["Tech" ]
 ---
 

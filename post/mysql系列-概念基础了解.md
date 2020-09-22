@@ -348,6 +348,32 @@ Oracle和MySQL中都有一张名称为dual的虚拟表。
 
 
 
+# select 1 from Table
+
+1是一常量（可以为任意数值），查到的所有行的值都是它，但从效率上来说，1>xxx>*，因为不用查字典表。
+
+1. select  1 from table       增加临时列，每行的列值是写在select后的数，这条sql语句中是1
+2. select count(1)  from table   管count(a)的a值如何变化，得出的值总是table表的行数
+3. select sum(1) from table   计算临时列的和
+
+**用途**
+
+一般用来当做判断子查询是否成功（即是否有满足条件的时候使用）
+
+比如：
+
+```sql
+select * from ta where exists (select 1 from ta.id = tb.id)	
+```
+
+这个判断就是(select 1 from ta.id = tb.id)这个查询如果有返回值的话表示当前查询满足条件，一般来说就简单话的用select 1 当然也可以用select * ,或者select 任何东东，因为这里仅仅是表明子查询有结果就行了，至于什么结果无所谓。
+
+
+
+
+
+
+
 
 
  

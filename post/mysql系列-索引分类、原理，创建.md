@@ -178,6 +178,27 @@ MySQL能在多个列上创建索引。一个索引可以由最多15个列组成�
 
 最左前缀：顾名思义，就是最左优先。在创建多列索引时，要根据业务需求，where子句中使用最频繁的一列放在最左边。
 
+
+
+## 强制使用索引
+
+有的时候MySQL优化器采取它认为合适的索引来检索sql语句，但是可能它所采用的索引并不是我们想要的。这时就可以采用force index来强制优化器使用我们制定的索引。**必要时可以使用force index来强制查询走某个索引**。
+
+```sql
+SELECT
+  a.id as article_id ,
+  a.title as title ,
+  a.author_id as author_id 
+from
+  article a  FORCE INDEX(idx_createTime)
+where
+  a.create_time between '2020-03-22 03:00:00.003'
+and '2020-04-22 03:00:00.003'
+and a.status = 1
+```
+
+
+
 # 索引的基本原理
 
 ## 举例解析基本原理 

@@ -1,11 +1,11 @@
 ---
 title:       "mysql系列-覆盖索引与回表"
 subtitle:    ""
-description: "索引的执行流程图片话，覆盖索引如何优化，回表是什么, count查询优化,分页优化"
+description: "索引的执行流程图片话，覆盖索引如何优化，回表是什么, count查询优化,分页优化,Extra列的NULL表示进行了回表查询"
 date:        2020-09-19
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["mysql系列","索引的执行流程图片话，覆盖索引如何优化，回表是什么,count查询优化，分页优化"]
+tags:        ["mysql系列","索引的执行流程图片话，覆盖索引如何优化，回表是什么,count查询优化，分页优化,Extra列的NULL表示进行了回表查询"]
 categories:  ["Tech" ]
 ---
 
@@ -181,7 +181,7 @@ explain分析：因为age是普通索引，使用到了age索引，通过一次�
 2、实现：select id,age,name from user where age = 10;
 ```
 
-explain分析：age是普通索引，但name列不在索引树上，所以通过age索引在查询到id和age的值后，需要进行回表再查询name的值。此时的Extra列的NULL表示进行了回表查询。
+explain分析：age是普通索引，但name列不在索引树上，所以通过age索引在查询到id和age的值后，需要进行回表再查询name的值。**此时的Extra列的NULL表示进行了回表查询**。
 
 ![Xnip2020-09-19_20-33-28](/img/Xnip2020-09-19_20-33-28.png)
 

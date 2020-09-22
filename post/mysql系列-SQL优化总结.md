@@ -1,11 +1,11 @@
 ---
 title:       "mysql系列-SQL优化总结"
 subtitle:    ""
-description: "SQL优化总结"
+description: "SQL优化总结，SQL优化总结，更新优化，插入优化，查询优化,批量插入示例"
 date:        2020-09-19
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["mysql系列","SQL优化总结"]
+tags:        ["mysql系列","SQL优化总结，更新优化，插入优化，查询优化,批量插入示例"]
 categories:  ["Tech" ]
 ---
 
@@ -162,19 +162,79 @@ mysql使用了一个叫join buffer的缓冲区去减少循环次数，这个缓�
 
 
 
-## Join优化
+## 查询和索引优化
 
 1. 用小结果集驱动大结果集，尽量减少 join 语句中的Nested Loop循环总次数。
 2. 优先优化 Nested Loop 内层循环，因为内层循环是循环中执行次数最多的，每次循环提升很小的性能都能在整个循环中提升很大的性能。
 3. **对被驱动表的 join 字段上建立索引**，并且Join ON 条件的字段应该是**相同类型**的。
 4. 当被驱动表的 join 字段上无法建立索引的时候，设置足够的 Join Buffer Size。
-5. 
+
+**说明：跟多相关看博客《mysql系列-索引设计和查询优化》**
 
 
 
+# 更新优化
+
+1.  如果只更改1、2个字段，不要Update全部字段，否则频繁调用会引起明显的性能消耗，同时带来大量日志；
+2.  对于多张大数据量（这里几百条就算大了）的表JOIN，要先分页再JOIN，否则逻辑读会很高，性能很差。
+3.  应尽可能的避免更新 clustered 索引数据列，因为 clustered 索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新 clustered 索引数据列，
+   那么需要考虑是否应将该索引建为 clustered 索引；
 
 
 
+# 插入优化
+
+1. 在新建临时表时，如果一次性插入数据量很大，那么可以使用 select into 代替 create table，避免造成大量 log，
+
+   以提高速度；如果数据量不大，为了缓和系统表的资源，应先create table，然后insert。
+
+2. 拆分大的 DELETE 或INSERT 语句，批量提交SQL语句。 
+
+   如果你需要在一个在线的网站上去执行一个大的 DELETE 或 INSERT 查询，你需要非常小心，要避免你的操作让你的整个网站停止相应。
+
+   因为这两个操作是会锁表的，表一锁住了，别的操作都进不来了。Apache 会有很多的子进程或线程。所以，其工作起来相当有效率，而我们的服务器也不希望有太多的子进程，线程和数据库链接，这是极大的占服务器资源的事情，尤其是内存。
+
+   如果你把你的表锁上一段时间，比如30秒钟，那么对于一个有很高访问量的站点来说，这30秒所积累的访问进程/线程，数据库链接，打开的文件数，可能不仅仅会让你的WEB服务崩溃，还可能会让你的整台服务器马上挂了。
+   所以，如果你有一个大的处理，你一定把其拆分，使用 LIMIT oracle(rownum),sqlserver(top)条件是一个好的方法。
+
+3. 创建适当的索引，每当为一个表添加一个索引，select会更快，可insert和delete却大大变慢，因为创建了维护索引需要许多额外的工作。
+
+   1）采用函数处理的字段不能利用索引
+   2）条件内包括了多个本表的字段运算时不能进行索引
 
 
+
+## 批量插入示例
+
+```sql
+UPDATE
+    party_communitya_ssociation_member
+SET
+	job = CASE 
+	WHEN ID = ? THEN ? 
+	WHEN ID = ? THEN ? 
+	WHEN ID = ? THEN ? END,
+	
+	
+	NAME = CASE 
+	WHEN ID = ? THEN ? 
+	WHEN ID = ? THEN ? 
+	WHEN ID = ? THEN ? 
+	END,
+	
+	
+	phoneNumber = CASE 
+	WHEN ID = ? THEN ? 
+	WHEN ID = ? THEN ?
+	WHEN ID = ? THEN ? 
+	END,
+	
+	identityCard = CASE 
+	WHEN ID = ? THEN ? 
+	WHEN ID = ? THEN ? 
+	WHEN ID = ? THEN ? 
+	END
+WHERE
+	ID IN (?, ?, ?)
+```
 

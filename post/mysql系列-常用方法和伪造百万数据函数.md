@@ -93,3 +93,9 @@ https://blog.csdn.net/drose29/article/details/92830231?utm_medium=distribute.pc_
 
 
 
+1. 彻底理解**——**区分**in**和**exists**， **not in**和**not exists**
+2.    group_concat_max_len = 102400 #你要的最大长度
+
+exists 不一定比 in的性能好 如果查询A表 子查询B表 如果A表数据量大于B表 in比exists速度快  
+
+IFNULL(exp1,exp2): 当表达式1(exp1) 值为空(null)时，方法返回表达式2(exp2)的值 

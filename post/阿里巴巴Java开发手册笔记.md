@@ -5,7 +5,7 @@ description: "代码规范，命名风格，异常日志，MySQL数据库，服�
 date:        2020-05-26
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["java基础", "开发手册代码规范"]
+tags:        ["java基础", "代码规范，命名风格，异常日志，sql代码规范，sql编写规范, sql索引优化，服务器"]
 categories:  ["Tech" ]
 ---
 
@@ -958,8 +958,10 @@ float 和 double 在存储的时候，存在精度损失的问题，很可能在
 
 说明：
 
-```
-其中idgmt_modified动更新。必为主键，类型为unsigned bigint、单表时自增、步长为1。gmt_create,gmt_modified的类型均为date_time类型,前者现在时表示主动创建，后者过去分词表示被动更新
+```sql
+其中id,gmt_modified动更新。必为主键，类型为unsigned bigint、单表时自增、步长为1。
+gmt_create,gmt_modified的类型均为date_time类型,
+前者现在时表示主动创建，后者过去分词表示被动更新
 ```
 
 
