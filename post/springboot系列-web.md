@@ -1,7 +1,7 @@
 ---
 title:       "springboot系列-web"
 subtitle:    ""
-description: ""
+description: "sprigboot父pom"
 date:        2019-05-26
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"

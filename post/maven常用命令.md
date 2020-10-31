@@ -1,11 +1,11 @@
 ---
 title:       "maven常用命令"
 subtitle:    ""
-description: "pom.xml标签解释，常用mvn命令"
+description: "pom.xml标签解释，常用mvn命令,Maven打包常用插件,Maven默认系统变量,maven地址,{project.build.directory},"
 date:        2019-04-28
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
-tags:        ["开发工具", "maven"]
+tags:        ["开发工具", "maven","Maven打包常用插件","Maven的六类属性"]
 categories:  ["Tech" ]
 ---
 
@@ -688,11 +688,15 @@ deploy命令完成了项目编译、单元测试、打包功能，同时把打�
 
 
 
-  
+# Maven打包常用插件
 
+ [maven打包常用的几个插件](https://my.oschina.net/zhaolin/blog/2873754)
 
+# Maven的六类属性
 
+Maven的六类属性，${project.basedir}，${project.build.directory}：项目构件输出目录，默认为 target/
 
+[http://www.manongjc.com/detail/15-vzefeoqflzegfek.html](http://www.manongjc.com/detail/15-vzefeoqflzegfek.html)
 
 
 

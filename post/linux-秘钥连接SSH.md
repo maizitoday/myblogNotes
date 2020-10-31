@@ -65,6 +65,24 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub parallels@10.211.55.6
 
 执行成功后会在服务端生成`~/.ssh/authorized_keys`文件，文件内容和客户端生成的`id_rsa.pub`内容完全一致。
 
+# 注意
+
+如果出现，上面的命令无法上传的时候， 如果发现权限不够的时候， 有可能是因为那边服务器没有打开开关，或者权限不够，我们可以把自己的id_rsa.pub公钥通过
+
+```shell
+cat id_rsa.pub >> authorized_keys 
+```
+
+直接强制加入到文件中，就ok了。 
+
+当我们在用第三方的**给我们的秘钥**的时候， 有可能出现这个文件的权限太大的时候。
+
+```shell
+ chmod 600  
+```
+
+进行设置处理。 
+
 # mac配置
 
 在你当前用户， 也就是/Users/maizi/.ssh这个文件夹下面， 配置里面的一个config文件，具体如下：

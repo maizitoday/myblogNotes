@@ -71,6 +71,10 @@ call ptestInndb();
 
 # 常用函数
 
+https://my.oschina.net/nimo10050/blog/3020334    in 和 exit的用法。
+
+
+
 
 
 原理的博客中就有常用函数， 把他找出来， 然后统一总结起来。 

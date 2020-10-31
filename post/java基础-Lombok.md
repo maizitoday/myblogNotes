@@ -190,8 +190,14 @@ public class LombokTest {
 1. 不支持多种参数构造器的重载
 2. 虽然省去了手动创建getter/setter方法的麻烦，但大大降低了源代码的可读性和完整性，降低了阅读源代码的舒适度
 
-## 
+# 注意
 
+## callSuper=true问题
 
+@EqualsAndHashCode，它默认仅使用该类中定义的属性且不调用父类的方法。可通过callSuper=true解决上一点问题。让其生成的方法中调用父类的方法。
+
+**好文：https://blog.csdn.net/c851204293/article/details/96989512**
+
+**好文:  https://blog.csdn.net/qq_42888567/article/details/105145024?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param**
 
  

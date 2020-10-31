@@ -251,7 +251,9 @@ CREATE TEMPORARY TABLE tmp_table SELECT * FROM table_name
 
 ### 作用
 
+基本表的内容是持久的，而视图的内容是在使用过程中动态产生的。
 
+视图根本用途看来就一个：简化sql查询，提高开发效率。如果说还有另外一个用途那就是兼容老的表结构。
 
 #### 提高了重用性
 
