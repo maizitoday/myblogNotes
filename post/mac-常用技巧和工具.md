@@ -1,7 +1,7 @@
 ---
 title:       "mac-常用技巧和工具"
 subtitle:    ""
-description: "mac常用技巧，查看java所有版本，查看端口"
+description: "mac常用技巧，查看java所有版本，查看端口, 文本快捷键,选中一行"
 date:        2019-06-27
 author:      "麦子"
 image:       "https://zhaohuabing.com//img/post-bg-unix-linux.jpg"
@@ -39,6 +39,16 @@ Matching Java Virtual Machines (3):
 
 ```
 ctrl 按两下
+```
+
+
+
+# 文本快捷键
+
+```
+command + shift + 左边，选中一行
+shift + option + 上下键  复制一行 
+option + 上下键  移动代码
 ```
 
 

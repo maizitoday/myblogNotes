@@ -404,3 +404,14 @@ https://code.visualstudio.com/docs/editor/emmet 官方文档
 
 他可以让一些大量的HTML标签批量的生成显示出来。 
 
+
+
+# vscode 自动整理所有引用import 不依赖插件
+
+settings.json中加入配置项：
+
+```json
+ "editor.codeActionsOnSave": { "source.organizeImports": true },
+```
+
+可实现保存代码时（ctrl+s）自动整理页面所有import引用，包括删除未使用到的import、多import归类整理、排序等。很好用。

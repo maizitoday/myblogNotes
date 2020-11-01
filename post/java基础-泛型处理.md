@@ -82,3 +82,33 @@ public class Home<K super Animal>
 /**
 指定泛型的范围必须是 T 的父类。
 ```
+
+# 泛型如何实现实例化
+
+```java
+public abstract class BaseServiceImpl<M extends MyBaseMapper<T>, T extends BaseEntity, D extends T>
+        extends ServiceImpl<M, T> {
+```
+
+观察可以看到，  我们实例化的是  D 这个实例对象， 他属于 2 的位置处理。
+
+```java
+  private D newDTOclass() {
+        D dto = null;
+        try {
+            ParameterizedType ptype = (ParameterizedType) this.getClass().getGenericSuperclass();
+            Class<D> clazz = (Class<D>) ptype.getActualTypeArguments()[2];
+            dto = (D) clazz.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dto;
+    }
+```
+
+
+
+
+
+
+

@@ -594,7 +594,19 @@ Spring4推出了@Conditional注解，方便程序根据当前环境或者容器�
 
 说明： 配置类中有两个Computer类的bean，一个是笔记本电脑，一个是备用电脑。如果当前容器中已经有电脑bean了，就不注入备用电脑，如果没有，则注入备用电脑，这里需要使用到@ConditionalOnMissingBean。
 
- 
+# @ControllerAdvice 
+
+`@ControllerAdvice`，是Spring3.2提供的新注解，从名字上可以看出大体意思是控制器增强
+
+该注解使用`@Component`注解，这样的话当我们使用`<context:component-scan>`扫描时也能扫描到。
+
+一般都是用于异常的处理， 配合  @ExceptionHandler 进行全局异常处理。 
+
+# @MapperScan
+
+在SpringBoot中集成MyBatis，可以在mapper接口上添加@Mapper注解，将mapper注入到Spring,但是如果每一给mapper都添加@mapper注解会很麻烦，这时可以使用@MapperScan注解来扫描包。
+
+
 
 # 如何理解spring的容器的概念
 
